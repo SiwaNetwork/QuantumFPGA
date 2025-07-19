@@ -1,27 +1,12 @@
 --*****************************************************************************************
--- Project: Time Card
+-- Проект: Time Card
 --
--- Author: Ioannis Sotiropoulos, NetTimeLogic GmbH
---
--- License: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
--- All rights reserved.
---
--- THIS PROGRAM IS FREE SOFTWARE: YOU CAN REDISTRIBUTE IT AND/OR MODIFY
--- IT UNDER THE TERMS OF THE GNU LESSER GENERAL PUBLIC LICENSE AS
--- PUBLISHED BY THE FREE SOFTWARE FOUNDATION, VERSION 3.
---
--- THIS PROGRAM IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT
--- WITHOUT ANY WARRANTY; WITHOUT EVEN THE IMPLIED WARRANTY OF
--- MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SEE THE GNU
--- LESSER GENERAL LESSER PUBLIC LICENSE FOR MORE DETAILS.
---
--- YOU SHOULD HAVE RECEIVED A COPY OF THE GNU LESSER GENERAL PUBLIC LICENSE
--- ALONG WITH THIS PROGRAM. IF NOT, SEE <http://www.gnu.org/licenses/>.
+-- Модуль создания временных меток сигналов
 --
 --*****************************************************************************************
 
 --*****************************************************************************************
--- General Libraries
+-- Общие библиотеки
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
@@ -29,15 +14,15 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 --*****************************************************************************************
--- Specific Libraries
+-- Специальные библиотеки
 --*****************************************************************************************
 library TimecardLib;
 use TimecardLib.Timecard_Package.all;
 
 --*****************************************************************************************
--- Entity Declaration
+-- Объявление сущности
 --*****************************************************************************************
--- The SignalTimestamper timestamps an event signal of configurable polarity.            --
+-- SignalTimestamper timestamps an event signal of configurable polarity.            --
 -- Timestamps are taken on the configured edge of the signal and optional interrupts     -- 
 -- are generated. The reference time for the timestamp is provided as input and the      --
 -- delays of the timestamps are compensated. The Signal Timestamper is intended to be    --
@@ -53,21 +38,21 @@ entity SignalTimestamper is
         HighResFreqMultiply_Gen                     :       natural range 4 to 10 := 5
     );          
     port (          
-        -- System           
+        -- Система           
         SysClk_ClkIn                                : in    std_logic;
         SysClkNx_ClkIn                              : in    std_logic := '0';
         SysRstN_RstIn                               : in    std_logic;
                     
-        -- Time Input           
+        -- Временные данные           
         ClockTime_Second_DatIn                      : in    std_logic_vector((SecondWidth_Con-1) downto 0);
         ClockTime_Nanosecond_DatIn                  : in    std_logic_vector((NanosecondWidth_Con-1) downto 0);
         ClockTime_TimeJump_DatIn                    : in    std_logic; -- unused
         ClockTime_ValIn                             : in    std_logic;
             
-        -- Timestamp Event Input            
+        -- Входной сигнал события            
         SignalTimestamper_EvtIn                     : in    std_logic;
                             
-        -- Interrupt Output         
+        -- Выходной прерывание         
         Irq_EvtOut                                  : out   std_logic;          
             
         -- Axi          
@@ -98,27 +83,27 @@ entity SignalTimestamper is
 end entity SignalTimestamper;
 
 --*****************************************************************************************
--- Architecture Declaration
+-- Объявление архитектуры
 --*****************************************************************************************
 architecture SignalTimestamper_Arch of SignalTimestamper is
     --*************************************************************************************
-    -- Procedure Definitions
+    -- Определения процедур
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Function Definitions
+    -- Определения функций
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Constant Definitions
+    -- Определения констант
     --*************************************************************************************
-    -- Timestamper Version 
+    -- Версия Timestamper 
     constant TimestamperMajorVersion_Con            : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(0, 8));
     constant TimestamperMinorVersion_Con            : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(1, 8));
     constant TimestamperBuildVersion_Con            : std_logic_vector(15 downto 0) := std_logic_vector(to_unsigned(0, 16));
     constant TimestamperVersion_Con                 : std_logic_vector(31 downto 0) := TimestamperMajorVersion_Con & TimestamperMinorVersion_Con & TimestamperBuildVersion_Con;
         
-    -- AXI Registers        
+    -- Регистры AXI        
     constant TimestamperControl_Reg_Con             : Axi_Reg_Type:= (x"00000000", x"00000001", Rw_E, x"00000000");
     constant TimestamperStatus_Reg_Con              : Axi_Reg_Type:= (x"00000004", x"00000003", Wc_E, x"00000000");
     constant TimestamperPolarity_Reg_Con            : Axi_Reg_Type:= (x"00000008", x"00000001", Rw_E, x"00000000");
@@ -140,11 +125,11 @@ architecture SignalTimestamper_Arch of SignalTimestamper is
     constant TimestamperIrqMask_TimestampBit_Con    : natural := 0;
 
     --*************************************************************************************
-    -- Type Definitions
+    -- Определения типов
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Signal Definitions
+    -- Определения сигналов
     --*************************************************************************************
     signal Enable_Ena                               : std_logic;
     signal SignalTimestamper_Evt                    : std_logic;
@@ -156,7 +141,7 @@ architecture SignalTimestamper_Arch of SignalTimestamper is
     signal RegisterDelay_DatReg                     : integer range 0 to (3*ClockPeriod_Gen);
     signal Count_CntReg                             : std_logic_vector(31 downto 0);
                                                     
-    -- Time Input           
+    -- Временные данные           
     signal ClockTime_Second_DatReg                  : std_logic_vector((SecondWidth_Con-1) downto 0);
     signal ClockTime_Nanosecond_DatReg              : std_logic_vector((NanosecondWidth_Con-1) downto 0);
     signal ClockTime_ValReg                         : std_logic;
@@ -170,7 +155,7 @@ architecture SignalTimestamper_Arch of SignalTimestamper is
     signal TimestampSysClk4_EvtReg                  : std_logic := '0';
     signal TimestampSysClk_EvtShiftReg              : std_logic_vector(HighResFreqMultiply_Gen*2-1 downto 0) := (others => '0');
                                                     
-    -- Axi Signals                                  
+    -- Сигналы Axi                                  
     signal Axi_AccessState_StaReg                   : Axi_AccessState_Type:= Axi_AccessState_Type_Rst_Con;
                                                     
     signal AxiWriteAddrReady_RdyReg                 : std_logic;       
@@ -198,12 +183,12 @@ architecture SignalTimestamper_Arch of SignalTimestamper is
     signal TimestamperData_DatReg                   : std_logic_vector(31 downto 0); -- unused
 
 --*****************************************************************************************
--- Architecture Implementation
+-- Реализация архитектуры
 --*****************************************************************************************
 begin
 
     --*************************************************************************************
-    -- Concurrent Statements
+    -- Одновременные операторы
     --*************************************************************************************
     Irq_EvtOut                                      <= TimestamperIrq_DatReg(TimestamperIrq_TimestampBit_Con) and TimestamperIrqMask_DatReg(TimestamperIrqMask_TimestampBit_Con);
                                             
@@ -225,9 +210,9 @@ begin
     AxiReadDataData_DatOut                          <= AxiReadDataData_DatReg;
     
     --*************************************************************************************
-    -- Procedural Statements
+    -- Процедурные операторы
     --*************************************************************************************
-    -- Mark an input event at the shift register of the high resolution clock domain
+    -- Отмечаем событие на сдвиговом регистре высокого разрешения частоты
     SysClkNxReg_Prc : process(SysClkNx_ClkIn) is
     begin
         if ((SysClkNx_ClkIn'event) and (SysClkNx_ClkIn = '1')) then 
@@ -237,7 +222,7 @@ begin
         end if;
     end process SysClkNxReg_Prc;
     
-    -- Copy the event shift register of the high resolution clock domain to the system clock domain
+    -- Копируем сдвиговый регистр события высокого разрешения частоты в системный частотный домен
     SysClkReg_Prc : process(SysClk_ClkIn) is
     begin
         if ((SysClk_ClkIn'event) and (SysClk_ClkIn = '1')) then 
@@ -249,10 +234,10 @@ begin
         end if;
     end process SysClkReg_Prc;
     
-    -- Calculate the timestamp by compensating for the delays:
-    --    - the timestamping at the high resolution clock domain and the corresponding register delays for switching the clock domains
-    --    - the input delay, which is provided as generic input
-    --    - the cable delay, which is received by the AXI register (and enabled by a generic input)
+    -- Вычисляем временную метку, компенсируя задержки:
+    --    - задержка высокого разрешения временной метки и соответствующие задержки регистров для переключения частотных доменов
+    --    - задержка входного сигнала, которая предоставляется как входной параметр
+    --    - задержка кабеля, которая получается из регистра AXI (и включается входным параметром)
     Timestamp_Prc: process(SysClk_ClkIn, SysRstN_RstIn) 
     begin
         if (SysRstN_RstIn = '0') then 
@@ -265,13 +250,13 @@ begin
             ClockTime_Nanosecond_DatReg <= (others => '0');
             ClockTime_ValReg <= '0';
         elsif ((SysClk_ClkIn'event) and (SysClk_ClkIn = '1')) then
-            -- single pulse
+            -- одиночный импульс
             Timestamp_ValReg <= '0';
-            -- calculate the delay of the high resolution timestamping which consists of 
-            --     - the fixed offset of the clock domain crossing 
-            --     - the number of high res. clock periods, from the event until the next rising edge of the system clock
+            -- вычисляем задержку высокого разрешения временной метки, которая состоит из 
+            --     - фиксированного смещения переключения частотных доменов 
+            --     - количество периодов высокого разрешения частоты, от события до следующего фронта системного частотного сигнала
             if ((TimestampSysClk2_EvtReg = '1') and (TimestampSysClk3_EvtReg = '0')) then 
-                -- store the current time 
+                -- сохраняем текущее время 
                 ClockTime_Second_DatReg <= ClockTime_Second_DatIn;
                 ClockTime_Nanosecond_DatReg <= ClockTime_Nanosecond_DatIn;
                 ClockTime_ValReg <= ClockTime_ValIn;
@@ -292,7 +277,7 @@ begin
                 end loop;
             end if;
             
-            -- Compensate the timestamp delays. Ensure that the Nanosecond field does not underflow.
+            -- Компенсируем задержки временной метки. Убедитесь, что поле Nanosecond не переполняется.
             if (TimestampSysClk3_EvtReg = '1' and TimestampSysClk4_EvtReg = '0') then 
                 Count_CntReg <= std_logic_vector(unsigned(Count_CntReg) + 1);
                 Timestamp_ValReg <= '1';
@@ -301,12 +286,12 @@ begin
                     Timestamp_Second_DatReg <= (others => '0');               
                     Timestamp_Nanosecond_DatReg <= (others => '0');
                 else
-                    if (to_integer(unsigned(ClockTime_Nanosecond_DatReg)) < InputDelay_Gen + RegisterDelay_DatReg + to_integer(unsigned(SignalCableDelay_Dat))) then -- smaller than 0
+                    if (to_integer(unsigned(ClockTime_Nanosecond_DatReg)) < InputDelay_Gen + RegisterDelay_DatReg + to_integer(unsigned(SignalCableDelay_Dat))) then -- меньше 0
                         Timestamp_Nanosecond_DatReg <= std_logic_vector(to_unsigned((SecondNanoseconds_Con + 
                                                        to_integer(unsigned(ClockTime_Nanosecond_DatReg)) - 
                                                        (InputDelay_Gen + RegisterDelay_DatReg + to_integer(unsigned(SignalCableDelay_Dat)))), NanosecondWidth_Con));
                         Timestamp_Second_DatReg <= std_logic_vector(unsigned(ClockTime_Second_DatReg) - 1); 
-                    else -- larger than/equal to 0
+                    else -- больше или равно 0
                         Timestamp_Nanosecond_DatReg <= std_logic_vector(to_unsigned((to_integer(unsigned(ClockTime_Nanosecond_DatReg)) - 
                                                        (InputDelay_Gen + RegisterDelay_DatReg + to_integer(unsigned(SignalCableDelay_Dat)))), NanosecondWidth_Con));
                         Timestamp_Second_DatReg <= ClockTime_Second_DatReg; 
@@ -323,7 +308,7 @@ begin
         end if;
     end process Timestamp_Prc;
     
-    -- AXI register access
+    -- Доступ к регистрам AXI
     Axi_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     variable TempAddress                            : std_logic_vector(31 downto 0) := (others => '0');    
     begin
@@ -456,12 +441,12 @@ begin
             end if;
             
             if (Enable_Ena = '1') then
-                -- counter counts all events 
+                -- счетчик считает все события 
                 if (Timestamp_ValReg = '1') then
                     TimestamperEvtCount_DatReg <= std_logic_vector(unsigned(TimestamperEvtCount_DatReg) + 1);
                 end if;
             else
-                TimestamperIrq_DatReg(TimestamperIrq_TimestampBit_Con) <= '0'; -- when disabled we also clear that we had one pending
+                TimestamperIrq_DatReg(TimestamperIrq_TimestampBit_Con) <= '0'; -- когда отключен, мы также очищаем, что у нас было одно ожидающее событие
                 TimestamperEvtCount_DatReg <= (others => '0');
                 TimestamperCount_DatReg <= (others => '0');
                 TimestamperStatus_DatReg(TimestamperStatus_DropBit_Con) <= '0';
@@ -469,14 +454,14 @@ begin
             
             if ((Enable_Ena = '1') and (TimestamperIrq_DatReg(TimestamperIrq_TimestampBit_Con) = '0') and 
                 (Timestamp_ValReg = '1')) then
-                -- counter counts the handled events
+                -- счетчик считает обработанные события
                 TimestamperIrq_DatReg(TimestamperIrq_TimestampBit_Con) <= '1';
                 TimestamperCount_DatReg <= std_logic_vector(Count_CntReg);
                 TimestamperTimeValueL_DatReg <= Timestamp_Nanosecond_DatReg;
                 TimestamperTimeValueH_DatReg <= Timestamp_Second_DatReg;
             elsif ((Enable_Ena = '1') and (TimestamperIrq_DatReg(TimestamperIrq_TimestampBit_Con) = '1') and 
-                   (Timestamp_ValReg = '1')) then -- we still have a timestamp which was not handled, so we will drop that
-                TimestamperStatus_DatReg(TimestamperStatus_DropBit_Con) <= '1'; -- make an event drop sticky
+                   (Timestamp_ValReg = '1')) then -- у нас все еще есть временная метка, которая не была обработана, поэтому мы отбросим ее
+                TimestamperStatus_DatReg(TimestamperStatus_DropBit_Con) <= '1'; -- сделать событие отброса накопительным
             end if;
             TimestamperDataWidth_DatReg <= std_logic_vector(to_unsigned(0, 32)); -- unused
             TimestamperData_DatReg <= std_logic_vector(to_unsigned(0, 32)); -- unused

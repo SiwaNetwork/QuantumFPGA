@@ -1,6 +1,6 @@
-# FPGA Open Source Time Card structure
+# Структура FPGA Open Source Time Card
 
-The FPGA Open Source TimeCard repository is structured as shown below
+Репозиторий FPGA Open Source TimeCard структурирован как показано ниже
 
 ```bash
     │
@@ -73,33 +73,33 @@ The FPGA Open Source TimeCard repository is structured as shown below
     └───Package
 ```
 
-## Implementation
-The FPGA implementations of the TimeCard are separated depending on the vendor/version. Currently, only a Xilinx implementation of the Open Source Timecard is available. 
-The top folder of the project is under the name [*/[YOUR_PATH]/Implementation/Xilinx/TimeCard*](implementation/Xilinx/TimeCard/).
+## Реализация
+FPGA реализации TimeCard разделены в зависимости от поставщика/версии. В настоящее время доступна только Xilinx реализация Open Source Timecard. 
+Главная папка проекта находится по пути [*/[ВАШ_ПУТЬ]/Implementation/Xilinx/TimeCard*](implementation/Xilinx/TimeCard/).
 
-Under this folder there are the vendor and implementation dependent files:
-- File **Readme.md** describes the design of the implementation and instructs how to create/implement the project and generate the binaries.
-- File **DefaultConfigFile.txt** is the default configuration of the FPGA cores
-- File **CoreListFile.txt** lists the configurable cores of the FPGA
-- 4 **.tcl** files for creating/implementing the project and generating the binaries
-- Folder **Additional Files** contains files (e.g. images) for the documentation of the project 
-- Folder **Bd** contains the **.tcl** files for the project's Block Design creation (called by the CreateProject.tcl)
-- Folder **Binaries** contains the generated binaries of the project after each implementation run 
-- Folder **Constraints** contains all the constraint files of the project 
-- Folder **TimeCard**  contains the project files generated during creation, synthesis and implementation of the project. 
-The folder is created when the **CreateProject.tcl** is executed. The folder is not added to the repository and it shall be deleted, in order to call successfully the CreateProject.tcl
-- Folder **Top** contains the top .vhd file of the project
+В этой папке находятся файлы, зависящие от поставщика и реализации:
+- Файл **Readme.md** описывает дизайн реализации и инструктирует как создать/реализовать проект и сгенерировать бинарные файлы.
+- Файл **DefaultConfigFile.txt** - конфигурация FPGA ядер по умолчанию
+- Файл **CoreListFile.txt** перечисляет настраиваемые ядра FPGA
+- 4 **.tcl** файла для создания/реализации проекта и генерации бинарных файлов
+- Папка **Additional Files** содержит файлы (например, изображения) для документации проекта 
+- Папка **Bd** содержит **.tcl** файлы для создания Block Design проекта (вызываются CreateProject.tcl)
+- Папка **Binaries** содержит сгенерированные бинарные файлы проекта после каждого запуска реализации 
+- Папка **Constraints** содержит все файлы ограничений проекта 
+- Папка **TimeCard** содержит файлы проекта, созданные во время создания, синтеза и реализации проекта. 
+Папка создается при выполнении **CreateProject.tcl**. Папка не добавляется в репозиторий и должна быть удалена для успешного вызова CreateProject.tcl
+- Папка **Top** содержит верхний .vhd файл проекта
 
-## Ips
-The [**Ips** folder](Ips) contains all the user-defined open source IP cores. Each folder of an IP core has similar structure 
-- File **Readme.md** describes the FPGA core (design overview, register set description, etc.)     
-- File(s) **.vhd** of the core
-- Folder **Xilinx** contains the vendor specific IPI files to integrate the cores in the Vivado tool
-- Folder **Additional Files** contains files (e.g. images) for the documentation of the core
+## IP-ядра
+Папка [**Ips**](Ips) содержит все пользовательские открытые IP-ядра. Каждая папка IP-ядра имеет похожую структуру 
+- Файл **Readme.md** описывает FPGA ядро (обзор дизайна, описание набора регистров и т.д.)     
+- Файл(ы) **.vhd** ядра
+- Папка **Xilinx** содержит специфичные для поставщика IPI файлы для интеграции ядер в инструмент Vivado
+- Папка **Additional Files** содержит файлы (например, изображения) для документации ядра
 
-Additionally, the **Ips** folder contains .xml files of the custom type definitions for the IP core interfaces.
+Дополнительно, папка **Ips** содержит .xml файлы пользовательских определений типов для интерфейсов IP-ядер.
 
-## Modules
-The [**Modules**  folder](Modules) contains all the user-defined open source .vhd files which are not instantiated as IPI.
-## Package
-The [**Package** folder ](Package) contains the library file of the project which contains different constants and common used procedures.
+## Модули
+Папка [**Modules**](Modules) содержит все пользовательские открытые .vhd файлы, которые не инстанцируются как IPI.
+## Пакет
+Папка [**Package**](Package) содержит библиотечный файл проекта, который содержит различные константы и общие используемые процедуры.

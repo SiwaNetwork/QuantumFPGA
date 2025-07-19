@@ -1,7 +1,7 @@
 # ##########################################################################################
-# Проект: Time Card
+# Project: Time Card
 #
-# Скрипт создания проекта Vivado для TimeCard
+# Vivado project creation script for TimeCard
 #
 # ##########################################################################################
 
@@ -10,23 +10,23 @@ set ScriptFolder [file dirname $ScriptFile]
 
 cd $ScriptFolder
 
-# Установить ссылочную директорию для относительных путей исходных файлов (по умолчанию значение - путь к директории скрипта)
+# Set the reference directory for relative source file paths (default is script directory path)
 set origin_dir $ScriptFolder
 
-# Установить путь к директории для оригинального проекта, откуда был экспортирован этот скрипт
+# Set the path to the directory for the original project from which this script was exported
 set orig_proj_dir "[file normalize "$origin_dir"]"
 
-# Установить имя проекта
+# Set the project name
 set _xil_proj_name_ "TimeCard"
 
 
-# Создать проект
+# Create project
 create_project ${_xil_proj_name_} ./${_xil_proj_name_} -part xc7a100tfgg484-1 -force
 
-# Установить путь к директории для нового проекта
+# Set the path to the directory for the new project
 set proj_dir [get_property directory [current_project]]
 
-# Установить свойства проекта
+# Set project properties
 set obj [current_project]
 set_property -name "default_lib" -value "xil_defaultlib" -objects $obj
 set_property -name "enable_vhdl_2008" -value "1" -objects $obj
@@ -40,19 +40,20 @@ set_property -name "simulator_language" -value "Mixed" -objects $obj
 set_property -name "target_language" -value "VHDL" -objects $obj
 set_property -name "xpm_libraries" -value "XPM_CDC XPM_FIFO XPM_MEMORY" -objects $obj
 
-# Создать 'sources_1' файловый набор (если не найден)
+# Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
   create_fileset -srcset sources_1
 }
 
-# Установить пути к репозиториям IP
+# Set paths to IP repositories
 set obj [get_filesets sources_1]
 set_property "ip_repo_paths" "$origin_dir/../../../" $obj
-# Перестройте индекс пользовательских IP-репозиториев перед добавлением любых исходных файлов
+
+# Rebuild user IP repository index before adding any source files
 update_ip_catalog -rebuild
 
 
-# Установить объект 'sources_1' файловый набор
+# Set 'sources_1' fileset object
 set obj [get_filesets sources_1]
 set files [list \
  "[file normalize "$origin_dir/../../../Package/TimeCard_Package.vhd"]"\
@@ -61,7 +62,7 @@ set files [list \
 ]
 add_files -norecurse -fileset $obj $files
 
-# Установить свойства файлов 'sources_1' файлового набора для удаленных файлов
+# Set properties for files in 'sources_1' fileset for remote files
 
 set file "$origin_dir/../../../Package/TimeCard_Package.vhd"
 set file [file normalize $file]
@@ -81,21 +82,21 @@ set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property "file_type" "VHDL" $file_obj
 set_property "library" "TimeCardLib" $file_obj
 
-# Установить свойства файлов 'sources_1' файлового набора для удаленных файлов
+# Set properties for files in 'sources_1' fileset for remote files
 
-# Установить свойства 'sources_1' файлового набора
+# Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
 set_property "top" "TimeCardTop" $obj
 
-# Создать 'constrs_1' файловый набор (если не найден)
+# Create 'constrs_1' fileset (if not found)
 if {[string equal [get_filesets -quiet constrs_1] ""]} {
   create_fileset -constrset constrs_1
 }
 
-# Установить объект 'constrs_1' файлового набора
+# Set 'constrs_1' fileset object
 set obj [get_filesets constrs_1]
 
-# Добавить/Импортировать файл констрейнтов и установить свойства файла констрейнтов
+# Add/Import constraint file and set constraint file properties
 set file "[file normalize "$origin_dir/Constraints/PinoutConstraint.xdc"]"
 set file_added [add_files -norecurse -fileset $obj $file]
 set file "$origin_dir/Constraints/PinoutConstraint.xdc"
@@ -103,7 +104,7 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property "file_type" "XDC" $file_obj
 
-# Добавить/Импортировать файл констрейнтов и установить свойства файла констрейнтов
+# Add/Import constraint file and set constraint file properties
 set file "[file normalize "$origin_dir/Constraints/TimingConstraint.sdc"]"
 set file_added [add_files -norecurse -fileset $obj $file]
 set file "$origin_dir/Constraints/TimingConstraint.sdc"
@@ -112,7 +113,7 @@ set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property "file_type" "XDC" $file_obj
 set_property used_in_synthesis false $file_obj
 
-# Добавить/Импортировать файл констрейнтов и установить свойства файла констрейнтов
+# Add/Import constraint file and set constraint file properties
 set file "[file normalize "$origin_dir/Constraints/UpdateImageConstraint.xdc"]"
 set file_added [add_files -norecurse -fileset $obj $file]
 set file "$origin_dir/Constraints/UpdateImageConstraint.xdc"
@@ -120,19 +121,19 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets constrs_1] [list "*$file"]]
 set_property "file_type" "XDC" $file_obj
 
-# Установить свойства 'constrs_1' файлового набора
+# Set 'constrs_1' fileset properties
 set obj [get_filesets constrs_1]
 set_property "target_constrs_file" "[file normalize "$origin_dir/Constraints/PinoutConstraint.xdc"]" $obj
 
-# Создать 'constrs_golden' файловый набор (если не найден)
+# Create 'constrs_golden' fileset (if not found)
 if {[string equal [get_filesets -quiet constrs_golden] ""]} {
   create_fileset -constrset constrs_golden
 }
 
-# Установить объект 'constrs_golden' файлового набора
+# Set 'constrs_golden' fileset object
 set obj [get_filesets constrs_golden]
 
-# Добавить/Импортировать файл констрейнтов и установить свойства файла констрейнтов
+# Add/Import constraint file and set constraint file properties
 set file "[file normalize "$origin_dir/Constraints/PinoutConstraint.xdc"]"
 set file_added [add_files -norecurse -fileset $obj $file]
 set file "$origin_dir/Constraints/PinoutConstraint.xdc"
@@ -140,7 +141,7 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets constrs_golden] [list "*$file"]]
 set_property "file_type" "XDC" $file_obj
 
-# Добавить/Импортировать файл констрейнтов и установить свойства файла констрейнтов
+# Add/Import constraint file and set constraint file properties
 set file "[file normalize "$origin_dir/Constraints/TimingConstraint.sdc"]"
 set file_added [add_files -norecurse -fileset $obj $file]
 set file "$origin_dir/Constraints/TimingConstraint.sdc"
@@ -149,7 +150,7 @@ set file_obj [get_files -of_objects [get_filesets constrs_golden] [list "*$file"
 set_property "file_type" "XDC" $file_obj
 set_property used_in_synthesis false $file_obj
 
-# Добавить/Импортировать файл констрейнтов и установить свойства файла констрейнтов
+# Add/Import constraint file and set constraint file properties
 set file "[file normalize "$origin_dir/Constraints/GoldenImageConstraint.xdc"]"
 set file_added [add_files -norecurse -fileset $obj $file]
 set file "$origin_dir/Constraints/GoldenImageConstraint.xdc"
@@ -157,37 +158,37 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets constrs_golden] [list "*$file"]]
 set_property "file_type" "XDC" $file_obj
 
-# Установить свойства 'constrs_golden' файлового набора
+# Set 'constrs_golden' fileset properties
 set obj [get_filesets constrs_golden]
 set_property "target_constrs_file" "[file normalize "$origin_dir/Constraints/PinoutConstraint.xdc"]" $obj
 
-# Создать 'sim_1' файловый набор (если не найден)
+# Create 'sim_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sim_1] ""]} {
   create_fileset -simset sim_1
 }
 
-# Установить объект 'sim_1' файлового набора
+# Set 'sim_1' fileset object
 set obj [get_filesets sim_1]
-# Пустой (отсутствуют источники)
+# Empty (no sources)
 
-# Установить свойства 'sim_1' файлового набора
+# Set 'sim_1' fileset properties
 set obj [get_filesets sim_1]
 # --! set_property -name "top" -value "TimeCard" -objects $obj
 set_property -name "top_lib" -value "xil_defaultlib" -objects $obj
 
-# Установить объект 'utils_1' файлового набора
+# Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
-# Пустой (отсутствуют источники)
+# Empty (no sources)
 
 set obj [get_filesets utils_1]
-# Установить свойства 'utils_1' файлового набора
+# Set 'utils_1' fileset properties
 set obj [get_filesets utils_1]
 
 set VivadoVersion [lindex [split [version -short] "."] 0]
 set Synthesis_Flow "Vivado Synthesis $VivadoVersion"
 set Implementation_Flow "Vivado Implementation $VivadoVersion"
 
-# Создать 'synth_1' запуск (если не найден)
+# Create 'synth_1' run (if not found)
 if {[string equal [get_runs -quiet synth_1] ""]} {
     create_run -name synth_1 -part xc7a100tfgg484-1 -flow $Synthesis_Flow -strategy "Vivado Synthesis Defaults" -report_strategy {No Reports} -constrset constrs_1
 } else {
@@ -198,7 +199,7 @@ set obj [get_runs synth_1]
 set_property -name "steps.synth_design.args.more options" -value "-generic GoldenImage_Gen=false" -objects $obj
 
 
-# Создать 'impl_1' запуск (если не найден)
+# Create 'impl_1' run (if not found)
 if {[string equal [get_runs -quiet impl_1] ""]} {
     create_run -name impl_1 -part xc7a100tfgg484-1 -flow $Implementation_Flow -strategy "Vivado Implementation Defaults" -report_strategy {No Reports} -constrset constrs_1 -parent_run synth_1
 } else {
@@ -212,7 +213,7 @@ set_property -name "steps.write_bitstream.args.verbose" -value "0" -objects $obj
 set_property -name "steps.write_bitstream.args.BIN_FILE" -value "1" -objects $obj
 
 
-# Создать 'synth_golden' запуск (если не найден)
+# Create 'synth_golden' run (if not found)
 if {[string equal [get_runs -quiet synth_golden] ""]} {
     create_run -name synth_golden -part xc7a100tfgg484-1 -flow $Synthesis_Flow -strategy "Vivado Synthesis Defaults" -report_strategy {No Reports} -constrset constrs_golden
 } else {
@@ -224,7 +225,7 @@ set_property -name "strategy" -value "Vivado Synthesis Defaults" -objects $obj
 set_property -name "steps.synth_design.args.more options" -value "-generic GoldenImage_Gen=true" -objects $obj
 
 
-# Создать 'impl_golden' запуск (если не найден)
+# Create 'impl_golden' run (if not found)
 if {[string equal [get_runs -quiet impl_golden] ""]} {
     create_run -name impl_golden -part xc7a100tfgg484-1 -flow $Implementation_Flow -strategy "Vivado Implementation Defaults" -report_strategy {No Reports} -constrset constrs_golden -parent_run synth_golden
 } else {
@@ -239,9 +240,9 @@ set_property -name "steps.write_bitstream.args.verbose" -value "0" -objects $obj
 set_property -name "steps.write_bitstream.args.BIN_FILE" -value "1" -objects $obj
 
 
-# Установить текущий запуск синтеза
+# Set current synthesis run
 current_run -synthesis [get_runs synth_1]
-# Установить текущий запуск реализации
+# Set current implementation run
 current_run -implementation [get_runs impl_1]
 
 puts "INFO: Project created:${_xil_proj_name_}"
@@ -254,23 +255,23 @@ source "$origin_dir/Bd/TimeCardBd.tcl"
 update_compile_order -fileset sources_1
 make_wrapper -files [get_files $origin_dir/TimeCard/TimeCard.srcs/sources_1/bd/TimeCard/TimeCard.bd] -top
 add_files -norecurse $origin_dir/TimeCard/TimeCard.srcs/sources_1/bd/TimeCard/hdl/TimeCard_wrapper.vhd
-# Установить свойства 'sources_1' файлового набора
+# Set 'sources_1' fileset properties
 update_compile_order -fileset sources_1
-# Обновите относительные пути текстовых файлов
+# Update relative paths for text files
 set_property CONFIG.ConfigFile_Gen $origin_dir/DefaultConfigFile.txt [get_bd_cells /TC_ConfMaster_0]
 set_property CONFIG.CoreListFile_Gen $origin_dir/CoreListFile.txt [get_bd_cells /TC_CoreList_0]
 
-# Подавлять предупреждения 
+# Suppress warnings 
 
-# только части, используемые интерфейса
+# only parts used by interfaces
 set_msg_config -suppress -id {BD 41-1306}
-# обновление предупреждений IP свойств после создания BD
+# update IP property warnings after BD creation
 set_msg_config -suppress -id {BD 41-927} 
-# настройки на уровне модуля для выходного пина невозможны
+# output pin settings at module level are not possible
 set_msg_config -suppress -id {BD 41-1731} -string {{WARNING: [BD 41-1731] Type mismatch between connected pins: /BufgMux_IPI_0/ClkOut_ClkOut(undef) and /BufgMux_IPI_2/ClkIn0_ClkIn(clk)} }
 set_msg_config -suppress -id {BD 41-1731} -string {{WARNING: [BD 41-1731] Type mismatch between connected pins: /BufgMux_IPI_1/ClkOut_ClkOut(undef) and /BufgMux_IPI_2/ClkIn1_ClkIn(clk)} } 
 set_msg_config -suppress -id {BD 41-1731} -string {{WARNING: [BD 41-1731] Type mismatch between connected pins: /BufgMux_IPI_2/ClkOut_ClkOut(undef) and /clk_wiz_1/clk_in1(clk)} }
 set_msg_config -suppress -id {BD 41-1731} -string {{WARNING: [BD 41-1731] Type mismatch between connected pins: /BufgMux_IPI_2/ClkIn0_ClkIn(clk) and /BufgMux_IPI_0/ClkOut_ClkOut(undef)} } 
-# интерфейс шины неизвестен, так как он источником другого BUFGMUX
+# bus interface is unknown as it is the source of another BUFGMUX
 set_msg_config -suppress -id {IP_Flow 19-3153} -string {{WARNING: [IP_Flow 19-3153] Bus Interface 'ClkIn0_ClkIn': ASSOCIATED_BUSIF bus parameter is missing.} } 
 set_msg_config -suppress -id {IP_Flow 19-3153} -string {{WARNING: [IP_Flow 19-3153] Bus Interface 'ClkIn1_ClkIn': ASSOCIATED_BUSIF bus parameter is missing.} } 

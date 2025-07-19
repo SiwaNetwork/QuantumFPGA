@@ -1,27 +1,27 @@
 --*****************************************************************************************
--- Project: Time Card
+-- Проект: Time Card
 --
--- Author: Ioannis Sotiropoulos, NetTimeLogic GmbH
+-- Автор: Ioannis Sotiropoulos, NetTimeLogic GmbH
 --
--- License: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
--- All rights reserved.
+-- Лицензия: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
+-- Все права защищены.
 --
--- THIS PROGRAM IS FREE SOFTWARE: YOU CAN REDISTRIBUTE IT AND/OR MODIFY
--- IT UNDER THE TERMS OF THE GNU LESSER GENERAL PUBLIC LICENSE AS
--- PUBLISHED BY THE FREE SOFTWARE FOUNDATION, VERSION 3.
+-- ЭТА ПРОГРАММА ЯВЛЯЕТСЯ СВОБОДНЫМ ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ: ВЫ МОЖЕТЕ РАСПРОСТРАНЯТЬ ЕЁ И/ИЛИ
+-- ИЗМЕНЯТЬ В СООТВЕТСТВИИ С УСЛОВИЯМИ GNU LESSER GENERAL PUBLIC LICENSE,
+-- ОПУБЛИКОВАННОЙ FREE SOFTWARE FOUNDATION, ВЕРСИЯ 3.
 --
--- THIS PROGRAM IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT
--- WITHOUT ANY WARRANTY; WITHOUT EVEN THE IMPLIED WARRANTY OF
--- MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SEE THE GNU
--- LESSER GENERAL LESSER PUBLIC LICENSE FOR MORE DETAILS.
+-- ЭТА ПРОГРАММА РАСПРОСТРАНЯЕТСЯ В НАДЕЖДЕ, ЧТО ОНА БУДЕТ ПОЛЕЗНОЙ, НО
+-- БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ; ДАЖЕ БЕЗ ПОДРАЗУМЕВАЕМОЙ ГАРАНТИИ
+-- ТОВАРНОЙ ПРИГОДНОСТИ ИЛИ ПРИГОДНОСТИ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ. СМОТРИТЕ
+-- GNU LESSER GENERAL PUBLIC LICENSE ДЛЯ БОЛЕЕ ПОДРОБНОЙ ИНФОРМАЦИИ.
 --
--- YOU SHOULD HAVE RECEIVED A COPY OF THE GNU LESSER GENERAL PUBLIC LICENSE
--- ALONG WITH THIS PROGRAM. IF NOT, SEE <http://www.gnu.org/licenses/>.
+-- ВЫ ДОЛЖНЫ БЫЛИ ПОЛУЧИТЬ КОПИЮ GNU LESSER GENERAL PUBLIC LICENSE
+-- ВМЕСТЕ С ЭТОЙ ПРОГРАММОЙ. ЕСЛИ НЕТ, СМОТРИТЕ <http://www.gnu.org/licenses/>.
 --
 --*****************************************************************************************
 
 --*****************************************************************************************
--- General Libraries
+-- Общие библиотеки
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
@@ -29,18 +29,18 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 --*****************************************************************************************
--- Specific Libraries
+-- Специфичные библиотеки
 --*****************************************************************************************
 library TimecardLib;
 use TimecardLib.Timecard_Package.all;
 
 --*****************************************************************************************
--- Entity Declaration
+-- Объявление сущности
 --*****************************************************************************************
--- The PPS Generator generates a Pulse Per Second (PPS) aligned to the local clock's     --
--- new second. The local clock is provided as input. The core can be configured by an    --
--- AXI4Light-Slave Register interface. A high resolution clock is used for the pulse     --
--- generation to reduce the jitter.                                                      --
+-- Генератор PPS генерирует импульс в секунду (PPS), выровненный по началу новой         --
+-- секунды локальных часов. Локальные часы подаются как входной сигнал. Ядро может быть --
+-- настроено через интерфейс регистров AXI4Light-Slave. Высокочастотные часы            --
+-- используются для генерации импульса для уменьшения джиттера.                         --
 -------------------------------------------------------------------------------------------
 entity PpsGenerator is
     generic (
@@ -53,18 +53,18 @@ entity PpsGenerator is
         Sim_Gen                                     :       boolean := false
     );          
     port (          
-        -- System           
+        -- Система           
         SysClk_ClkIn                                : in    std_logic;
         SysClkNx_ClkIn                              : in    std_logic := '0';
         SysRstN_RstIn                               : in    std_logic;
                 
-        -- Time Input                       
+        -- Вход времени                       
         ClockTime_Second_DatIn                      : in   std_logic_vector((SecondWidth_Con-1) downto 0);
         ClockTime_Nanosecond_DatIn                  : in   std_logic_vector((NanosecondWidth_Con-1) downto 0);
         ClockTime_TimeJump_DatIn                    : in   std_logic;
         ClockTime_ValIn                             : in   std_logic;
                 
-        -- Pps Output                       
+        -- Выход PPS                       
         Pps_EvtOut                                  : out   std_logic;
                 
         -- Axi                  
@@ -95,43 +95,43 @@ entity PpsGenerator is
 end entity PpsGenerator;
 
 --*****************************************************************************************
--- Architecture Declaration
+-- Объявление архитектуры
 --*****************************************************************************************
 architecture PpsGenerator_Arch of PpsGenerator is
     --*************************************************************************************
-    -- Procedure Definitions
+    -- Определения процедур
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Function Definitions
+    -- Определения функций
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Constant Definitions
+    -- Определения констант
     --*************************************************************************************
-    -- High resolution constants
+    -- Высокочастотные константы
     constant HighResClockPeriod_Con                 : natural := (ClockPeriod_Gen/HighResFreqMultiply_Gen);
     constant RegOutputDelay_Con                     : natural := ((3 * ClockPeriod_Gen) + HighResClockPeriod_Con);
-    -- The total output delay consists of 
-    --     - the configurable output delay compensation(generic input), due to output registers
-    --     - the cable delay compensation, provided by AXI reg, if enabled by the generic input
-    --     - the internal register delay compensation for the clock domain crossing
+    -- Общая задержка вывода состоит из 
+    --     - компенсации конфигурируемой задержки вывода (входной параметр), из-за регистров вывода
+    --     - компенсации задержки кабеля, предоставляемой регистром AXI, если включена входной параметр
+    --     - компенсации задержки регистра для перехода между доменами
     constant OutputDelaySum_Con                     : integer := (OutputDelay_Gen + (ClockPeriod_Gen/2) + RegOutputDelay_Con);
 
     constant OutputPulseWidthMillsecond_Con         : natural := 500;
     
-    -- PPS Generator version
+    -- Версия генератора PPS
     constant PpsGenMajorVersion_Con                 : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(0, 8));
     constant PpsGenMinorVersion_Con                 : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(1, 8));
     constant PpsGenBuildVersion_Con                 : std_logic_vector(15 downto 0) := std_logic_vector(to_unsigned(0, 16));
     constant PpsGenVersion_Con                      : std_logic_vector(31 downto 0) := PpsGenMajorVersion_Con & PpsGenMinorVersion_Con & PpsGenBuildVersion_Con;
     
-    -- AXI regs                                                       Addr       , Mask       , RW  , Reset
+    -- Регистры AXI                                                       Адрес       , Маска       , RW  , Сброс
     constant PpsGenControl_Reg_Con                  : Axi_Reg_Type:= (x"00000000", x"00000001", Rw_E, x"00000000");
     constant PpsGenStatus_Reg_Con                   : Axi_Reg_Type:= (x"00000004", x"00000001", Wc_E, x"00000000");
     constant PpsGenPolarity_Reg_Con                 : Axi_Reg_Type:= (x"00000008", x"00000001", Rw_E, x"00000000");
     constant PpsGenVersion_Reg_Con                  : Axi_Reg_Type:= (x"0000000C", x"FFFFFFFF", Ro_E, PpsGenVersion_Con);
-    constant PpsGenPulseWidth_Reg_Con               : Axi_Reg_Type:= (x"00000010", x"000003FF", Rw_E, x"00000000"); -- unused
+    constant PpsGenPulseWidth_Reg_Con               : Axi_Reg_Type:= (x"00000010", x"000003FF", Rw_E, x"00000000"); -- неиспользуемый
     constant PpsGenCableDelay_Reg_Con               : Axi_Reg_Type:= (x"00000020", x"0000FFFF", Rw_E, x"00000000");
 
     constant PpsGenControl_EnableBit_Con            : natural := 0;
@@ -139,24 +139,24 @@ architecture PpsGenerator_Arch of PpsGenerator is
     constant PpsGenPolarity_PolarityBit_Con         : natural := 0;
 
     --*************************************************************************************
-    -- Type Definitions
+    -- Определения типов
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Signal Definitions
+    -- Определения сигналов
     --*************************************************************************************
     signal Enable_Ena                               : std_logic;
     signal Polarity_Dat                             : std_logic;
     signal PulseWidth_Dat                           : std_logic_vector(9 downto 0);
     signal CableDelay_Dat                           : std_logic_vector(15 downto 0);
     
-    -- Time Input           
+    -- Входные данные времени           
     signal ClockTime_Second_DatReg                  : std_logic_vector((SecondWidth_Con-1) downto 0);
     signal ClockTime_Nanosecond_DatReg              : std_logic_vector((NanosecondWidth_Con-1) downto 0);
     signal ClockTime_TimeJump_DatReg                : std_logic;
     signal ClockTime_ValReg                         : std_logic;
 
-    -- count the high resolution ticks
+    -- подсчет высокочастотных тиков
     signal PpsShiftSysClk_DatReg                    : std_logic_vector((HighResFreqMultiply_Gen-1) downto 0);
     signal PpsShiftSysClk1_DatReg                   : std_logic_vector((HighResFreqMultiply_Gen-1) downto 0) := (others => '0');
     signal PpsShiftSysClkNx_DatReg                  : std_logic_vector(((HighResFreqMultiply_Gen*2)-1) downto 0) := (others => '0');
@@ -165,7 +165,7 @@ architecture PpsGenerator_Arch of PpsGenerator is
     signal Pps_Reg                                  : std_logic;
     signal PulseWidthCounter_CntReg                 : integer;
     
-    -- AXI signals and regs
+    -- Сигналы AXI и регистры
     signal Axi_AccessState_StaReg                   : Axi_AccessState_Type:= Axi_AccessState_Type_Rst_Con;
     signal AxiWriteAddrReady_RdyReg                 : std_logic;       
     signal AxiWriteDataReady_RdyReg                 : std_logic;   
@@ -180,16 +180,16 @@ architecture PpsGenerator_Arch of PpsGenerator is
     signal PpsGenPolarity_DatReg                    : std_logic_vector(31 downto 0);
     signal PpsGenStatus_DatReg                      : std_logic_vector(31 downto 0);
     signal PpsGenVersion_DatReg                     : std_logic_vector(31 downto 0);
-    signal PpsGenPulseWidth_DatReg                  : std_logic_vector(31 downto 0); -- unused
+    signal PpsGenPulseWidth_DatReg                  : std_logic_vector(31 downto 0); -- неиспользуемый
     signal PpsGenCableDelay_DatReg                  : std_logic_vector(31 downto 0);
     
 --*****************************************************************************************
--- Architecture Implementation
+-- Реализация архитектуры
 --*****************************************************************************************
 begin
 
     --*************************************************************************************
-    -- Concurrent Statements
+    -- Одновременные утверждения
     --*************************************************************************************
     AxiWriteAddrReady_RdyOut                        <= AxiWriteAddrReady_RdyReg;        
     AxiWriteDataReady_RdyOut                        <= AxiWriteDataReady_RdyReg;   
@@ -206,18 +206,18 @@ begin
     CableDelay_Dat                                  <= PpsGenCableDelay_DatReg(15 downto 0);
 
     --*************************************************************************************
-    -- Procedural Statements
+    -- Процедурные утверждения
     --*************************************************************************************
     
-   -- Pulse generation on the clock domain of the high frequency clock
+   -- Генерация импульса на частоте высокочастотного сигнала
     SysClkNxReg_Prc : process(SysClkNx_ClkIn) is
     begin
         if ((SysClkNx_ClkIn'event) and (SysClkNx_ClkIn = '1')) then
             PpsShiftSysClk1_DatReg <= PpsShiftSysClk_DatReg;
             if (PpsShiftSysClk_DatReg /= PpsShiftSysClk1_DatReg) then
-                PpsShiftSysClkNx_DatReg <= PpsShiftSysClkNx_DatReg(((HighResFreqMultiply_Gen*2)-2) downto (HighResFreqMultiply_Gen-1)) & PpsShiftSysClk_DatReg; -- copy the high resolution clock periods
+                PpsShiftSysClkNx_DatReg <= PpsShiftSysClkNx_DatReg(((HighResFreqMultiply_Gen*2)-2) downto (HighResFreqMultiply_Gen-1)) & PpsShiftSysClk_DatReg; -- копирование высокочастотных периодов часов
             else
-                PpsShiftSysClkNx_DatReg <= PpsShiftSysClkNx_DatReg(((HighResFreqMultiply_Gen*2)-2) downto 0) & PpsShiftSysClkNx_DatReg(0); -- retain the last value
+                PpsShiftSysClkNx_DatReg <= PpsShiftSysClkNx_DatReg(((HighResFreqMultiply_Gen*2)-2) downto 0) & PpsShiftSysClkNx_DatReg(0); -- сохранение последнего значения
             end if;
             if (Polarity_Dat = '1') then
                 Pps_EvtOut <= PpsShiftSysClkNx_DatReg((HighResFreqMultiply_Gen*2)-1);
@@ -227,11 +227,11 @@ begin
         end if;
     end process SysClkNxReg_Prc;
 
-    -- The process sets the activation and deactivation of the PPS, based on the system
-    -- clock. It also marks the pulse-activation in a shift register, which will
-    -- be later used by the high-resolution clock to set a motre accurate activation time.
-    -- The deactivation of the pulse is calculated by a free-running counter (i.e. not aligned 
-    -- to the local time).
+    -- Процесс устанавливает активацию и деактивацию PPS на основе системного сигнала.
+    -- Он также отмечает активацию импульса в регистре сдвига, который будет
+    -- позже использоваться высокочастотными часами для установки более точной временной активации.
+    -- Деактивация импульса рассчитывается бесплатным счетчиком (т.е. не выровненным 
+    -- по локальному времени).
     Pps_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     begin
         if (SysRstN_RstIn = '0') then
@@ -264,17 +264,17 @@ begin
             
             if (Enable_Ena = '1') then
                 if ((ClockTime_ValReg = '0') or (ClockTime_TimeJump_DatReg = '1')) then
-                    -- do nothing, this may cause a loss of a PPS. If overflow happens, better than a wrong PPS          
+                    -- ничего не делать, это может привести к потере PPS. Если переполнение, лучше, чем неправильный PPS          
                     PpsError_Reg <= '1';
                 else
-                    -- the pulse activation time is when a new second starts minus the total output delay
+                    -- время активации импульса - когда начинается новая секунда минус общая задержка вывода
                     if ((Pps_Reg = '0') and
                         (((Sim_Gen = true) and ((to_integer(unsigned(ClockTime_Nanosecond_DatReg)) mod (SecondNanoseconds_Con/(1000*10))) >= ((SecondNanoseconds_Con/(1000*10)) - OutputDelaySum_Con))) or
-                         ((Sim_Gen = false) and ((to_integer(unsigned(ClockTime_Nanosecond_DatReg))) >= (SecondNanoseconds_Con - OutputDelaySum_Con))))) then -- overflow in first half
-                        PpsError_Reg <= '0'; -- clear the error on the next PPS
-                        Pps_Reg <= '1'; -- this we need to do the edge detection
+                         ((Sim_Gen = false) and ((to_integer(unsigned(ClockTime_Nanosecond_DatReg))) >= (SecondNanoseconds_Con - OutputDelaySum_Con))))) then -- переполнение в первой половине
+                        PpsError_Reg <= '0'; -- очистка ошибки на следующем PPS
+                        Pps_Reg <= '1'; -- это нам нужно сделать для обнаружения фронта
                         PpsShiftSysClk_DatReg <= (others => '0');
-                        -- Mark in a shift-register how many high-resolution clock periods 'fit' between the current time and the compensated pulse-activation time.                         
+                        -- Отмечаем в регистре сдвига, сколько высокочастотных периодов 'подходят' между текущим временем и скомпенсированным временем активации импульса.                         
                         for i in 0 to (HighResFreqMultiply_Gen-1) loop
                             if (Sim_Gen = true) then
                                 if ((to_integer(unsigned(ClockTime_Nanosecond_DatReg)) mod (SecondNanoseconds_Con/(1000*10))) >= ((SecondNanoseconds_Con/(1000*10)) - OutputDelaySum_Con + (i*HighResClockPeriod_Con))) then
@@ -291,12 +291,12 @@ begin
                         else
                             PulseWidthCounter_CntReg <= to_integer(unsigned(PulseWidth_Dat))*(SecondNanoseconds_Con/1000);
                         end if;
-                    -- the pulse deactivation time is when a free-running counter counts down to 0
+                    -- время деактивации импульса - когда бесплатный счетчик считает до 0
                     else
                         if (Pps_Reg = '1') then
-                            PpsShiftSysClk_DatReg <= (others => '1'); -- now set the level
+                            PpsShiftSysClk_DatReg <= (others => '1'); -- теперь установите уровень
                         end if;
-                        if (PulseWidthCounter_CntReg > ClockPeriod_Gen) then -- pulse done (not aligned with the input clock)
+                        if (PulseWidthCounter_CntReg > ClockPeriod_Gen) then -- импульс завершен (не выровнен по входному сигналу)
                             PulseWidthCounter_CntReg <= PulseWidthCounter_CntReg - ClockPeriod_Gen;               
                         else
                             Pps_Reg <= '0';
@@ -316,7 +316,7 @@ begin
         end if;
     end process Pps_Prc;
     
-    -- Access configuration and monitoring registers via an AXI4L slave
+    -- Доступ к конфигурационным и мониторинговым регистрам через AXI4L slave
     Axi_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     variable TempAddress                            : std_logic_vector(31 downto 0) := (others => '0');    
     begin
@@ -339,7 +339,7 @@ begin
             Axi_Init_Proc(PpsGenStatus_Reg_Con, PpsGenStatus_DatReg);
             Axi_Init_Proc(PpsGenPolarity_Reg_Con, PpsGenPolarity_DatReg);
             Axi_Init_Proc(PpsGenVersion_Reg_Con, PpsGenVersion_DatReg);
-            Axi_Init_Proc(PpsGenPulseWidth_Reg_Con, PpsGenPulseWidth_DatReg); -- unused
+            Axi_Init_Proc(PpsGenPulseWidth_Reg_Con, PpsGenPulseWidth_DatReg); -- неиспользуемый
             Axi_Init_Proc(PpsGenCableDelay_Reg_Con, PpsGenCableDelay_DatReg);
             
             if (OutputPolarity_Gen = true) then
@@ -348,7 +348,7 @@ begin
                 PpsGenPolarity_DatReg(PpsGenPolarity_PolarityBit_Con) <= '0';
             end if;
             
-            PpsGenPulseWidth_DatReg(9 downto 0) <= std_logic_vector(to_unsigned(OutputPulseWidthMillsecond_Con, 10)); -- overwrite with constant
+            PpsGenPulseWidth_DatReg(9 downto 0) <= std_logic_vector(to_unsigned(OutputPulseWidthMillsecond_Con, 10)); -- перезапись константой
            
         elsif ((SysClk_ClkIn'event) and (SysClk_ClkIn = '1')) then
             if ((AxiWriteAddrValid_ValIn = '1') and (AxiWriteAddrReady_RdyReg = '1')) then
@@ -391,7 +391,7 @@ begin
                         Axi_Read_Proc(PpsGenStatus_Reg_Con, PpsGenStatus_DatReg, TempAddress, AxiReadDataData_DatReg, AxiReadDataResponse_DatReg);
                         Axi_Read_Proc(PpsGenPolarity_Reg_Con, PpsGenPolarity_DatReg, TempAddress, AxiReadDataData_DatReg, AxiReadDataResponse_DatReg);
                         Axi_Read_Proc(PpsGenVersion_Reg_Con, PpsGenVersion_DatReg, TempAddress, AxiReadDataData_DatReg, AxiReadDataResponse_DatReg);
-                        Axi_Read_Proc(PpsGenPulseWidth_Reg_Con, PpsGenPulseWidth_DatReg, TempAddress, AxiReadDataData_DatReg, AxiReadDataResponse_DatReg); -- unused
+                        Axi_Read_Proc(PpsGenPulseWidth_Reg_Con, PpsGenPulseWidth_DatReg, TempAddress, AxiReadDataData_DatReg, AxiReadDataResponse_DatReg); -- неиспользуемый
                         if (CableDelay_Gen = true) then
                             Axi_Read_Proc(PpsGenCableDelay_Reg_Con, PpsGenCableDelay_DatReg, TempAddress, AxiReadDataData_DatReg, AxiReadDataResponse_DatReg);
                         end if;
@@ -408,7 +408,7 @@ begin
                         Axi_Write_Proc(PpsGenStatus_Reg_Con, PpsGenStatus_DatReg, TempAddress, AxiWriteDataData_DatIn, AxiWriteRespResponse_DatReg);
                         Axi_Write_Proc(PpsGenPolarity_Reg_Con, PpsGenPolarity_DatReg, TempAddress, AxiWriteDataData_DatIn, AxiWriteRespResponse_DatReg);
                         Axi_Write_Proc(PpsGenVersion_Reg_Con, PpsGenVersion_DatReg, TempAddress, AxiWriteDataData_DatIn, AxiWriteRespResponse_DatReg);
-                        Axi_Write_Proc(PpsGenPulseWidth_Reg_Con, PpsGenPulseWidth_DatReg, TempAddress, AxiWriteDataData_DatIn, AxiWriteRespResponse_DatReg); -- unused
+                        Axi_Write_Proc(PpsGenPulseWidth_Reg_Con, PpsGenPulseWidth_DatReg, TempAddress, AxiWriteDataData_DatIn, AxiWriteRespResponse_DatReg); -- неиспользуемый
                         if (CableDelay_Gen = true) then
                             Axi_Write_Proc(PpsGenCableDelay_Reg_Con, PpsGenCableDelay_DatReg, TempAddress, AxiWriteDataData_DatIn, AxiWriteRespResponse_DatReg);
                         end if;
@@ -426,14 +426,14 @@ begin
             end case;  
             
             if (PpsGenControl_DatReg(PpsGenControl_EnableBit_Con) = '1') then
-                if (PpsError_Reg = '1') then -- make it sticky
+                if (PpsError_Reg = '1') then -- сделать его липким
                     PpsGenStatus_DatReg(PpsGenStatus_ErrorBit_Con) <= '1';
                 end if;
             else
                 PpsGenStatus_DatReg(PpsGenStatus_ErrorBit_Con) <= '0';
             end if;
                             
-            PpsGenPulseWidth_DatReg(9 downto 0) <= std_logic_vector(to_unsigned(OutputPulseWidthMillsecond_Con, 10)); -- overwrite with generic
+            PpsGenPulseWidth_DatReg(9 downto 0) <= std_logic_vector(to_unsigned(OutputPulseWidthMillsecond_Con, 10)); -- перезапись входной параметром
                             
             if (CableDelay_Gen = false) then
                 Axi_Init_Proc(PpsGenCableDelay_Reg_Con, PpsGenCableDelay_DatReg);

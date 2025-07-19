@@ -1,39 +1,39 @@
 --*****************************************************************************************
--- Project: Time Card
+-- Проект: Time Card
 --
--- Author: Ioannis Sotiropoulos, NetTimeLogic GmbH
+-- Автор: Ioannis Sotiropoulos, NetTimeLogic GmbH
 --
--- License: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
--- All rights reserved.
+-- Лицензия: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
+-- Все права защищены.
 --
--- THIS PROGRAM IS FREE SOFTWARE: YOU CAN REDISTRIBUTE IT AND/OR MODIFY
--- IT UNDER THE TERMS OF THE GNU LESSER GENERAL PUBLIC LICENSE AS
--- PUBLISHED BY THE FREE SOFTWARE FOUNDATION, VERSION 3.
+-- ЭТА ПРОГРАММА ЯВЛЯЕТСЯ СВОБОДНЫМ ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ: ВЫ МОЖЕТЕ РАСПРОСТРАНЯТЬ ЕЁ И/ИЛИ
+-- ИЗМЕНЯТЬ В СООТВЕТСТВИИ С УСЛОВИЯМИ GNU LESSER GENERAL PUBLIC LICENSE,
+-- ОПУБЛИКОВАННОЙ FREE SOFTWARE FOUNDATION, ВЕРСИЯ 3.
 --
--- THIS PROGRAM IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT
--- WITHOUT ANY WARRANTY; WITHOUT EVEN THE IMPLIED WARRANTY OF
--- MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SEE THE GNU
--- LESSER GENERAL LESSER PUBLIC LICENSE FOR MORE DETAILS.
+-- ЭТА ПРОГРАММА РАСПРОСТРАНЯЕТСЯ В НАДЕЖДЕ, ЧТО ОНА БУДЕТ ПОЛЕЗНОЙ, НО
+-- БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ; ДАЖЕ БЕЗ ПОДРАЗУМЕВАЕМОЙ ГАРАНТИИ
+-- ТОВАРНОЙ ПРИГОДНОСТИ ИЛИ ПРИГОДНОСТИ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ. СМОТРИТЕ
+-- GNU LESSER GENERAL PUBLIC LICENSE ДЛЯ БОЛЕЕ ПОДРОБНОЙ ИНФОРМАЦИИ.
 --
--- YOU SHOULD HAVE RECEIVED A COPY OF THE GNU LESSER GENERAL PUBLIC LICENSE
--- ALONG WITH THIS PROGRAM. IF NOT, SEE <http://www.gnu.org/licenses/>.
+-- ВЫ ДОЛЖНЫ БЫЛИ ПОЛУЧИТЬ КОПИЮ GNU LESSER GENERAL PUBLIC LICENSE
+-- ВМЕСТЕ С ЭТОЙ ПРОГРАММОЙ. ЕСЛИ НЕТ, СМОТРИТЕ <http://www.gnu.org/licenses/>.
 --
 --*****************************************************************************************
 
 --*****************************************************************************************
--- General Libraries
+-- Общие библиотеки
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 --*****************************************************************************************
--- Package Declaration
+-- Объявление пакета
 --*****************************************************************************************
 package TimeCard_Package is
 
     --*************************************************************************************
-    -- Constant Definitions
+    -- Определения констант
     --*************************************************************************************
     constant SecondWidth_Con                : natural := 32;
     constant NanosecondWidth_Con            : natural := 32;
@@ -58,7 +58,7 @@ package TimeCard_Package is
     constant DriftFactorP_Con               : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(((DriftMulP_Con*(2**16))/DriftDivP_Con), 32));
     constant DriftFactorI_Con               : std_logic_vector(31 downto 0) := std_logic_vector(to_unsigned(((DriftMulI_Con*(2**16))/DriftDivI_Con), 32));
     
-    -- AXI related constants
+    -- Константы, связанные с AXI
     constant Axi_AddrSize_Con               : natural := 32;
     constant Axi_DataSize_Con               : natural := 32;
     
@@ -68,10 +68,10 @@ package TimeCard_Package is
     constant Axi_RespDecErr_Con             : std_logic_vector(1 downto 0) := "11";
 
     --*************************************************************************************
-    -- Type Definitions
+    -- Определения типов
     --*************************************************************************************
     
-    -- AXI related definitions
+    -- Определения, связанные с AXI
     type Axi_AccessState_Type               is (Idle_St, Read_St, Write_St, Resp_St);
     
     type Axi_RegType_Type                   is (Ro_E, Rw_E, Wo_E, Wc_E, Rc_E, None_E);
@@ -84,7 +84,7 @@ package TimeCard_Package is
     end record;
 
     --*************************************************************************************
-    -- Reset Constant Definitions
+    -- Определения констант сброса
     --*************************************************************************************
     constant Axi_AccessState_Type_Rst_Con : Axi_AccessState_Type:= Idle_St;
     
@@ -98,7 +98,7 @@ package TimeCard_Package is
     );
 
     --*************************************************************************************
-    -- Procedure Definitions
+    -- Определения процедур
     --*************************************************************************************
     procedure Axi_Init_Proc(
                 constant    RegDef          : in    Axi_Reg_Type;
@@ -124,12 +124,12 @@ package TimeCard_Package is
 end package TimeCard_Package;
 
 --*****************************************************************************************
--- Package Implementation
+-- Реализация пакета
 --*****************************************************************************************
 package body TimeCard_Package is
 
     --*************************************************************************************
-    -- Procedure Implementation
+    -- Реализация процедур
     --*************************************************************************************
 
     procedure Axi_Init_Proc(

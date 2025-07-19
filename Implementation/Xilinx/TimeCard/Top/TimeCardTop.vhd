@@ -1,28 +1,28 @@
 --*****************************************************************************************
--- Project: Time Card
+-- Проект: Time Card
 --
--- Author: Sven Meier, NetTimeLogic GmbH
+-- Автор: Sven Meier, NetTimeLogic GmbH
 --
--- License: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
--- All rights reserved.
+-- Лицензия: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
+-- Все права защищены.
 --
--- THIS PROGRAM IS FREE SOFTWARE: YOU CAN REDISTRIBUTE IT AND/OR MODIFY
--- IT UNDER THE TERMS OF THE GNU LESSER GENERAL PUBLIC LICENSE AS
--- PUBLISHED BY THE FREE SOFTWARE FOUNDATION, VERSION 3.
+-- ЭТА ПРОГРАММА ЯВЛЯЕТСЯ СВОБОДНЫМ ПРОГРАММНЫМ ОБЕСПЕЧЕНИЕМ: ВЫ МОЖЕТЕ РАСПРОСТРАНЯТЬ ЕЁ И/ИЛИ
+-- ИЗМЕНЯТЬ В СООТВЕТСТВИИ С УСЛОВИЯМИ GNU LESSER GENERAL PUBLIC LICENSE,
+-- ОПУБЛИКОВАННОЙ FREE SOFTWARE FOUNDATION, ВЕРСИЯ 3.
 --
--- THIS PROGRAM IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT
--- WITHOUT ANY WARRANTY; WITHOUT EVEN THE IMPLIED WARRANTY OF
--- MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SEE THE GNU
--- LESSER GENERAL LESSER PUBLIC LICENSE FOR MORE DETAILS.
+-- ЭТА ПРОГРАММА РАСПРОСТРАНЯЕТСЯ В НАДЕЖДЕ, ЧТО ОНА БУДЕТ ПОЛЕЗНОЙ, НО
+-- БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ; ДАЖЕ БЕЗ ПОДРАЗУМЕВАЕМОЙ ГАРАНТИИ
+-- ТОВАРНОЙ ПРИГОДНОСТИ ИЛИ ПРИГОДНОСТИ ДЛЯ КОНКРЕТНОЙ ЦЕЛИ. СМОТРИТЕ
+-- GNU LESSER GENERAL PUBLIC LICENSE ДЛЯ БОЛЕЕ ПОДРОБНОЙ ИНФОРМАЦИИ.
 --
--- YOU SHOULD HAVE RECEIVED A COPY OF THE GNU LESSER GENERAL PUBLIC LICENSE
--- ALONG WITH THIS PROGRAM. IF NOT, SEE <http://www.gnu.org/licenses/>.
+-- ВЫ ДОЛЖНЫ БЫЛИ ПОЛУЧИТЬ КОПИЮ GNU LESSER GENERAL PUBLIC LICENSE
+-- ВМЕСТЕ С ЭТОЙ ПРОГРАММОЙ. ЕСЛИ НЕТ, СМОТРИТЕ <http://www.gnu.org/licenses/>.
 --
 --*****************************************************************************************
 
 
 --*****************************************************************************************
--- General Libraries
+-- Общие библиотеки
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
@@ -35,14 +35,14 @@ library xil_defaultlib;
 use xil_defaultlib.all;
 
 --*****************************************************************************************
--- Entity Declaration
+-- Объявление сущности
 --*****************************************************************************************
 entity TimeCardTop is
     generic (
         GoldenImage_Gen             :       boolean := false
     );
     port (
-        -- System 
+        -- Система 
         Mhz10ClkDcxo1_ClkIn         : in    std_logic;
             
         RstN_RstIn                  : in    std_logic;
@@ -65,7 +65,7 @@ entity TimeCardTop is
         EepromWp_DatOut             : out   std_logic;
    
         -----------------------------------------------------------------
-        -- QSPI Flash Inputs/Outputs
+        -- Входы/Выходы QSPI Flash
         -----------------------------------------------------------------
         SpiFlashDq0_DatInOut        : inout std_logic;
         SpiFlashDq1_DatInOut        : inout std_logic;
@@ -74,7 +74,7 @@ entity TimeCardTop is
         SpiFlashCsN_EnaOut          : out   std_logic;
         
         -----------------------------------------------------------------
-        -- SMA Inputs/Outputs
+        -- Входы/Выходы SMA
         -----------------------------------------------------------------
         SmaIn1_DatIn                : in    std_logic;      -- ANT1
         SmaIn2_DatIn                : in    std_logic;      -- ANT2

@@ -1,13 +1,13 @@
 --*****************************************************************************************
--- Проект: Time Card
+-- Project: Time Card
 --
--- Открытая аппаратная реализация системы точного времени
+-- Open source hardware implementation of precision timing system
 --
 --*****************************************************************************************
 
 
 --*****************************************************************************************
--- Общие библиотеки
+-- Common libraries
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
@@ -20,14 +20,14 @@ library xil_defaultlib;
 use xil_defaultlib.all;
 
 --*****************************************************************************************
--- Объявление сущности
+-- Entity Declaration
 --*****************************************************************************************
 entity TimeCardTop is
     generic (
         GoldenImage_Gen             :       boolean := false
     );
     port (
-        -- Система 
+        -- System 
         Mhz10ClkDcxo1_ClkIn         : in    std_logic;
             
         RstN_RstIn                  : in    std_logic;
@@ -50,7 +50,7 @@ entity TimeCardTop is
         EepromWp_DatOut             : out   std_logic;
    
         -----------------------------------------------------------------
-        -- Входы/Выходы QSPI Flash
+        -- QSPI Flash Inputs/Outputs
         -----------------------------------------------------------------
         SpiFlashDq0_DatInOut        : inout std_logic;
         SpiFlashDq1_DatInOut        : inout std_logic;
@@ -59,7 +59,7 @@ entity TimeCardTop is
         SpiFlashCsN_EnaOut          : out   std_logic;
         
         -----------------------------------------------------------------
-        -- Входы/Выходы SMA
+        -- SMA Inputs/Outputs
         -----------------------------------------------------------------
         SmaIn1_DatIn                : in    std_logic;      -- ANT1
         SmaIn2_DatIn                : in    std_logic;      -- ANT2

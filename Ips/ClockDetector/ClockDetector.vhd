@@ -1,27 +1,12 @@
 --*****************************************************************************************
--- Project: Time Card
+-- Проект: Time Card
 --
--- Author: Thomas Schaub, NetTimeLogic GmbH
---
--- License: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
--- All rights reserved.
---
--- THIS PROGRAM IS FREE SOFTWARE: YOU CAN REDISTRIBUTE IT AND/OR MODIFY
--- IT UNDER THE TERMS OF THE GNU LESSER GENERAL PUBLIC LICENSE AS
--- PUBLISHED BY THE FREE SOFTWARE FOUNDATION, VERSION 3.
---
--- THIS PROGRAM IS DISTRIBUTED IN THE HOPE THAT IT WILL BE USEFUL, BUT
--- WITHOUT ANY WARRANTY; WITHOUT EVEN THE IMPLIED WARRANTY OF
--- MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. SEE THE GNU
--- LESSER GENERAL LESSER PUBLIC LICENSE FOR MORE DETAILS.
---
--- YOU SHOULD HAVE RECEIVED A COPY OF THE GNU LESSER GENERAL PUBLIC LICENSE
--- ALONG WITH THIS PROGRAM. IF NOT, SEE <http://www.gnu.org/licenses/>.
+-- Детектор и селектор источников опорной частоты
 --
 --*****************************************************************************************
 
 --*****************************************************************************************
--- General Libraries
+-- Общие библиотеки
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
@@ -29,19 +14,16 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 --*****************************************************************************************
--- Specific Libraries
+-- Специальные библиотеки
 --*****************************************************************************************
 library TimecardLib;
 use TimecardLib.Timecard_Package.all;
 
 
 --*****************************************************************************************
--- Entity Declaration
+-- Объявление сущности
 --*****************************************************************************************
--- The Clock Detector detects the available clock sources and selects the clocks to be   --
--- used. The selection is done with different clock selector and clock enable outputs.   --
--- The selection is according to a priority scheme and it can be overwritten via         --
--- registers of the AXI slave interface                                                  --
+-- Детектор опорных частот обнаруживает доступные источники частоты и выбирает часы для использования. Выбор осуществляется с помощью различных селекторов часов и выходных сигналов разрешения часов. Выбор осуществляется в соответствии с схемой приоритетов, и его можно переопределить через регистры интерфейса AXI-slave. --
 -------------------------------------------------------------------------------------------
 entity ClockDetector is
     generic( 
@@ -49,17 +31,17 @@ entity ClockDetector is
         PpsSelect_Gen                               :       std_logic_vector(1 downto 0):="00"
     );
     port (
-        -- System
+        -- Система
         SysClk_ClkIn                                : in    std_logic;
         SysRstN_RstIn                               : in    std_logic;
 
-        -- Clock Inputs
+        -- Входные часы
         Mhz10ClkSma_ClkIn                           : in    std_logic;
         Mhz10ClkMac_ClkIn                           : in    std_logic;
         Mhz10ClkDcxo1_ClkIn                         : in    std_logic;
         Mhz10ClkDcxo2_ClkIn                         : in    std_logic;
 
-        -- Selected Clock output
+        -- Выходные часы
         ClkMux1Select_EnOut                         : out   std_logic;
         ClkMux2Select_EnOut                         : out   std_logic;
         ClkMux3Select_EnOut                         : out   std_logic;
@@ -67,7 +49,7 @@ entity ClockDetector is
 
         ClockRstN_RstOut                            : out   std_logic;
 
-        -- Config interface to PPS source select
+        -- Интерфейс конфигурации для выбора источника PPS
         PpsSourceSelect_DatOut                      : out std_logic_vector(1 downto 0);
         PpsSourceAvailable_DatIn                    : in  std_logic_vector(3 downto 0);
 
@@ -100,36 +82,36 @@ end entity ClockDetector;
 
 
 --*****************************************************************************************
--- Architecture Declaration
+-- Объявление архитектуры
 --*****************************************************************************************
 architecture ClockDetector_Arch of ClockDetector is
     --*************************************************************************************
-    -- Procedure Definitions
+    -- Определения процедур
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Function Definitions
+    -- Определения функций
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Constant Definitions
+    -- Определения констант
     --*************************************************************************************
     constant NumberOfClocks_Con                     : natural := 4;
     
-    -- PPS Generator version
+    -- Версия генератора PPS
     constant ClkDetMajorVersion_Con                 : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(0, 8));
     constant ClkDetMinorVersion_Con                 : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(1, 8));
     constant ClkDetBuildVersion_Con                 : std_logic_vector(15 downto 0) := std_logic_vector(to_unsigned(0, 16));
     constant ClkDetVersion_Con                      : std_logic_vector(31 downto 0) := ClkDetMajorVersion_Con & ClkDetMinorVersion_Con & ClkDetBuildVersion_Con;
 
-    -- AXI regs                                                       Addr       , Mask       , RW  , Reset
+    -- Регистры AXI                                                       Адрес       , Маска       , RW  , Сброс
     constant ClkDetSourceSelected_Reg_Con           : Axi_Reg_Type:= (x"00000000", x"000000FF", Ro_E, x"00000000");
     constant ClkDetSourceSelect_Reg_Con             : Axi_Reg_Type:= (x"00000008", x"000000FF", Rw_E, (x"000000" & ClockSelect_Gen & "00" & PpsSelect_Gen));
     constant ClkDetVersion_Reg_Con                  : Axi_Reg_Type:= (x"00000010", x"FFFFFFFF", Ro_E, ClkDetVersion_Con);
 
 
     --*************************************************************************************
-    -- Type Definitions
+    -- Определения типов
     --*************************************************************************************
     type Common_ByteU_Type                          is array(natural range <>) of unsigned(7 downto 0);
     type Common_Natural_Type                        is array(natural range <>) of natural range 0 to 10000;
@@ -139,7 +121,7 @@ architecture ClockDetector_Arch of ClockDetector is
                                                         End_St);
 
     --*************************************************************************************
-    -- Signal Definitions
+    -- Определения сигналов
     --*************************************************************************************
     signal MhzXClk_ClkIn                            : std_logic_vector(NumberOfClocks_Con-1 downto 0);
 
@@ -159,10 +141,10 @@ architecture ClockDetector_Arch of ClockDetector is
 
     signal ClockSelection_StateStReg                : ClockSelection_State_Type;
 
-    -- Manual Clock selection
+    -- Ручное выбор часов
     signal ClkManualSelect_Dat                      : std_logic_vector(NumberOfClocks_Con-1 downto 0);
 
-    -- AXI signals and regs
+    -- Сигналы AXI и регистры
     signal Axi_AccessState_StaReg                   : Axi_AccessState_Type:= Axi_AccessState_Type_Rst_Con;
     signal AxiWriteAddrReady_RdyReg                 : std_logic;
     signal AxiWriteDataReady_RdyReg                 : std_logic;
@@ -178,21 +160,21 @@ architecture ClockDetector_Arch of ClockDetector is
     signal ClkDetVersion_DatReg                     : std_logic_vector(31 downto 0);
 
 --*****************************************************************************************
--- Architecture Implementation
+-- Реализация архитектуры
 --*****************************************************************************************
 begin
 
     --*************************************************************************************
-    -- Concurrent Statements
+    -- Одновременные операторы
     --*************************************************************************************
-    -- Stretch reset
+    -- Растягивание сброса
     ClockRstN_RstOut <= '1' when ClockRst_ShiftReg = x"00" else '0';
 
-    ClkManualSelect_Dat <= ClkDetSourceSelect_DatReg(7 downto 4);       -- manual clock selection
-    PpsSourceSelect_DatOut <= ClkDetSourceSelect_DatReg(1 downto 0);    --forward the source PPS source selection to the output
+    ClkManualSelect_Dat <= ClkDetSourceSelect_DatReg(7 downto 4);       -- ручной выбор часов
+    PpsSourceSelect_DatOut <= ClkDetSourceSelect_DatReg(1 downto 0);    -- передаем выбранный источник PPS на выход
 
     ------------------------------------------------------------
-    -- Selected Clock
+    -- Выбранные часы
     --------------------------Mux1----Mux2----Mux3----Wiz2------
     -- Mhz10ClkSma_ClkIn        0       x       0       0
     -- Mhz10ClkMac_ClkIn        1       x       0       0
@@ -200,7 +182,7 @@ begin
     -- Mhz10ClkDcxo2_ClkIn      x       1       1       0
     -- Ext                      x       x       x       1
 
-    -- PLL Select Logic
+    -- Логика выбора PLL
     ClkMux1Select_EnOut <= '1' when ClkSelected_Dat(1) = '1' else '0';
     ClkMux2Select_EnOut <= '1' when ClkSelected_Dat(3) = '1' else '0';
     ClkMux3Select_EnOut <= '1' when ClkSelected_Dat(2) = '1' or ClkSelected_Dat(3) = '1' else '0';
@@ -211,12 +193,12 @@ begin
     MhzXClk_ClkIn(2) <= Mhz10ClkDcxo1_ClkIn;
     MhzXClk_ClkIn(3) <= Mhz10ClkDcxo2_ClkIn;
 
-    -- For each clock input create a slow clock (slower frequency by factor 128)
+    -- Для каждого входного часового сигнала создаем медленный час (частота в 128 раз ниже)
     SlowClk_Generate : for i in 0 to NumberOfClocks_Con-1 generate
         MhzSlowClk_Clk(i) <= ClockCounter_DatReg(i)(7);
     end generate SlowClk_Generate;
 
-    -- AXI assignements
+    -- Определения AXI
     AxiWriteAddrReady_RdyOut                        <= AxiWriteAddrReady_RdyReg;
     AxiWriteDataReady_RdyOut                        <= AxiWriteDataReady_RdyReg;
     AxiWriteRespValid_ValOut                        <= AxiWriteRespValid_ValReg;
@@ -227,10 +209,10 @@ begin
     AxiReadDataData_DatOut                          <= AxiReadDataData_DatReg;
 
     --*************************************************************************************
-    -- Procedural Statements
+    -- Процедурные операторы
     --*************************************************************************************
 
-    -- 8-bit tick counter for each clock
+    -- 8-битный счетчик тиков для каждого часового сигнала
     ClockCounter_Gen : for i in 0 to NumberOfClocks_Con-1 generate
         Counter_Prc : process(MhzXClk_ClkIn(i)) is
         begin
@@ -240,7 +222,7 @@ begin
         end process Counter_Prc;
     end generate ClockCounter_Gen;
 
-    -- For each clock input, check its availability, based on the toggling of its slow clock
+    -- Для каждого входного часового сигнала проверяем его доступность, на основе переключения его медленного часового сигнала
     ClockDetect_Gen : for i in 0 to NumberOfClocks_Con-1 generate
         Counter_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
         begin
@@ -267,7 +249,7 @@ begin
 
     end generate ClockDetect_Gen;
 
-    -- Select the clock based on the availability, the default priority and, optionally, on a manual selection
+    -- Выбор часов на основе доступности, приоритета по умолчанию и, при необходимости, на ручное выбор
     ClockSelect_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     begin
         if (SysRstN_RstIn = '0') then
@@ -280,7 +262,7 @@ begin
             ClockSelection_StateStReg <= Idle_St;
         elsif ((SysClk_ClkIn'event) and (SysClk_ClkIn = '1')) then
             ClkSelected_DatReg <= ClkSelected_Dat;
-            --Reset after new selection
+            -- Сброс после нового выбора
             if(ClkSelected_DatReg /= ClkSelected_Dat) then
                 ClockRst_ShiftReg <= ClockRst_ShiftReg(6 downto 0) & '1';
             else
@@ -289,11 +271,11 @@ begin
 
             case (ClockSelection_StateStReg) is
                 when Idle_St =>
-                    -- Automatic Selection
+                    -- Автоматический выбор
                     if(unsigned(ClkManualSelect_Dat) = 0)then
                         ClockSelection_StateStReg <= SelectClk_St;
                     else
-                    -- Manual Selection
+                    -- Ручной выбор
                         ClkManualSelect_DatReg <= ClkManualSelect_Dat;
                         ClockSelection_StateStReg <= CheckClk_St;
                     end if;
@@ -332,7 +314,7 @@ begin
         end if;
     end process ClockSelect_Prc;
 
-    -- Access configuration and monitoring registers via an AXI4L slave
+    -- Доступ к конфигурационным и мониторинговым регистрам через AXI4L slave
     Axi_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     variable TempAddress                : std_logic_vector(31 downto 0) := (others => '0');
     begin
@@ -422,14 +404,14 @@ begin
 
             end case;
 
-            ClkDetSourceSelected_DatReg(7 downto 4) <= ClkSelected_Dat; -- report the selected clock
-            ClkDetSourceSelected_DatReg(3 downto 0) <= PpsSourceAvailable_DatIn; -- receive the available PPS sources externally
+            ClkDetSourceSelected_DatReg(7 downto 4) <= ClkSelected_Dat; -- сообщаем выбранный час
+            ClkDetSourceSelected_DatReg(3 downto 0) <= PpsSourceAvailable_DatIn; -- получаем доступные источники PPS извне
         end if;
     end process Axi_Prc;
 
 
     --*************************************************************************************
-    -- Instantiations and Port mapping
+    -- Инстанциации и маппинг портов
     --*************************************************************************************
 
 end architecture ClockDetector_Arch;

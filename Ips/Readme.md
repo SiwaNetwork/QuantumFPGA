@@ -1,6 +1,6 @@
-# FPGA Open Source Time Card IP Cores
+# IP‑ядра FPGA Open Source Time Card
 
-The folder contains the files for the custom IP cores which are used at the Time Card project. 
+В папке содержатся файлы пользовательских IP‑ядер, которые используются в проекте TimeCard.
 
 ```bash
    │
@@ -47,22 +47,22 @@ The folder contains the files for the custom IP cores which are used at the Time
 ```
 
 ## Readme.md
-The current file.
+Текущий файл.
 
-## User-defined interfaces
-The .xml files in the folder define user-defined interfaces which are used by the IP cores of the project. 
-Currently, there are 3 user-defined interfaces.
+## Пользовательские интерфейсы
+XML‑файлы в папке определяют пользовательские интерфейсы, которые применяются IP‑ядрами проекта.
+В настоящее время определены 3 интерфейса.
 
-| Interface Name | Interface Description |
-|----------------|-----------------------|
-| [Time](TC_Time_rtl.xml) | It contains the actual time counter in seconds and nanoseconds and also a validity bit and a flag that notifies a hard time-set. |
-| [ClockAdjustment](TC_ClockAdjustment_rtl.xml) | It contains the time adjustment in terms of seconds, nanoseconds, direction, interval over which the adjustment should be applied and validity |
-| [Servo](TC_Servo_rtl.xml) | It contains the coefficients of a PI servo loop |
+| Имя интерфейса | Описание интерфейса |
+|----------------|----------------------|
+| [Time](TC_Time_rtl.xml) | Содержит текущее время в секундах и наносекундах, бит валидности и флаг «жёсткой» установки времени |
+| [ClockAdjustment](TC_ClockAdjustment_rtl.xml) | Содержит параметры коррекции времени: секунды, наносекунды, направление, интервал применения коррекции и признак валидности |
+| [Servo](TC_Servo_rtl.xml) | Содержит коэффициенты ПИ‑регулятора |
 
-## IP cores
-Each user-defined open source IP cores is defined in a seperate folder. Each IP folder has similar structure 
-- The **Readme.md** file which describes the FPGA core (context overview, register set description, design description, etc.)     
-- The **.vhd** files of the core
-- The **Xilinx** folder contains the vendor specific IPI files to integrate the cores in the Vivado tool
-- The **Additional Files** folder contains files (e.g. images) for the documentation of the core and -for some cores- file templates
+## IP‑ядра
+Каждое пользовательское open‑source IP‑ядро размещено в отдельной папке. Структура папок одинакова:
+- Файл **Readme.md** с описанием ядра (обзор, карта регистров, описание дизайна и т. д.)
+- Файлы ядра **.vhd**
+- Папка **Xilinx** со специфичными для вендора файлами IPI для интеграции в Vivado
+- Папка **Additional Files** с файлами (например, изображениями) для документации ядра и, для некоторых ядер, с шаблонами файлов
 

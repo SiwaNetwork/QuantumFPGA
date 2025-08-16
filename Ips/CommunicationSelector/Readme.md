@@ -1,41 +1,39 @@
-# Communication Selector Design Description
-## Contents
+# Описание дизайна Communication Selector
+## Содержание
 
-[1. Context Overview](#1-context-overview)
+[1. Обзор](#1-context-overview)
 
-[2. Interface Description](#2-interface-description)
+[2. Описание интерфейса](#2-interface-description)
 
-[3. Register Set](#3-register-set)
+[3. Набор регистров](#3-register-set)
 
-[4. Design Description](#4-design-description)
+[4. Описание дизайна](#4-design-description)
 
-## 1. Context Overview
-The Communication Selector is a full hardware (FPGA) implementation that selects which communication interface will be used between the FPGA and the module's clock (e.g. MAC, OCXO). The selection can be received by an AXI configuration register (e.g. by using [AXI GPIO](https://www.xilinx.com/products/intellectual-property/axi_gpio.html#documentation)) and it is set as UART (Selection:'0') or I<sup>2</sup>C (Selection:'1'). The default configuration is UART communication.
+## 1. Обзор
+Communication Selector — полностью аппаратная реализация выбора коммуникационного интерфейса между FPGA и тактируемым модулем (например, MAC, OCXO). Выбор поступает из регистра конфигурации AXI (например, [AXI GPIO](https://www.xilinx.com/products/intellectual-property/axi_gpio.html#documentation)) и задаёт UART (0) или I<sup>2</sup>C (1). По умолчанию — UART.
 
-## 2. Interface Description
+## 2. Описание интерфейса
 ### 2.1 Communication Selector IP
-The interface of the Communication Selector is:
-- The selection of the communication from an AXI register as input
-- The UART interface (inputs and outputs) 
-- The UART Interrupt request as input
-- The I<sup>2</sup>C interface (inputs and outputs)
-- The UART Interupt request as input 
+Интерфейс:
+- Вход выбора интерфейса из AXI‑регистра
+- UART интерфейс (входы/выходы)
+- Вход прерывания UART
+- Интерфейс I<sup>2</sup>C (входы/выходы)
+- Вход прерывания I<sup>2</sup>C
 
 ![CommunicatioSelectorIP](Additional%20Files/CommunicationSelectorIP.png)
 
-The core providess no configuration options 
+Параметров конфигурации нет.
 
-## 3. Register Set
-The Communication Selector has no dedicated AXI4L interface. It receives though the Selection input which can provided via an external AXI interface. This interface is implementation specific, and outside of this document's scope.
+## 3. Набор регистров
+Собственного AXI4‑Lite интерфейса нет. Ядро получает только «Selection» из внешнего AXI‑интерфейса (реализация‑зависимо и вне рамок документа).
 
-## 4 Design Description
-The core multiplexes a UART and an I<sup> 2</sup>C interface so that the same board pinout can support both interfaces. Since the I<sup> 2</sup>C interface has more pins than the UART, when the UART interfaces is selected, some of the pins will be unused.
+## 4. Описание дизайна
+Ядро мультиплексирует UART и I<sup>2</sup>C, чтобы один набор выводов платы поддерживал оба интерфейса. Поскольку у I<sup>2</sup>C больше линий, при выборе UART часть линий остаётся неиспользованной.
 
 ![CommunicationMux](Additional%20Files/CommunicationMux.png)
 
-
-
-The table below shows the port assignment of inputs to outputs when Selection is 0 (UART):
+Назначение портов при Selection=0 (UART):
 
 |                       |SCL In|SCL Out|SCL T|SDA In|SDA Out|SDA T|IRQ|
 |-----------------------|:----:|:-----:|:---:|:----:|:-----:|:---:|:-:|
@@ -50,7 +48,7 @@ The table below shows the port assignment of inputs to outputs when Selection is
 |I<sup> 2</sup>C SDA T  |
 |I<sup> 2</sup>C IRQ    |
 
-The table below shows the port assignment of inputs to outputs when Selection is 1 (I<sup> 2</sup>C):
+Назначение портов при Selection=1 (I<sup>2</sup>C):
 
 |                       |SCL In|SCL Out|SCL T|SDA In|SDA Out|SDA T|IRQ|
 |-----------------------|:----:|:-----:|:---:|:----:|:-----:|:---:|:-:|

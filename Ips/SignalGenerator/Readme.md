@@ -1,42 +1,44 @@
-# Signal Generator Design Description
-## Contents
+# Описание дизайна Signal Generator
+## Содержание
 
-[1. Context Overview](#1-context-overview)
+[1. Обзор](#1-context-overview)
 
-[2. Interface Description](#2-interface-description)
+[2. Описание интерфейса](#2-interface-description)
 
-[3. Register Set](#3-register-set)
+[3. Набор регистров](#3-register-set)
 
-[4. Design Description](#4-design-description)
+[4. Описание дизайна](#4-design-description)
 
-## 1. Context Overview
-The Signal Generator is a full hardware (FPGA) only implementation that allows to generate pulse width modulated (PWM) signals of configurable polarity aligned with the local clock. The Signal Generator takes a start time, a pulse width and period as well as a repeat count as input and generates the signal accordingly. The settings are configurable by an AXI4Lite-Slave Register interface.
-## 2. Interface Description
+## 1. Обзор
+Signal Generator — полностью аппаратная (FPGA) реализация генератора PWM‑сигналов с настраиваемой полярностью, выравненных по локальным часам. Принимает время старта, длительность импульса и период, а также число повторов, и формирует сигнал соответственно. Настройки выполняются через AXI4‑Lite.
+
+## 2. Описание интерфейса
 ### 2.1 Signal Generator IP
-The interface of the Signal Generator  is:
-- System Reset and System Clock as inputs
-- A high resolution Clock input, for high precision timestamps (an integer multiple of the System Clock, with a fix relationship to the System clock e.g. sourced by same PLL)
-- The local time input, from the [Adjustable Clock](../AdjustableClock/Readme.md)
-- An AXI4L slave interface, via which the CPU reads and writes the generator's registers
-- An optional interrupt output, when the signal generation is deactivated due to a time error
- 
-![Signal Generator IP](Additional%20Files/SigGeneratorIP.png) 
+Интерфейс:
+- Входы системного сброса и системной тактовой
+- Вход высокоточной тактовой (целое кратное системной, фиксированная связь)
+- Вход локального времени от [Adjustable Clock](../AdjustableClock/Readme.md)
+- Интерфейс AXI4‑Lite для доступа к регистрам генератора
+- Необязательный выход прерывания при остановке генерации из‑за ошибки времени
 
-The configuration options of the core are:
-- The system clock period in nanoseconds.
-- The high resolution frequency multiplier, that indicates how many times faster than the system clock is the high resolution clock is  
-- The option to enable/disable the cable delay support. If enabled, then the generator compensates for the cable delay which is provided in nanoseconds via the AXI configuration. 
-- The output delay in nanoseconds which will be compensated by the generator
-- The polarity of the generated signal. If '1', then the generated signal is active-high. Else, it is active-low. 
+![Signal Generator IP](Additional%20Files/SigGeneratorIP.png)
+
+Параметры конфигурации:
+- Период системной тактовой в нс
+- Множитель частоты высокоточной тактовой
+- Включение/отключение компенсации задержки кабеля (значение по AXI в нс)
+- Компенсируемая выходная задержка в нс
+- Полярность генерируемого сигнала
 
 ![Signal Generator Gui](Additional%20Files/SigGeneratorConfiguration.png)
-## 3. Register Set
-This is the register set of the Signal Generator. It is accessible via AXI4 Light Memory Mapped. All registers are 32bit wide, no burst access, no unaligned access, no byte enables, no timeouts are supported. Register address space is not contiguous. Register addresses are only offsets in the memory area where the core is mapped in the AXI inter connects. Non existing register access in the mapped memory area is answered with a slave decoding error.
-### 3.1 Register Set Overview 
-The Register Set overview is shown in the table below. 
+
+## 3. Набор регистров
+Регистры доступны по AXI4‑Lite. 32‑битные, без burst/byte enable/таймаутов/невыравненных доступов; вне диапазона — ошибка декодирования.
+
+### 3.1 Обзор
 ![RegisterSet](Additional%20Files/RegsetOverview.png)
-### 3.2 Register Decription
-The tables below describes the registers of the Signal Generator.     
+
+### 3.2 Описание регистров
 ![Control](Additional%20Files/Regset1_Control.png)
 ![Status](Additional%20Files/Regset2_Status.png)
 ![Polarity](Additional%20Files/Regset3_Polarity.png)
@@ -51,18 +53,19 @@ The tables below describes the registers of the Signal Generator.
 ![PeriodL](Additional%20Files/Regset12_PeriodL.png)
 ![PeriodH](Additional%20Files/Regset13_PeriodH.png)
 ![Repeat](Additional%20Files/Regset14_Repeat.png)
-## 4 Design Description
-The Signal Generator takes a (synchronized) time input as reference and generates the PWM signal aligned with this clock (start time, pulse width and period) compensating the output delay. The Signal Generator contains an AXI4Lite slave for configuration and status supervision from a CPU. The component consists of 3 main operations:
-- Periodically generate the signal, aligned to the local time
-- Fine-tune the rising and falling edge of the signal with a high resolution clock   
-- Interface with the CPU (AXI master) via the AXI slave
-### 4.1 Periodically generate the signal
-The signal generation requires several configuration inputs: a start time which defines the first edge of the PWM signal, a pulse width which defines the duty cycle of the signal, a period which defines the period (in case of a repeating signal) and a pulse count which defines the number of pulses to be generated (or continuous, when set to '0').
-When the Signal Generator is enabled and the new configuration inputs are set, it calculates the start time (beginning of pulse) and stop time (end of pulse). The start time is calculated the following way: input start time minus the output delay. The stop time is calculated the following way: calculated start time plus the pulse width. When the start time is reached (equal or bigger) the pulse is asserted to the configured polarity and a new start time is calculated by adding to the current start time the signal period. When the stop time is reached (also equal or bigger) the pulse is asserted to the inverse of the configured polarity, the new stop time is calculated by adding the period and a pulse counter gets incremented. 
-This start/stop procedure is repeated until either the pulse count is reached or continuously repeated when the pulse count is set to zero.
-When a time jump happens, the pulse generation is immediately disabled and the output signal set to the idle level of the polarity. This is required because of the
-start/stop time calculations. This also means that a start time must be always in the future when the Signal Generator is configured.     
-### 4.2 Compute the exact time of the generation
-In order to compute the exact time of the generation, apart from compensating the output and cable delays at the start and stop times, the signal is also generated eventually by a high resolution clock, whose frequency is an integer multiple of the system clock's frequency. At the system clock domain, when the start or stop time is reached (equal or bigger), the time difference of the start/stop time to the current time is taken. The number of high resolution periods that 'fit' into this time difference, indicate when the high resolution clock should generate the rising and falling edges of the signal.    
-### 4.3 AXI slave of the Signal Timestamper 
-The Signal Generator includes an AXI Light Memory Mapped Slave. It provides access to all registers and allows to configure the Signal Generator. An AXI Master has to configure the Datasets with AXI writes to the registers, which is typically done by a CPU. It also provides a status interface which allows to supervise the status of the generator. [Chapter 3](#3-register-set) has a complete description of the register set.
+
+## 4. Описание дизайна
+Генератор принимает (синхронизированное) время и формирует PWM‑сигнал, выравненный по локальному времени, компенсируя выходную задержку. Содержит AXI4‑Lite для конфигурации и статуса.
+Состоит из 3 операций:
+- Периодическая генерация сигнала, выровненная по локальному времени
+- Точная подстройка фронтов высокоточной тактовой
+- Интерфейс с CPU через AXI‑slave
+
+### 4.1 Периодическая генерация
+Требуются: время старта, длительность импульса, период и счётчик повторений (0 — непрерывно). При включении и установке параметров вычисляются времена начала/окончания импульса с учётом задержки выхода. При достижении времени старта устанавливается активный уровень в соответствии с полярностью; затем время старта/останова сдвигается на период. По окончании длительности устанавливается пассивный уровень; счётчик импульсов инкрементируется. При скачке времени генерация сразу отключается, выход — в пассивное состояние полярности. Время старта должно быть в будущем.
+
+### 4.2 Вычисление точного времени
+Помимо компенсации выходной/кабельной задержек, фронты формируются высокоточной тактовой (кратной системной). Разница между текущим временем и временем старта/останова определяет количество периодов высокоточной тактовой до формирования фронта.
+
+### 4.3 AXI‑slave
+AXI4‑Lite предоставляет доступ к конфигурации/статусу; CPU настраивает наборы регистров. Подробнее — в [разделе 3](#3-register-set).

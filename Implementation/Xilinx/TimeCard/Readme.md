@@ -1,74 +1,76 @@
-# Open Source Timecard Design Description
-## Contents
+# Описание дизайна Open Source TimeCard
+## Содержание
 
-[1. Design Overview](#1-design-overview)
+[1. Обзор дизайна](#1-design-overview)
 
-[2. Address Mapping](#2-address-mapping)
+[2. Карта адресов](#2-address-mapping)
 
-[3. Interrupt Mapping](#3-interrupt-mapping)
+[3. Карта прерываний](#3-interrupt-mapping)
 
-[4. SMA Connectors](#4-sma-connectors)
+[4. Разъёмы SMA](#4-sma-connectors)
 
-[5. Status LEDs](#5-status-leds)
+[5. Светодиоды состояния](#5-status-leds)
 
-[6. Default Configuration](#6-default-configuration)
+[6. Конфигурация по умолчанию](#6-default-configuration)
 
-[7. Core List](#7-core-list)
+[7. Список ядер](#7-core-list)
 
-[8. Create FPGA project and binaries](#8-create-fpga-project-and-binaries)
+[8. Создание проекта FPGA и бинарных файлов](#8-create-fpga-project-and-binaries)
 
-[9. Program FPGA and SPI Flash](#9-program-fpga-and-spi-flash)
+[9. Программирование FPGA и SPI Flash](#9-program-fpga-and-spi-flash)
 
-## 1. Design Overview
+<a id="1-design-overview"></a>
+## 1. Обзор дизайна
 
-The original Open Source Timecard design includes open-source IP cores from [NetTimeLogic](https://www.nettimelogic.com/) and free-to-use IP cores from [Xilinx](https://www.xilinx.com/).
-The following cores are used in the Open Source Timecard design.
+Исходный дизайн Open Source TimeCard включает открытые IP‑ядра от [NetTimeLogic](https://www.nettimelogic.com/) и свободно используемые IP‑ядра от [Xilinx](https://www.xilinx.com/).
+В дизайне Open Source TimeCard используются следующие ядра.
 
-|Core|Vendor|Description|
+|Ядро|Поставщик|Описание|
 |----|:----:|-----------|
-|[AXI Memory Mapped to PCI Express](https://www.xilinx.com/products/intellectual-property/axi_pcie.html) |Xilinx|Interface between the AXI4 interface and the Gen2 PCI Express (PCIe) silicon hard core|
-|[AXI GPIO](https://www.xilinx.com/products/intellectual-property/axi_gpio.html) |Xilinx|General purpose input/output interface to AXI4-Lite|
-|[AXI I2C](https://www.xilinx.com/products/intellectual-property/axi_iic.html) |Xilinx| Interface between AXI4-Lite and IIC bus|
-|[AXI UART 16550](https://www.xilinx.com/products/intellectual-property/axi_uart16550.html)|Xilinx|Interface between AXI4-Lite and UART interface|
-|[AXI HWICAP](https://www.xilinx.com/products/intellectual-property/axi_hwicap.html) |Xilinx|AXI4-Lite interface to read and write the FPGA configuration memory through the Internal Configuration Access Port (ICAP)|
-|[AXI Quad SPI Flash](https://www.xilinx.com/products/intellectual-property/axi_quadspi.html) |Xilinx|Interface between AXI4-Lite and Dual or Quad SPI||
-|[AXI Interconnect](https://www.xilinx.com/products/intellectual-property/axi_interconnect.html) |Xilinx|Connection between one or more AXI4 memory-mapped Master devices to one or more memory-mapped Slave devices.|
-|[Clocking Wizard](https://www.xilinx.com/products/intellectual-property/clocking_wizard.html) |Xilinx|Configuration of a clock circuit to user requirements|
-|[Processor System Reset](https://www.xilinx.com/products/intellectual-property/proc_sys_reset.html) |Xilinx|Setting certain parameters to enable/disable features|
-|[TC Adj. Clock](../../../Ips/AdjustableClock/)|NetTimeLogic|A timer clock in the Second and Nanosecond format that can be frequency and phase adjusted|
-|[TC Signal Timestamper](../../../Ips/SignalTimestamper)|NetTimeLogic|Timestamping of an event signal of configurable polarity and generate interrupts|
-|[TC PPS Generator](../../../Ips/PpsGenerator)|NetTimeLogic|Generation of a Pulse Per Second (PPS) of configurable polarity and aligned to the local clock's new second|
-|[TC Signal Generator](../../../Ips/SignalGenerator)|NetTimeLogic|Generation of pulse width modulated (PWM) signals of configurable polarity and aligned to the local clock|
-|[TC PPS Slave](../../../Ips/PpsSlave)|NetTimeLogic|Calculation of the offset and drift corrections to be applied to the Adjustable Clock, in order to synchronize to a PPS input|
-|[TC ToD Slave](../../../Ips/TodSlave)|NetTimeLogic|Reception of GNSS receiver's messages over UART and synchronization to the Time of Day|
-|[TC Frequency Counter](../../../Ips/FrequencyCounter)| NetTimeLogic|Measuring of the frequency of an input signal of range 1 - 10'000'000 Hz|
-|[TC CoreList](../../../Ips/CoreList)|NetTimeLogic|A list of the current FPGA core instantiations which are accessible by an AXI4-Lite interface|
-|[TC Conf Master](../../../Ips/ConfMaster)|NetTimeLogic|A default configuration which is provided to the AXI4-Lite slaves during startup, without the support of a CPU|
-|[TC MsiIrq](../../../Ips/MsiIrq)|NetTimeLogic|Forwarding single interrupts as Message-Signaled Interrupts the [AXI-PCIe bridge](https://www.xilinx.com/products/intellectual-property/axi_pcie.html)|
-|[TC Clock Detector](../../../Ips/ClockDetector)|NetTimeLogic|Detection of the available clock sources and selection of the clocks to be used, according to a priority scheme and a configuration|
-|[TC SMA Selector](../../../Ips/SmaSelector)|NetTimeLogic|Select the mapping of the inputs and the outputs of the 4 SMA connectors of the [Timecard](https://github.com/opencomputeproject/Time-Appliance-Project/tree/master/Time-Card)|
-|[TC PPS Selector](../../../Ips/PpsSourceSelector)|NetTimeLogic|Detection of the available PPS sources and selection of the PPS source to be used, according to a priority scheme and a configuration|
-|[TC Communication Selector](../../../Ips/CommunicationSelector)|NetTimeLogic|Selection of the clock's communication interface (UART or I<sup>2</sup>C)|
-|[TC Dummy Axi Slave](../../../Ips/DummyAxiSlave)|NetTimeLogic|AXI4L slave that is used as a placeholder of an address range|
-|[TC FPGA Version](../../../Ips/FpgaVersion)|NetTimeLogic|AXI register that stores the design's version numbers|
+|[AXI Memory Mapped to PCI Express](https://www.xilinx.com/products/intellectual-property/axi_pcie.html) |Xilinx|Интерфейс между AXI4 и аппаратным ядром PCI Express (PCIe) Gen2|
+|[AXI GPIO](https://www.xilinx.com/products/intellectual-property/axi_gpio.html) |Xilinx|Универсальный ввод/вывод по интерфейсу AXI4‑Lite|
+|[AXI I2C](https://www.xilinx.com/products/intellectual-property/axi_iic.html) |Xilinx|Интерфейс между AXI4‑Lite и шиной I2C|
+|[AXI UART 16550](https://www.xilinx.com/products/intellectual-property/axi_uart16550.html)|Xilinx|Интерфейс между AXI4‑Lite и UART|
+|[AXI HWICAP](https://www.xilinx.com/products/intellectual-property/axi_hwicap.html) |Xilinx|AXI4‑Lite интерфейс для чтения/записи конфигурационной памяти FPGA через ICAP|
+|[AXI Quad SPI Flash](https://www.xilinx.com/products/intellectual-property/axi_quadspi.html) |Xilinx|Интерфейс между AXI4‑Lite и Dual/Quad SPI|
+|[AXI Interconnect](https://www.xilinx.com/products/intellectual-property/axi_interconnect.html) |Xilinx|Соединение одного или нескольких AXI4 MM Master с одним или несколькими Slave|
+|[Clocking Wizard](https://www.xilinx.com/products/intellectual-property/clocking_wizard.html) |Xilinx|Конфигурация тактирования под требования пользователя|
+|[Processor System Reset](https://www.xilinx.com/products/intellectual-property/proc_sys_reset.html) |Xilinx|Сброс и включение/выключение функций|
+|[TC Adj. Clock](../../../Ips/AdjustableClock/)|NetTimeLogic|Таймер‑часы в формате Секунды/Наносекунды с регулировкой частоты и фазы|
+|[TC Signal Timestamper](../../../Ips/SignalTimestamper)|NetTimeLogic|Метки времени события на настраиваемом фронте и генерация прерываний|
+|[TC PPS Generator](../../../Ips/PpsGenerator)|NetTimeLogic|Генерация PPS с настраиваемой полярностью и выравниванием по новой секунде локальных часов|
+|[TC Signal Generator](../../../Ips/SignalGenerator)|NetTimeLogic|Генерация PWM‑сигналов с настраиваемой полярностью и выравниванием по локальным часам|
+|[TC PPS Slave](../../../Ips/PpsSlave)|NetTimeLogic|Расчёт коррекций смещения и дрейфа для синхронизации по входному PPS|
+|[TC ToD Slave](../../../Ips/TodSlave)|NetTimeLogic|Приём сообщений GNSS по UART и синхронизация по ToD|
+|[TC Frequency Counter](../../../Ips/FrequencyCounter)| NetTimeLogic|Измерение частоты входного сигнала в диапазоне 1 – 10'000'000 Гц|
+|[TC CoreList](../../../Ips/CoreList)|NetTimeLogic|Список текущих инстанцированных IP‑ядер, доступных по AXI4‑Lite|
+|[TC Conf Master](../../../Ips/ConfMaster)|NetTimeLogic|Конфигурация по умолчанию для AXI4‑Lite Slave при старте, без CPU|
+|[TC MsiIrq](../../../Ips/MsiIrq)|NetTimeLogic|Преобразование одиночных прерываний в MSI для [AXI‑PCIe моста](https://www.xilinx.com/products/intellectual-property/axi_pcie.html)|
+|[TC Clock Detector](../../../Ips/ClockDetector)|NetTimeLogic|Обнаружение доступных источников тактирования и выбор по приоритетам и конфигурации|
+|[TC SMA Selector](../../../Ips/SmaSelector)|NetTimeLogic|Выбор источников/приёмников для 4 SMA разъёмов платы [TimeCard](https://github.com/opencomputeproject/Time-Appliance-Project/tree/master/Time-Card)|
+|[TC PPS Selector](../../../Ips/PpsSourceSelector)|NetTimeLogic|Обнаружение источников PPS и выбор по приоритетам и конфигурации|
+|[TC Communication Selector](../../../Ips/CommunicationSelector)|NetTimeLogic|Выбор интерфейса связи часов (UART или I<sup>2</sup>C)|
+|[TC Dummy Axi Slave](../../../Ips/DummyAxiSlave)|NetTimeLogic|AXI4‑Lite Slave‑заглушка для резервирования диапазона адресов|
+|[TC FPGA Version](../../../Ips/FpgaVersion)|NetTimeLogic|AXI‑регистр с версиями дизайна|
 
-The top-level design description is shown below.
+Описание схемы верхнего уровня показано ниже.
 
-![TimeCardTop](Additional%20Files/TimeCardTop.png) 
+![TimeCardTop](Additional%20Files/TimeCardTop.png)
 
-*NOTE:* In order to offload the drawing not all the AXI connections are shown, while the IRQ connections to the MSI Control are mentioned directly at the IPs.
+Примечание: для упрощения не все AXI‑соединения показаны на схеме; соединения IRQ к MSI‑контроллеру указаны непосредственно в описаниях IP.
 
-The TimeCard runs partially from the 200MHz SOM oscillator. 
-The NetTimeLogic cores with all the high precision parts are running based on the selected clock by the Clock Detector (10 MHz from MAC, SMA, etc.).
+TimeCard частично работает от генератора SOM 200 МГц.
+Ядра NetTimeLogic с высокоточной логикой работают от выбранного Clock Detector источника (10 МГц от MAC, SMA и т. п.).
 
-## 2. Address Mapping
-The design's cores are accessible via AXI4 Light Memory Mapped slave interfaces for configuration and reporting. 
-The AXI slave interfaces are accessed via the AXI interconnect by 2 AXI masters:
-- [TC ConfMaster](../../../Ips/ConfMaster) provides a default configuration to the cores after a reset. The default configuration can be changed at compilation time.
-- [AXI PCIe](https://www.xilinx.com/products/intellectual-property/axi_pcie.html) provides full bridge functionality between the AXI4 architecture and the PCIe network. 
-Typically, a CPU is connected to the timecard via this PCIe interface. 
+<a id="2-address-mapping"></a>
+## 2. Карта адресов
+Ядра дизайна доступны через AXI4‑Lite интерфейсы для конфигурирования и мониторинга.
+К AXI Slave интерфейсам обращаются два AXI Master через AXI interconnect:
+- [TC ConfMaster](../../../Ips/ConfMaster) подаёт конфигурацию по умолчанию после сброса (меняется на этапе сборки).
+- [AXI PCIe](https://www.xilinx.com/products/intellectual-property/axi_pcie.html) — мост между архитектурой AXI4 и сетью PCIe.
+Обычно CPU подключается к TimeCard через PCIe.
 
-The AXI Slave interfaces have the following addresses:
+Адреса AXI Slave:
 
 |Slave|AXI Slave interface|Offset Address|High Address|
 |-----|-------------------|--------------|------------|
@@ -112,221 +114,227 @@ The AXI Slave interfaces have the following addresses:
 |TC Frequency Counter 4|axi4l_slave|0x0123_0000|0x0123_FFFF|
 |TC CoreList|axi4l_slave|0x0130_0000|0x0130_FFFF|
 
-The detailed register description of each instance is available at the corresponding core description document (see links at [Chapter 1](#1-design-overview)). 
+Подробное описание регистров каждой инстанции доступно в документах соответствующих ядер (см. ссылки в [разделе 1](#1-design-overview)).
 
-### 2.1 FPGA Version Register
+### 2.1 Регистр версии FPGA
 
-The Version Slave has one single 32-Bit Register. 
-The upper 16 Bits show the version number of the golden image and the lower 16 Bits the version number of the regular image.
-E.g.:
+Слейв версии содержит один 32‑битный регистр.
+Старшие 16 бит — версия «golden» образа, младшие 16 бит — версия обычного образа.
+Пример:
 
-- Register 0x0200_0000 of the Golden image shows: 0x0001_0000
-- Register 0x0200_0000 of the Regular image shows: 0x0000_0003
+- Регистр 0x0200_0000 «golden» образа: 0x0001_0000
+- Регистр 0x0200_0000 обычного образа: 0x0000_0003
 
-If the lower 16 Bits are 0x0000 the Golden image has booted.
+Если младшие 16 бит равны 0x0000 — загрузился «golden» образ.
 
-### 2.2 AXI GPIO Registers
+### 2.2 Регистры AXI GPIO
 
-The implementation uses two instantiations of the [AXI GPIO](https://www.xilinx.com/products/intellectual-property/axi_gpio.html) IP. 
+В реализации используются две инстанции IP [AXI GPIO](https://www.xilinx.com/products/intellectual-property/axi_gpio.html).
 
-The mapping of the AXI GPIO Ext is as below
+Отображение сигналов AXI GPIO Ext:
 
 ![AXI_GPIO_Ext](Additional%20Files/AXI_GPIO_Ext.png)
 
-The mapping of the AXI GPIO GNSS/MAC is as below
+Отображение сигналов AXI GPIO GNSS/MAC:
 
 ![AXI_GPIO_GNSS_MAC](Additional%20Files/AXI_GPIO_GNSS_MAC.png)
 
-## 3. Interrupt Mapping
-The interrupts in the design are connected to the MSI Vector of the AXI Memory Mapped to PCI Express Core via a MSI controller. 
-The PCI Express Core needs to set the MSI_enable to ‘1’. 
-The MSI controller sends INTX_MSI Request with the MSI_Vector_Num to the PCI Express Core and with the INTX_MSI_Grant the interrupt is acknowledged. 
-If there are several interrupts pending, the messages are sent with the round-robin principle. 
-Level interrupts (e.g. AXI UART 16550) are taking at least one round for the next interrupt.
+<a id="3-interrupt-mapping"></a>
+## 3. Карта прерываний
+Прерывания в дизайне подключены к MSI Vector ядра AXI Memory Mapped to PCI Express через MSI‑контроллер.
+Ядру PCIe необходимо установить MSI_enable в ‘1’.
+MSI‑контроллер отправляет INTX_MSI Request с MSI_Vector_Num в PCIe‑ядро и по INTX_MSI_Grant прерывание подтверждается.
+Если ожидает несколько прерываний, сообщения отправляются по принципу round‑robin.
+Уровневые прерывания (например, AXI UART 16550) занимают как минимум один «круг» до следующего прерывания.
 
-|MSI Number|Interrupt Source|
+|MSI Number|Источник прерывания|
 |----------|----------------|
 |0|TC Signal TS FPGA PPS|
 |1|TC Signal TS GNSS1 PPS|
 |2|TC Signal TS1|
 |3|AXI UART 16550 GNSS1|
 |4|AXI UART 16550 GNSS2|
-|5|AXI UART 16550 MAC or AXI I<sup>2</sup>C OSC|
+|5|AXI UART 16550 MAC или AXI I<sup>2</sup>C OSC|
 |6|TC Signal TS2|
 |7|AXI I2C|
 |8|AXI HWICAP|
 |9|AXI Quad SPI Flash|
-|10|Reserved|
+|10|Резерв|
 |11|TC Signal Generator1|
 |12|TC Signal Generator2|
 |13|TC Signal Generator3|
 |14|TC Signal Generator4|
 |15|TC Signal TS3|
 |16|TC Signal TS4|
-|17|Reserved|
-|18|Reserved|
+|17|Резерв|
+|18|Резерв|
 |19|AXI UART 16550 Ext|
 
-## 4. SMA Connectors
-The [Timecard](https://github.com/opencomputeproject/Time-Appliance-Project/tree/master/Time-Card) has currently 4 SMA Connectors of configurable input/output and an additional GNSS Antenna SMA input.
-The default configuration of the SMA connectors is shown below.
+<a id="4-sma-connectors"></a>
+## 4. Разъёмы SMA
+Плата [TimeCard](https://github.com/opencomputeproject/Time-Appliance-Project/tree/master/Time-Card) имеет 4 настраиваемых разъёма SMA (вход/выход) и отдельный SMA для антенны GNSS.
+Конфигурация по умолчанию показана ниже.
 
 <p align="left"> <img src="Additional%20Files/SmaConnectors.png" alt="Sublime's custom image"/> </p>
 
-This default mapping and the direction can be changed via the 2 AXI slaves of the [TC SMA Selector](../../../Ips/SmaSelector) IP core. 
+Данную схему и направления можно изменить через 2 AXI‑слейва IP‑ядра [TC SMA Selector](../../../Ips/SmaSelector).
 
-## 5. Status LEDs
-At the current design, the Status LEDs are not connected to the AXI GPIO Ext and they are used directly by the FPGA.
+<a id="5-status-leds"></a>
+## 5. Светодиоды состояния
+В текущем дизайне светодиоды состояния подключены напрямую к FPGA и не управляются через AXI GPIO Ext.
 
-- LED1: Alive LED of the FPGA internal Clock (50MHz)
-- LED2: Alive LED of the PCIe clocking part (62.5MHz)
-- LED3: PPS of the FPGA (Time of the Local Clock via PPS Master)
-- LED4: PPS of the MAC (differential inputs from the MAC via diff-buffer)
+- LED1: индикатор активности внутреннего тактирования FPGA (50 МГц)
+- LED2: индикатор активности части PCIe‑тактирования (62.5 МГц)
+- LED3: PPS FPGA (локальные часы через PPS Master)
+- LED4: PPS MAC (дифференциальные входы от MAC через дифф‑буфер)
 
-## 6. Default Configuration 
+<a id="6-default-configuration"></a>
+## 6. Конфигурация по умолчанию
 
-The default configuration is provided by the [TC ConfMaster](../../../Ips/ConfMaster) and can be edited by updating the [DefaultConfigFile.txt](DefaultConfigFile.txt).
-Currently, the following cores are configured at startup by the default configuration file. 
+Конфигурация по умолчанию задаётся [TC ConfMaster](../../../Ips/ConfMaster) и может быть изменена в файле [DefaultConfigFile.txt](DefaultConfigFile.txt).
+В настоящее время при старте конфигурируются следующие ядра:
 
-|Core Instance|Configuration|
+|Инстанция|Конфигурация|
 |-------------|-------------|
-|Adjustable Clock|Enable with synchronization source 1 (ToD+PPS)|
-|PPS Generator|Enable with high polarity of the output pulse|
-|PPS Slave|Enable with high polarity of the input pulse|
-|ToD Slave|Enable with high polarity of the UART input|
-|SMA Selector|Set the FPGA PPS and GNSS PPS as SMA outputs|
+|Adjustable Clock|Включено, источник синхронизации 1 (ToD+PPS)|
+|PPS Generator|Включено, высокая полярность выхода|
+|PPS Slave|Включено, высокая полярность входа|
+|ToD Slave|Включено, высокая полярность UART|
+|SMA Selector|SMA‑выходы: PPS FPGA и PPS GNSS|
 
+<a id="7-core-list"></a>
+## 7. Список ядер
+Список конфигурируемых по AXI ядер формируется [TC CoreList](../../../Ips/CoreList) и задаётся в [CoreListFile.txt](CoreListFile.txt).
 
-## 7. Core List 
-The list of the configurable cores (via AXI) is provided by the [TC CoreList](../../../Ips/CoreList) and can be edited by updating the [CoreListFile.txt](CoreListFile.txt).
-## 8. Create FPGA project and binaries
-### 8.1 Create FPGA Project
-The Vivado project was generated with Vivado 2019.1.
-Since the Vivado project is not meant to be stored in a source control system or stored as is in general, a project script was created which will create the Vivado Project from the script.
+<a id="8-create-fpga-project-and-binaries"></a>
+## 8. Создание проекта FPGA и бинарных файлов
+### 8.1 Создание проекта FPGA
+Проект Vivado создан в Vivado 2019.1.
+Так как хранить готовый проект в VCS не планируется, подготовлен скрипт, создающий проект из исходников.
 
-The script has to be run once to create the project from scratch.
+Скрипт требуется запустить один раз для создания проекта с нуля.
 
-Run this from the Vivado TCL console:
+В консоли TCL Vivado выполните:
 
-*source /[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateProject.tcl*
+source /[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateProject.tcl
 
-(Alternatively, it can be started via the Tool=>Run Tcl Script… menu in the Vivado GUI)
+(либо через меню Vivado GUI: Tool => Run Tcl Script…)
 
-The script will add all necessary files to the project as well as the constraints so everything is ready to generate a bitstream for the FPGA.
-The project will be generated in the following folder:
+Скрипт добавит все необходимые файлы и ограничения; проект будет готов к генерации битстрима.
+Проект создаётся в каталоге:
 
-*/[YOUR_PATH]/Implementation/Xilinx/TimeCard/TimeCard*
-### 8.2 Synthesis, Implementation and Bitstream generation
-A bitstream generation script runs synthesis and implementation and generates the bitstreams for the specified design runs:
-- The script */[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinaries.tcl* runs the synthesis/implementation of the TimeCardOS design, it generates the  bitstreams and it updates correspondingly the Factory_TimeCardOS.bin
-- The script */[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinariesGolden.tcl* runs the synthesis/implementation of the Golden_TimeCardOS design, it generates the bitstreams and it updates correspondingly the Factory_TimeCardOS.bin
-- The script */[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinariesAll.tcl* runs the synthesis/implementation of both designs, it generates the corresponding bitstreams and it updates correspondingly the Factory_TimeCardOS.bin. It also create the file TimeCardOS_Gotham.bin which is based on the TimeCardOS.bin and it has an additional 16-byte header with the PCIe ID. 
+/[YOUR_PATH]/Implementation/Xilinx/TimeCard/TimeCard
 
-The binaries are copied to the folder */[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/*. 
-The existing bitstreams in the Binaries folder are overwritten and also a copy of the files is created in a subfolder of the Binaries folder with a timestamp. This way, the latest implementation run is always found at the same position, but backups of the previous (and current) runs are still available.
+### 8.2 Синтез, реализация и генерация битстрима
+Скрипты генерации битстрима запускают синтез/реализацию и формируют файлы для указанных сборок:
+- /[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinaries.tcl — сборка TimeCardOS и обновление Factory_TimeCardOS.bin
+- /[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinariesGolden.tcl — сборка Golden_TimeCardOS и обновление Factory_TimeCardOS.bin
+- /[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinariesAll.tcl — обе сборки, обновление Factory_TimeCardOS.bin и формирование TimeCardOS_Gotham.bin (TimeCardOS.bin + 16‑байтовый заголовок с PCIe ID)
 
-The latest binaries can be found here:
-- */[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/Factory_TimeCardOS.bin*
-- */[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/Golden_TimeCardOS.bin*
-- */[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/TimeCardOS.bin*
-- */[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/TimeCardOS_Gotham.bin*
+Бинарные файлы копируются в каталог /[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/.
+Текущие файлы в Binaries перезаписываются, а также создаётся копия в подпапке с меткой времени, чтобы всегда иметь актуальные файлы и резервные копии предыдущих запусков.
 
-The timestamped backups are found in a folder in this format:
+Актуальные бинарные файлы:
+- /[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/Factory_TimeCardOS.bin
+- /[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/Golden_TimeCardOS.bin
+- /[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/TimeCardOS.bin
+- /[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/TimeCardOS_Gotham.bin
 
-*/[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/YYYY_MM_DD hh_mm_ss/*, where YYYY: Year, MM: Month, DD: Day, hh: Hour, mm Minute, ss: Second
+Резервные копии с метками времени находятся в каталоге формата:
 
-E.g. for 30th of January 2022 at 13:05:00: 
+/[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/YYYY_MM_DD hh_mm_ss/
+
+Например, для 30.01.2022 13:05:00:
 /[YOUR_PATH]/Implementation/Xilinx/TimeCard/Binaries/2022_01_30 13_05_00/
 
-The Script can be run from the Vivado TCL console (when project is open) by the command:
+Скрипт можно запустить из TCL‑консоли Vivado (при открытом проекте):
 
-*source /[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinariesAll.tcl*
+source /[YOUR_PATH]/Implementation/Xilinx/TimeCard/CreateBinariesAll.tcl
 
-(Alternatively, it can be started via the Tool=>Run Tcl Script… menu in the Vivado GUI while the project is open)
+(либо через меню Vivado GUI: Tool => Run Tcl Script… при открытом проекте)
 
-### 8.3 Resource Utilization
-The design is implemented at the FPGA [Artix-7 XC7A100T-FGG484-1](https://docs.xilinx.com/v/u/en-US/ug475_7Series_Pkg_Pinout).
+### 8.3 Использование ресурсов
+Дизайн реализован в FPGA [Artix‑7 XC7A100T‑FGG484‑1](https://docs.xilinx.com/v/u/en-US/ug475_7Series_Pkg_Pinout).
 
-A resource utilization summary is shown below.
-|Resource|Used|Available|Util%|
+Сводка по ресурсам:
+|Ресурс|Исп.|Доступно|%|
 |--------|:--:|:-------:|:---:|
 |LUTs|35300|63400|55.68|
 |Flip Flops|29881|126800|23.57|
 |BRAMs|22.5|135|22.90|
 |DSPs|23|240|9.58|
 
+<a id="9-program-fpga-and-spi-flash"></a>
+## 9. Программирование FPGA и SPI Flash
+Для первичного программирования FPGA и SPI Flash требуется программатор JTAG, подключённый по USB JTAG.
+После успешного программирования в дизайне имеется IP AXI QUAD SPI, позволяющий выполнять обновления «в поле».
 
-## 9. Program FPGA and SPI Flash
-For the initial programming of the FPGA and SPI Flash the JTAG programmer is needed and has to be connected to the USB JTAG.
-After a successfully programmed FPGA, the design contains an AXI QUAD SPI Core which allows field updates.
+Файлы образов FPGA находятся в папке [Binaries](Binaries/).
 
-The FPGA images are stored at the folder [Binaries](Binaries/).
+<a id="91-bitstreams-with-fallback-configuration"></a>
+### 9.1 Битстримы с резервной конфигурацией (Fallback)
+Дизайн разделён на два образа (bit/bin), обеспечивающих отказоустойчивое обновление:
+- «Golden/Fallback» образ: Golden_TimeCardOS.bin — содержит минимальную функциональность для доступа к SPI Flash.
+- Обычный образ: TimeCardOS.bin — основной режим работы и образ, заменяемый при обновлении.
 
-### 9.1 Bitstreams with Fallback Configuration
-The FPGA design is split into two different bitstreams/bin-files to allow a fail-safe field update. 
-- The first image is the Golden/Fallback image *Golden_TimeCardOS.bin*. It contains only a limited functionality which provides access to the SPI Flash. 
-- The second image is the latest version of the regular image *TimeCardOS.bin*. It is used for normal operation and it is the one which is replaced in a field update.
+Конфигурация FPGA всегда начинается с Addr0, где расположен «golden» образ. В нём указана стартовая адресация образа обновления TimeCardOS.
+Загрузка переходит по этому адресу и пытается загрузить обновляемый образ. При неудаче выполняется возврат к «golden» образу.
 
-The FPGA configuration starts always at Addr0 where the Golden image is located. The Golden image has the start address of the Update image TimeCardOS. 
-The configuration jumps directly to this address and tries to load the Update image. If this load fails it falls back to the Golden image.
-
-Details about this Multiboot/Fallback approach can be found in the Xilinx Application Note 
+Подробности по Multiboot/Fallback описаны в примечании Xilinx:
 [MultiBoot with 7 Series FPGAs and BPI](https://www.xilinx.com/support/documentation/application_notes/xapp1246-multiboot-bpi.pdf).
 
-The *Factory_TimeCardOS.bin* image contains the two bitstreams and it shall be used to program the SPI flash for the first time, as example, during the productization. 
+Объединённый образ Factory_TimeCardOS.bin содержит оба битстрима и должен использоваться для первичного программирования SPI Flash (например, при изготовлении).
 
-This combined image has following structure:
+Структура объединённого образа:
 
-|Configuration Info|Value|
+|Параметр|Значение|
 |-------------------|----------|
-|File Format        |BIN       |
-|Interface          |SPIX4     |
-|Size               |16M       |
-|Start Address      |0x00000000|
-|End Address        |0x00FFFFFF|
+|Формат файла       |BIN       |
+|Интерфейс          |SPIX4     |
+|Размер             |16M       |
+|Начальный адрес    |0x00000000|
+|Конечный адрес     |0x00FFFFFF|
 
-|Addr1         |Addr2         |File(s)              |
+|Addr1         |Addr2         |Файл(ы)              |
 |:------------:|:------------:|---------------------|
 |0x00000000    |0x002C2A3B    |Golden_TimeCardOS.bit|
 |0x00400000    |0x006C37AF    |TimeCardOS.bit       |
 
-The image *TimeCardOS.bin* is the update/regular image and it shall be used for the field update via SPI.
-For the update, this bitstream must be placed at 0x00400000 in the SPI flash.
+Образ TimeCardOS.bin — это образ для обновления «в поле». Для обновления он должен располагаться по адресу 0x00400000 в SPI Flash.
 
-### 9.2 SPI programming steps (non-volatile)
+### 9.2 Шаги программирования SPI (энергонезависимая память)
 
-If the configuration memory device is already added to the project go to step 7, otherwise, go to step 1.
-1. Go to the Hardware Manager menu
+Если устройство конфигурационной памяти уже добавлено в проект — переходите к шагу 7; иначе начните с шага 1.
+1. Откройте меню Hardware Manager
 
-   ![Hardware Manager](Additional%20Files/HwManager.png) 
+   ![Hardware Manager](Additional%20Files/HwManager.png)
 
-2. Right klick on “xc7a100t_0(1)”, a menu will pop up
-3. Choose “Add Configuration Memory Device …” from the menu, the following window will pop up
+2. Щёлкните правой кнопкой по “xc7a100t_0(1)”
+3. Выберите “Add Configuration Memory Device …” — откроется окно
 
    ![Add Config Memory](Additional%20Files/AddConfigMem.png)
 
-4. Select “mt25ql128-spi-x1_x2_x4” as the SPI Flash type
-5. Press Ok, a new window will pop up:
+4. Выберите тип SPI Flash “mt25ql128-spi-x1_x2_x4”
+5. Нажмите Ok — откроется окно подтверждения
 
    ![Add Config Confirm](Additional%20Files/AddConfigConfirm.png)
 
-6. Press cancel
-7. Go to the Hardware Manager Menu which will have the flash attached
+6. Нажмите Cancel
+7. Вернитесь в Hardware Manager — флеш‑память будет отображена
 
-   ![Hardware Manager Updated](Additional%20Files/HwManagerUpdated.png) 
+   ![Hardware Manager Updated](Additional%20Files/HwManagerUpdated.png)
 
-8. Right klick on “mt25ql128-spi-x1_x2_x4”, a menu will pop up
-9. Choose “Program Configuration Memory Device …” from the menu, the following window will pop up
+8. Щёлкните правой кнопкой по “mt25ql128-spi-x1_x2_x4”
+9. Выберите “Program Configuration Memory Device …” — откроется окно
 
-   ![Config Mem Program](Additional%20Files/ConfigMemProgram.png) 
+   ![Config Mem Program](Additional%20Files/ConfigMemProgram.png)
 
-10. Select the bitstream you want to program:
-**Factory_TimeCardOS.bin** 
+10. Выберите образ для прошивки: Factory_TimeCardOS.bin
 
-IMPORTANT NOTE: 
-If the TimeCardOS.bin is loaded in this step, the field update will not work, as described in [Chapter 9.1](#91-bitstreams-with-fallback-configuration)!
+ВАЖНО:
+Если на этом шаге загрузить TimeCardOS.bin, обновление «в поле» работать не будет (см. [раздел 9.1](#91-bitstreams-with-fallback-configuration)).
 
-11. Press Ok and wait for completion
-12. Disconnect the JTAG interface from the board
-13. Power cycle or Reset the board / Cold start of the PC
-14. The RUN LED will blink
+11. Нажмите Ok и дождитесь завершения
+12. Отключите интерфейс JTAG от платы
+13. Выполните выключение/включение питания или Reset / холодный старт ПК
+14. Светодиод RUN начнёт мигать

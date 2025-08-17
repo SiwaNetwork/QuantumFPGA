@@ -1,4 +1,4 @@
-# Описание дизайна Open Source TimeCard 200T
+# Описание дизайна Quantum TimeCard 200T
 ## Содержание
 
 [1. Обзор дизайна](#1-design-overview)
@@ -22,7 +22,7 @@
 <a id="1-design-overview"></a>
 ## 1. Обзор дизайна
 
-Исходный дизайн Open Source TimeCard 200T включает открытые IP‑ядра от [NetTimeLogic](https://www.nettimelogic.com/) и свободно используемые IP‑ядра от [Xilinx](https://www.xilinx.com/).
+Исходный дизайн Quantum TimeCard 200T включает открытые IP‑ядра от [NetTimeLogic](https://www.nettimelogic.com/) и свободно используемые IP‑ядра от [Xilinx](https://www.xilinx.com/).
 В дизайне используются следующие ядра.
 
 |Ядро|Поставщик|Описание|

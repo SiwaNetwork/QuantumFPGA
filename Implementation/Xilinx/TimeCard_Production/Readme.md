@@ -1,4 +1,4 @@
-# Описание дизайна Open Source TimeCard (Production)
+# Описание дизайна Quantum TimeCard (Production)
 ## Содержание
 
 [1. Обзор дизайна](#1-design-overview)
@@ -22,7 +22,7 @@
 <a id="1-design-overview"></a>
 ## 1. Обзор дизайна
 
-Исходный дизайн Open Source TimeCard включает открытые IP‑ядра от [NetTimeLogic](https://www.nettimelogic.com/) и бесплатные IP‑ядра от [Xilinx](https://www.xilinx.com/).
+Исходный дизайн Quantum TimeCard включает открытые IP‑ядра от [NetTimeLogic](https://www.nettimelogic.com/) и бесплатные IP‑ядра от [Xilinx](https://www.xilinx.com/).
 Используются следующие ядра.
 
 |Ядро|Поставщик|Описание|

@@ -1,4 +1,4 @@
-# IP‑ядра FPGA Open Source Time Card
+# IP‑ядра FPGA Quantum TimeCard
 
 В папке содержатся файлы пользовательских IP‑ядер, которые используются в проекте TimeCard.
 

@@ -20,19 +20,18 @@ library TimecardLib;
 use TimecardLib.Timecard_Package.all;
 
 --*****************************************************************************************
--- Entity Declaration
+-- Объявление сущности
 --*****************************************************************************************
--- The Time-Of-Day (ToD) slave provides adjustment to a Clock of the "seconds" field.    --
--- From a GNSS receiver, it receives, via a UART interface, messages that include the    --
--- ToD. The messages are detected and decoded in order to extract the time infrmation.   --
--- The extracted time is converted to Unix Epoch format (32bit seconds and 32bit         --
--- nanonseconds)and then the TAI is calculated, by adding the received UTC offset. The   --
--- calculated time is compared with the time received from the connected Clock. If the   --
--- "seconds" field is not the equal, then a time adjustment is applied to the Clock at   --
--- at the change of second.                                                              --
--- This core is expected to be connected to an Adjustable Clock together with a PPS      --
--- slave. The TOD slave forces the Clock to jump to the correct "second", while the PPS  --
--- slave fine-tunes the Clock by providing offset and drift adjustments.                 --
+-- Ведомый модуль Time‑Of‑Day (ToD) выполняет корректировку поля «секунды» у часов.       --
+-- От приёмника GNSS по интерфейсу UART принимаются сообщения, содержащие ToD.            --
+-- Сообщения детектируются и декодируются для извлечения информации о времени.            --
+-- Извлечённое время переводится в формат Unix Epoch (32‑бит секунды и 32‑бит             --
+-- наносекунды), затем вычисляется TAI путём добавления полученного UTC‑смещения.          --
+-- Полученное время сравнивается со временем, полученным от подключённых часов. Если поле  --
+-- «секунды» не совпадает, выполняется коррекция часов на границе секунды.                 --
+-- Предполагается подключение этого ядра вместе с PPS‑ведомым к Настраиваемым часам:       --
+-- ToD задаёт скачок до корректной секунды, а PPS выполняет тонкую подстройку              --
+-- за счёт коррекций смещения и дрейфа.                                                    --
 -------------------------------------------------------------------------------------------
 entity TodSlave is
     generic (

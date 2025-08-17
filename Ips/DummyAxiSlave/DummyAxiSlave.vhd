@@ -1,8 +1,6 @@
 --*****************************************************************************************
 -- Project: Time Card
 --
--- Author: Ioannis Sotiropoulos, NetTimeLogic GmbH
---
 -- License: Copyright (c) 2022, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
 -- All rights reserved.
 --

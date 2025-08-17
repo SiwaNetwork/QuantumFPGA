@@ -1,8 +1,6 @@
 --*****************************************************************************************
 -- Project:     TimeSync
 --
--- Author:      Thomas Schaub, NetTimeLogic GmbH
---
 -- License:     Copyright (c) 2020, NetTimeLogic GmbH, Switzerland, <contact@nettimelogic.com>
 --              All rights reserved.
 --                

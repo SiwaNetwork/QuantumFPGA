@@ -22,14 +22,14 @@ use TimecardLib.Timecard_Package.all;
 --*****************************************************************************************
 -- Entity Declaration
 --*****************************************************************************************
--- The Adjustable Clock is a time counter that can set its value directly or adjust its  --
--- phase and frequency smoothly based on input adjustments. The component supports up to --
--- 5 external adjustments, plus a register adjustment, which is provided by the CPU via  --
--- the AXI slave. Each adjustment input can provide a direct time set to the time counter--
--- (TimeAdjustment), or a phase correction (OffsetAdjustment), or a frequency correction --
--- (DriftAdjustment). The component provides to the output the adjustable clock ClockTime--
--- and its status flags InSync and InHoldover. Also, the PI servo coefficients which are --
--- received by the AXI registers are forwarded to the output.                            --
+-- Настраиваемые часы — это счётчик времени, значение которого можно установить напрямую  --
+-- или плавно скорректировать фазу и частоту на основе входных коррекций. Компонент       --
+-- поддерживает до 5 внешних коррекций, а также коррекцию из регистра, задаваемую CPU     --
+-- через AXI‑слейв. Каждый вход коррекции может задавать прямую установку времени         --
+-- (TimeAdjustment), либо коррекцию фазы (OffsetAdjustment), либо коррекцию частоты       --
+-- (DriftAdjustment). На выход подаётся время часов ClockTime и флаги состояния           --
+-- InSync и InHoldover. Также на выход передаются коэффициенты ПИ‑контроллера,            --
+-- полученные через AXI‑регистры.                                                         --
 -------------------------------------------------------------------------------------------
 entity AdjustableClock is
     generic (

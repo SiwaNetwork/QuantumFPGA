@@ -1,4 +1,4 @@
-# Regenerate Vivado runs for TimeCard project
+# Регенерация запусков Vivado для проекта TimeCard
 set proj_path [file normalize "Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.xpr"]
 
 if {![file exists $proj_path]} {

@@ -1,38 +1,38 @@
-// Core Type Nr:
-// Invalid/End                          0x0
-// TC Core List Core Type               0x1
-// TC Adjustable Clock Core Type        0x2
-// TC Signal Generator Core Type        0x3
-// TC Signal Timestamper Core Type      0x4
-// TC PPS Generator Core Type           0x5
-// TC Frequency Counter                 0x6
-// TC Clock Detector Core Type          0x7
-// TC SMA Selector Core Type            0x8
-// TC PPS Source Selector Core Type     0x9
-// TC FPGA Version Core Type            0xA
-// TC PPS Slave Core Type               0xB
-// TC ToD Slave Core Type               0xC
-// TC Dummy Axi Slave Core Type         0xD
-// Xilinx AXI PCIe Core Type            0x10000
-// Xilinx AXI GPIO Core Type            0x10001
-// Xilinx AXI IIC Core Type             0x10002
-// Xilinx AXI UART Core Type            0x10003
-// Xilinx AXI HWICAP Core Type          0x10004
-// Xilinx AXI QUAD SPI FLASH Core Type  0x10005
+// Тип ядра (номер):
+// Недействительно/Конец                 0x0
+// Ядро TC Core List                     0x1
+// Ядро TC Adjustable Clock              0x2
+// Ядро TC Signal Generator              0x3
+// Ядро TC Signal Timestamper            0x4
+// Ядро TC PPS Generator                 0x5
+// Ядро TC Frequency Counter             0x6
+// Ядро TC Clock Detector                0x7
+// Ядро TC SMA Selector                  0x8
+// Ядро TC PPS Source Selector           0x9
+// Ядро TC FPGA Version                  0xA
+// Ядро TC PPS Slave                     0xB
+// Ядро TC ToD Slave                     0xC
+// Ядро TC Dummy Axi Slave               0xD
+// Ядро Xilinx AXI PCIe                  0x10000
+// Ядро Xilinx AXI GPIO                  0x10001
+// Ядро Xilinx AXI IIC                   0x10002
+// Ядро Xilinx AXI UART                  0x10003
+// Ядро Xilinx AXI HWICAP                0x10004
+// Ядро Xilinx AXI QUAD SPI FLASH        0x10005
 
-// Core Inst Nr range: [0 - (N-1)], where N is the number of instantiations of the core in the design
+// Номер экземпляра ядра в диапазоне: [0 - (N-1)], где N — число инстанцирований ядра в дизайне
 
-// Version Nr has the format 0xMMmmBBBB, where MM is the Major version (8 bits), mm is the Minor version (8 bits), BBBB is the Built version (16 bits)
+// Номер версии в формате 0xMMmmBBBB, где MM — мажорная версия (8 бит), mm — минорная версия (8 бит), BBBB — номер сборки (16 бит)
 
-// AddressRangeLow is the offset address of the core's AXI slave, 0xFFFFFFFF when the core does not have AXI slave
+// AddressRangeLow — смещение адреса AXI‑слейва ядра, 0xFFFFFFFF если у ядра нет AXI‑слейва
 
-// AddressRangeHigh is the highest address of the core's AXI slave
+// AddressRangeHigh — старший адрес AXI‑слейва ядра
 
-// Interrupt Nr range: [0x0-0x1F], 0xFFFFFFFF when the core does not have Interrupt
+// Номер прерывания в диапазоне: [0x0-0x1F], 0xFFFFFFFF если у ядра нет прерываний
 
-// Interrupt Sensitivity: bit0: 0=Edge/1=Level bit1: 0=ActiveLow/1=ActiveHigh
+// Чувствительность прерывания: bit0: 0=По фронту/1=Уровень bit1: 0=Активный низкий/1=Активный высокий
 
-// Magic Word: Core in ascii chars (maximum "TextWidth_Con" number of ascii chars)
+// Magic Word: имя ядра в ASCII (не более "TextWidth_Con" символов)
 
 // CoreTypeNr CoreInstNr VersionNr AddressRangeLow AddressRangeHigh InterruptNr Sensitivity MagicWord
 00000001 00000000 00010000 01300000 0130FFFF FFFFFFFF FFFFFFFF TC Core List

@@ -1,6 +1,6 @@
-# Структура FPGA Open Source Time Card
+# Структура FPGA Quantum TimeCard
 
-Репозиторий FPGA Open Source TimeCard структурирован как показано ниже
+Репозиторий FPGA Quantum TimeCard структурирован как показано ниже
 
 ```bash
     │
@@ -74,7 +74,7 @@
 ```
 
 ## Реализация
-FPGA реализации TimeCard разделены в зависимости от поставщика/версии. В настоящее время доступна только Xilinx реализация Open Source Timecard. 
+FPGA реализации TimeCard разделены в зависимости от поставщика/версии. В настоящее время доступна только Xilinx реализация Quantum TimeCard. 
 Главная папка проекта находится по пути [*/[ВАШ_ПУТЬ]/Implementation/Xilinx/TimeCard*](implementation/Xilinx/TimeCard/).
 
 В этой папке находятся файлы, зависящие от поставщика и реализации:

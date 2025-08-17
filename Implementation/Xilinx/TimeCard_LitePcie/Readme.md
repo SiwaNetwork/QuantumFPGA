@@ -25,7 +25,7 @@
 Требуется дополнительный скрипт PostSynth.tcl, который вызывается после Synthesis.
 
 
-# Описание дизайна Open Source TimeCard
+# Описание дизайна Quantum TimeCard
 ## Содержание
 
 [1. Обзор дизайна](#1-design-overview)
@@ -49,7 +49,7 @@
 <a id="1-design-overview"></a>
 ## 1. Обзор дизайна
 
-Исходный дизайн Open Source TimeCard включает открытые IP‑ядра от [NetTimeLogic](https://www.nettimelogic.com/) и бесплатные IP‑ядра от [Xilinx](https://www.xilinx.com/).
+Исходный дизайн Quantum TimeCard включает открытые IP‑ядра от [NetTimeLogic](https://www.nettimelogic.com/) и бесплатные IP‑ядра от [Xilinx](https://www.xilinx.com/).
 Дополнительно используется предварительно сгенерированная версия [LitePCIe](https://github.com/enjoy-digital/litepcie), поддерживающая MSI‑X и PTM.
 Используемые ядра:
 

@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="40" Path="C:/Users/SHIWA/Documents/GitHub/QUANTUM/Qantum Time-Card/FPGA/Open-Source/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.xpr">
+<Project Version="7" Minor="40" Path="C:/Project/TimeCard/TimeCard.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="e505187cf72845f1a33090afdd30c6f7"/>
@@ -22,7 +22,7 @@
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
     <Option Name="ProjectType" Val="Default"/>
-    <Option Name="IPRepoPath" Val="$PPRDIR/../Time-Card/FPGA/Open-Source"/>
+    <Option Name="IPRepoPath" Val="$PPRDIR/../Time-Card/FPGA/Source"/>
     <Option Name="IPRepoPath" Val="$PPRDIR/../../../../Ips"/>
     <Option Name="IPOutputRepo" Val="$PCACHEDIR/ip"/>
     <Option Name="IPCachePermission" Val="read"/>

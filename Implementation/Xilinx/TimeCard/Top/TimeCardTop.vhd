@@ -1,7 +1,7 @@
 --*****************************************************************************************
 -- Project: Time Card
 --
--- Open source hardware implementation of precision timing system
+-- Hardware implementation of precision timing system
 --
 --*****************************************************************************************
 

@@ -1,14 +1,14 @@
 --*****************************************************************************************
--- Project: Time Card
+-- Проект: Time Card
 --
---
+-- Селектор источников PPS для обнаружения доступных источников PPS и выбора
 --
 --
 --
 --*****************************************************************************************
 
 --*****************************************************************************************
--- General Libraries
+-- Общие библиотеки
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
@@ -16,19 +16,19 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 --*****************************************************************************************
--- Specific Libraries
+-- Специфические библиотеки
 --*****************************************************************************************
 
 
 --*****************************************************************************************
--- Entity Declaration
+-- Объявление сущности
 --*****************************************************************************************
--- The PPS Source Selector detects the available PPS sources and selects the PPS source --
--- according to a priority scheme and a configuration.                                  --
--- The configuration and monitoring of the core is optional and it is done by an        --
--- external interface (e.g. an AXI slave interface of Clock Detector). If the           --
--- configuration is not provided, then the PPS selection is done by a priority scheme   --
--- of the available PPS inputs.                                                         --
+-- Селектор источников PPS обнаруживает доступные источники PPS и выбирает источник PPS --
+-- согласно схеме приоритетов и конфигурации.                                          --
+-- Конфигурация и мониторинг ядра являются опциональными и выполняются через           --
+-- внешний интерфейс (например, AXI slave интерфейс Clock Detector). Если             --
+-- конфигурация не предоставлена, то выбор PPS выполняется по схеме приоритетов       --
+-- доступных входов PPS.                                                               --
 ------------------------------------------------------------------------------------------
 entity PpsSourceSelector is
     generic (
@@ -36,49 +36,49 @@ entity PpsSourceSelector is
         PpsAvailableThreshold_Gen       :       natural range 0 to 30 := 3
     );
     port (
-        -- System
+        -- Система
         SysClk_ClkIn                    : in    std_logic;
         SysRstN_RstIn                   : in    std_logic;
 
-        -- Selection
+        -- Выбор
         PpsSourceSelect_DatIn           : in    std_logic_vector(1 downto 0);
         
-        -- PPS Available    
+        -- Доступность PPS    
         PpsSourceAvailable_DatOut       : out   std_logic_vector(3 downto 0);
 
-        -- PPS Inputs 
+        -- Входы PPS 
         SmaPps_EvtIn                    : in    std_logic;
         MacPps_EvtIn                    : in    std_logic;
         GnssPps_EvtIn                   : in    std_logic;
         
-        -- PPS Outputs
+        -- Выходы PPS
         SlavePps_EvtOut                 : out   std_logic;
         MacPps_EvtOut                   : out   std_logic
     );
 end entity PpsSourceSelector;
 
 --*****************************************************************************************
--- Architecture Declaration
+-- Объявление архитектуры
 --*****************************************************************************************
 architecture PpsSourceSelector_Arch of PpsSourceSelector is
     --*************************************************************************************
-    -- Procedure Definitions
+    -- Определения процедур
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Function Definitions
+    -- Определения функций
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Constant Definitions
+    -- Определения констант
     --*************************************************************************************
     
     --*************************************************************************************
-    -- Type Definitions
+    -- Определения типов
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Signal Definitions
+    -- Определения сигналов
     --*************************************************************************************
     
     signal PpsSourceAvailable_DatReg    : std_logic_vector(2 downto 0) := (others => '0');
@@ -103,12 +103,12 @@ architecture PpsSourceSelector_Arch of PpsSourceSelector is
     signal MacSourceSelect_DatReg       : std_logic_vector(1 downto 0) := (others => '0');
 
 --*****************************************************************************************
--- Architecture Implementation
+-- Реализация архитектуры
 --*****************************************************************************************
 begin
 
     --*************************************************************************************
-    -- Concurrent Statements
+    -- Параллельные операторы
     --*************************************************************************************
     PpsSourceAvailable_DatOut <= "0" & PpsSourceAvailable_DatReg;
 
@@ -122,10 +122,10 @@ begin
                                                                 GnssPps_EvtIn when others;
     
     --*************************************************************************************
-    -- Procedural Statements
+    -- Процедурные операторы
     --*************************************************************************************
     
-    -- Check that each PPS input has a frequency of ~1 Hz for at least PpsAvailableThreshold_Gen seconds in sequence
+    -- Проверка, что каждый вход PPS имеет частоту ~1 Гц в течение как минимум PpsAvailableThreshold_Gen секунд подряд
     Supervision_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     begin
         if (SysRstN_RstIn = '0') then
@@ -261,7 +261,7 @@ begin
         
     end process Supervision_Prc;
     
-    -- Select the Slave PPS and MAC PPS sources according to configuration
+    -- Выбор источников Slave PPS и MAC PPS согласно конфигурации
     Select_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     begin
         if (SysRstN_RstIn = '0') then
@@ -270,7 +270,7 @@ begin
 
         elsif ((SysClk_ClkIn'event) and (SysClk_ClkIn = '1')) then
             case (PpsSourceSelect_DatIn) is
-                -- Auto select
+                -- Автоматический выбор
                 when "00" =>
                     -- 1. SMA
                     if (PpsSourceAvailable_DatReg(0) = '1') then
@@ -299,13 +299,13 @@ begin
                         end if;
                     end if;
                     
-                -- Force SMA
+                -- Принудительно SMA
                 when "01" =>
                     if (SmaPps_EvtIn = '0') then
                             PpsSlaveSourceSelect_DatReg <= "00";    -- SMA
                             MacSourceSelect_DatReg <= "00";         -- SMA
                     end if;
-                -- Force MAC
+                -- Принудительно MAC
                 when "10" =>
                     if (MacPps_EvtIn = '0') then
                         PpsSlaveSourceSelect_DatReg <= "01";        -- MAC
@@ -313,7 +313,7 @@ begin
                             MacSourceSelect_DatReg <= "10";         -- GNSS
                         end if;
                     end if;
-                -- Force GNSS
+                -- Принудительно GNSS
                 when "11" =>
                     if (GnssPps_EvtIn = '0') then
                         PpsSlaveSourceSelect_DatReg <= "10";        -- GNSS
@@ -332,7 +332,7 @@ begin
     end process Select_Prc;
     
     --*************************************************************************************
-    -- Instantiations and Port mapping
+    -- Инстанцирования и сопоставление портов
     --*************************************************************************************
         
 end architecture PpsSourceSelector_Arch;

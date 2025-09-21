@@ -1,14 +1,14 @@
 --*****************************************************************************************
--- Project: Time Card
+-- Проект: Time Card
 --
---
+-- Селектор SMA разъёмов для мультиплексирования выходов и демультиплексирования входов
 --
 --
 --
 --*****************************************************************************************
 
 --*****************************************************************************************
--- General Libraries
+-- Общие библиотеки
 --*****************************************************************************************
 library ieee;
 use ieee.std_logic_1164.all;
@@ -16,18 +16,18 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 --*****************************************************************************************
--- Specific Libraries
+-- Специфические библиотеки
 --*****************************************************************************************
 library TimecardLib;
 use TimecardLib.Timecard_Package.all;
 
 --*****************************************************************************************
--- Entity Declaration
+-- Объявление сущности
 --*****************************************************************************************
--- The SMA Selector multiplexes the output and demultiplexes the inputs of the 4 SMA     --
--- connectors of the Timecard. Each connector can be configured as input or output,      --
--- depending on the configured mapping. The configured mapping is done via 2 AXI4L slave --
--- interfaces. Each slave interface controls one mapping option.                         --
+-- Селектор SMA мультиплексирует выходы и демультиплексирует входы 4 SMA разъёмов      --
+-- TimeCard. Каждый разъём может быть настроен как вход или выход в зависимости от       --
+-- настроенного сопоставления. Настроенное сопоставление выполняется через 2 AXI4L      --
+-- slave интерфейса. Каждый slave интерфейс управляет одним вариантом сопоставления.    --
 -------------------------------------------------------------------------------------------
 entity SmaSelector is
     generic (
@@ -41,11 +41,11 @@ entity SmaSelector is
         SmaOutput4SourceSelect_Gen                  :       std_logic_vector(15 downto 0) := x"8001"
     );
     port (
-        -- System
+        -- Система
         SysClk_ClkIn                                : in    std_logic;
         SysRstN_RstIn                               : in    std_logic;
                     
-        -- Sma Input Sources                
+        -- Источники входов SMA                
         Sma10MHzSourceEnable_EnOut                  : out   std_logic;
         SmaExtPpsSource1_EvtOut                     : out   std_logic;
         SmaExtPpsSource2_EvtOut                     : out   std_logic;
@@ -61,7 +61,7 @@ entity SmaSelector is
         SmaDcfSlaveSource_DatOut                    : out   std_logic;
         SmaUartExtSource_DatOut                     : out   std_logic;
                     
-        -- Sma Output Sources           
+        -- Источники выходов SMA           
         Sma10MHzSource_ClkIn                        : in    std_logic;
         SmaFpgaPpsSource_EvtIn                      : in    std_logic;
         SmaMacPpsSource_EvtIn                       : in    std_logic;
@@ -77,19 +77,19 @@ entity SmaSelector is
         SmaUartGnss2Source_DatIn                    : in    std_logic;
         SmaUartExtSource_DatIn                      : in    std_logic;
                         
-        -- Sma Input            
+        -- Входы SMA            
         SmaIn1_DatIn                                : in    std_logic;
         SmaIn2_DatIn                                : in    std_logic;
         SmaIn3_DatIn                                : in    std_logic;
         SmaIn4_DatIn                                : in    std_logic;
                     
-        -- Sma Input            
+        -- Выходы SMA            
         SmaOut1_DatOut                              : out   std_logic;
         SmaOut2_DatOut                              : out   std_logic;
         SmaOut3_DatOut                              : out   std_logic;
         SmaOut4_DatOut                              : out   std_logic;
                     
-        -- Buffer enable            
+        -- Разрешение буферов            
         SmaIn1_EnOut                                : out   std_logic;
         SmaIn2_EnOut                                : out   std_logic;
         SmaIn3_EnOut                                : out   std_logic;
@@ -100,7 +100,7 @@ entity SmaSelector is
         SmaOut3_EnOut                               : out   std_logic;
         SmaOut4_EnOut                               : out   std_logic;
         
-        -- Axi 1
+        -- AXI 1
         Axi1WriteAddrValid_ValIn                    : in    std_logic;
         Axi1WriteAddrReady_RdyOut                   : out   std_logic;
         Axi1WriteAddrAddress_AdrIn                  : in    std_logic_vector(15 downto 0);
@@ -125,7 +125,7 @@ entity SmaSelector is
         Axi1ReadDataResponse_DatOut                 : out   std_logic_vector(1 downto 0);
         Axi1ReadDataData_DatOut                     : out   std_logic_vector(31 downto 0);
                                                     
-        -- Axi 2                                    
+        -- AXI 2                                    
         Axi2WriteAddrValid_ValIn                    : in    std_logic;
         Axi2WriteAddrReady_RdyOut                   : out   std_logic;
         Axi2WriteAddrAddress_AdrIn                  : in    std_logic_vector(15 downto 0);
@@ -154,19 +154,19 @@ end entity SmaSelector;
 
 
 --*****************************************************************************************
--- Architecture Declaration
+-- Объявление архитектуры
 --*****************************************************************************************
 architecture SmaSelector_Arch of SmaSelector is
     --*************************************************************************************
-    -- Procedure Definitions
+    -- Определения процедур
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Function Definitions
+    -- Определения функций
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Constant Definitions
+    -- Определения констант
     --*************************************************************************************
     constant SmaOutputSource10Mhz_Con               : std_logic_vector(14 downto 0) := (others => '0');
     constant SmaOutputSourceFpgaPps_Con             : std_logic_vector(14 downto 0) := (0 => '1', others => '0');
@@ -186,50 +186,50 @@ architecture SmaSelector_Arch of SmaSelector is
     constant SmaOutputSourceGnd_Con                 : std_logic_vector(14 downto 0) := (13 => '1', others => '0');
     constant SmaOutputSourceVcc_Con                 : std_logic_vector(14 downto 0) := (14 => '1', others => '0');
     
-    -- SMA Selector version
+    -- Версия селектора SMA
     constant SmaSelectorMajorVersion_Con            : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(0, 8));
     constant SmaSelectorMinorVersion_Con            : std_logic_vector(7 downto 0) := std_logic_vector(to_unsigned(1, 8));
     constant SmaSelectorBuildVersion_Con            : std_logic_vector(15 downto 0) := std_logic_vector(to_unsigned(1, 16));
     constant SmaSelectorVersion_Con                 : std_logic_vector(31 downto 0) := SmaSelectorMajorVersion_Con & SmaSelectorMinorVersion_Con & SmaSelectorBuildVersion_Con;
 
-    -- AXI 1 regs                                                     Addr       , Mask       , RW  , Reset
+    -- Регистры AXI 1                                               Адрес       , Маска      , RW  , Сброс
     constant SmaInputSelect1_Reg_Con                : Axi_Reg_Type:= (x"00000000", x"FFFFFFFF", Rw_E, (SmaInput2SourceSelect_Gen & SmaInput1SourceSelect_Gen));
     constant SmaOutputSelect1_Reg_Con               : Axi_Reg_Type:= (x"00000008", x"FFFFFFFF", Rw_E, (SmaOutput4SourceSelect_Gen & SmaOutput3SourceSelect_Gen));
     constant SmaSelectorVersion1_Reg_Con            : Axi_Reg_Type:= (x"00000010", x"FFFFFFFF", Ro_E, SmaSelectorVersion_Con);
     constant SmaInputStatus_Reg_Con                 : Axi_Reg_Type:= (x"00002000", x"00003333", Ro_E, x"00000000");
 
-    -- AXI 2 regs                                                     Addr       , Mask       , RW  , Reset
+    -- Регистры AXI 2                                               Адрес       , Маска      , RW  , Сброс
     constant SmaInputSelect2_Reg_Con                : Axi_Reg_Type:= (x"00000000", x"FFFFFFFF", Rw_E, (SmaInput4SourceSelect_Gen & SmaInput3SourceSelect_Gen));
     constant SmaOutputSelect2_Reg_Con               : Axi_Reg_Type:= (x"00000008", x"FFFFFFFF", Rw_E, (SmaOutput2SourceSelect_Gen & SmaOutput1SourceSelect_Gen));
     constant SmaSelectorVersion2_Reg_Con            : Axi_Reg_Type:= (x"00000010", x"FFFFFFFF", Ro_E, SmaSelectorVersion_Con);
     
     --*************************************************************************************
-    -- Type Definitions
+    -- Определения типов
     --*************************************************************************************
 
     --*************************************************************************************
-    -- Signal Definitions
+    -- Определения сигналов
     --*************************************************************************************
     signal Sma10MHzSourceEnable_EnReg               : std_logic;
-    -- SMA status                   
+    -- Статус SMA                   
     signal SmaInputStatus_Dat                       : std_logic_vector(31 downto 0) := (others => '0');    
     signal SmaInputStatus_DatReg                    : std_logic_vector(31 downto 0) := (others => '0');    
         
-    -- Selection Map1       
+    -- Карта выбора 1       
     signal SmaInput1SourceSelect_DatReg             : std_logic_vector(15 downto 0);
     signal SmaInput2SourceSelect_DatReg             : std_logic_vector(15 downto 0);
                                                 
     signal SmaOutput3SourceSelect_DatReg            : std_logic_vector(15 downto 0);
     signal SmaOutput4SourceSelect_DatReg            : std_logic_vector(15 downto 0);
             
-    -- Selection Map2       
+    -- Карта выбора 2       
     signal SmaInput3SourceSelect_DatReg             : std_logic_vector(15 downto 0);
     signal SmaInput4SourceSelect_DatReg             : std_logic_vector(15 downto 0);
                                                     
     signal SmaOutput1SourceSelect_DatReg            : std_logic_vector(15 downto 0);
     signal SmaOutput2SourceSelect_DatReg            : std_logic_vector(15 downto 0);
     
-    -- AXI4L slave 1 signals and regs
+    -- Сигналы и регистры AXI4L slave 1
     signal Axi1_AccessState_StaReg                  : Axi_AccessState_Type:= Axi_AccessState_Type_Rst_Con;
     signal Axi1WriteAddrReady_RdyReg                : std_logic;       
     signal Axi1WriteDataReady_RdyReg                : std_logic;   
@@ -244,7 +244,7 @@ architecture SmaSelector_Arch of SmaSelector is
     signal SmaOutputSelect1_DatReg                  : std_logic_vector(31 downto 0);
     signal SmaSelectorVersion1_DatReg               : std_logic_vector(31 downto 0);
 
-    -- AXI4L slave 2 signals and regs
+    -- Сигналы и регистры AXI4L slave 2
     signal Axi2_AccessState_StaReg                  : Axi_AccessState_Type:= Axi_AccessState_Type_Rst_Con;
     signal Axi2WriteAddrReady_RdyReg                : std_logic;       
     signal Axi2WriteDataReady_RdyReg                : std_logic;   
@@ -260,21 +260,21 @@ architecture SmaSelector_Arch of SmaSelector is
     signal SmaSelectorVersion2_DatReg               : std_logic_vector(31 downto 0);
     
 --*****************************************************************************************
--- Architecture Implementation
+-- Реализация архитектуры
 --*****************************************************************************************
 begin
 
     --*************************************************************************************
-    -- Concurrent Statements
+    -- Параллельные операторы
     --*************************************************************************************
     
-    -- SMA status 
+    -- Статус SMA 
     SmaInputStatus_Dat(1 downto 0) <= SmaIn1_DatIn & SmaInput1SourceSelect_DatReg(15);
     SmaInputStatus_Dat(5 downto 4) <= SmaIn2_DatIn & SmaInput2SourceSelect_DatReg(15);
     SmaInputStatus_Dat(9 downto 8) <= SmaIn3_DatIn & SmaInput3SourceSelect_DatReg(15);
     SmaInputStatus_Dat(13 downto 12) <= SmaIn4_DatIn & SmaInput4SourceSelect_DatReg(15);
     
-    -- Clock only supported via Sma Input 0 and must be enabled
+    -- Тактирование поддерживается только через SMA Input 0 и должно быть включено
     Sma10MHzSourceEnable_EnOut                      <= Sma10MHzSourceEnable_EnReg;
                    
     SmaIn1_EnOut <= SmaInput1SourceSelect_DatReg(15);
@@ -287,7 +287,7 @@ begin
     SmaOut3_EnOut <= SmaOutput3SourceSelect_DatReg(15);
     SmaOut4_EnOut <= SmaOutput4SourceSelect_DatReg(15);
     
-    -- Demultiplex the SMA inputs according to configuration
+    -- Демультиплексирование входов SMA согласно конфигурации
     SmaExtPpsSource1_EvtOut <=  SmaIn1_DatIn when SmaInput1SourceSelect_DatReg(0) = '1' else
                                 SmaIn2_DatIn when SmaInput2SourceSelect_DatReg(0) = '1' else
                                 SmaIn3_DatIn when SmaInput3SourceSelect_DatReg(0) = '1' else
@@ -355,7 +355,7 @@ begin
     
                                 
     
-    -- Multiplex the SMA outputs according to configuration
+    -- Мультиплексирование выходов SMA согласно конфигурации
     with SmaOutput1SourceSelect_DatReg(14 downto 0) select SmaOut1_DatOut <= Sma10MHzSource_ClkIn when SmaOutputSource10Mhz_Con,
                                                                             SmaFpgaPpsSource_EvtIn when SmaOutputSourceFpgaPps_Con,
                                                                             SmaMacPpsSource_EvtIn when SmaOutputSourceMacPps_Con,
@@ -428,7 +428,7 @@ begin
                                                                             '1' when SmaOutputSourceVcc_Con,
                                                                             SmaFpgaPpsSource_EvtIn when others;
     
-    -- AXI assignments
+    -- Присваивания AXI
     Axi1WriteAddrReady_RdyOut                        <= Axi1WriteAddrReady_RdyReg;        
     Axi1WriteDataReady_RdyOut                        <= Axi1WriteDataReady_RdyReg;   
     Axi1WriteRespValid_ValOut                        <= Axi1WriteRespValid_ValReg;
@@ -448,16 +448,16 @@ begin
     Axi2ReadDataData_DatOut                          <= Axi2ReadDataData_DatReg;
     
     --*************************************************************************************
-    -- Procedural Statements
+    -- Процедурные операторы
     --*************************************************************************************
     
-    -- Process to enable the 10 MHz clock
+    -- Процесс для включения тактирования 10 МГц
     ClockEnable_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     begin
         if (SysRstN_RstIn = '0') then
             Sma10MHzSourceEnable_EnReg <= '0';
         elsif ((SysClk_ClkIn'event) and (SysClk_ClkIn = '1')) then
-            -- Clock only supported via Sma Input 0 and must be enabled
+            -- Тактирование поддерживается только через SMA Input 0 и должно быть включено
             if (unsigned(SmaInput1SourceSelect_DatReg(14 downto 0)) = 0) then
                 Sma10MHzSourceEnable_EnReg <= '1';
             else
@@ -466,8 +466,8 @@ begin
         end if;
     end process ClockEnable_Prc;
     
-    -- Access configuration and monitoring registers via the AXI4L slave 1
-    -- Set the SMA Input 1/2 and SMA Output 3/4
+    -- Доступ к регистрам конфигурации и мониторинга через AXI4L slave 1
+    -- Установка SMA Input 1/2 и SMA Output 3/4
     Axi1_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     variable TempAddress1                : std_logic_vector(31 downto 0) := (others => '0');    
     begin
@@ -575,8 +575,8 @@ begin
         end if;
     end process Axi1_Prc;
 
-    -- Access configuration and monitoring registers via the AXI4L slave 2
-    -- Set the SMA Input 3/4 and SMA Output 1/2
+    -- Доступ к регистрам конфигурации и мониторинга через AXI4L slave 2
+    -- Установка SMA Input 3/4 и SMA Output 1/2
     Axi2_Prc : process(SysClk_ClkIn, SysRstN_RstIn) is
     variable TempAddress2                : std_logic_vector(31 downto 0) := (others => '0');    
     begin
@@ -679,7 +679,7 @@ begin
 
     
     --*************************************************************************************
-    -- InstSmaiations and Port mapping
+    -- Инстанцирования и сопоставление портов
     --*************************************************************************************
         
 end architecture SmaSelector_Arch;

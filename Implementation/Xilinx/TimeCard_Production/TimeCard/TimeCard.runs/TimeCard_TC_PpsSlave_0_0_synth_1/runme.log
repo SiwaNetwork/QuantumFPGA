@@ -1,0 +1,580 @@
+
+*** Running vivado
+    with args -log TimeCard_TC_PpsSlave_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source TimeCard_TC_PpsSlave_0_0.tcl
+
+
+
+****** Vivado v2022.1 (64-bit)
+  **** SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+  **** IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source TimeCard_TC_PpsSlave_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1281.938 ; gain = 8.195
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_PpsSlave_0_0_synth_1'.)
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.1/data/ip'.
+WARNING: [IP_Flow 19-4995] The host OS only allows 260 characters in a normal path. The IP cache path is more than 80 characters. If you experience issues with IP caching, please consider changing the IP cache to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. 
+Current IP cache path is c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.cache/ip 
+Command: synth_design -top TimeCard_TC_PpsSlave_0_0 -part xc7a100tfgg484-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tfgg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 19328
+WARNING: [Synth 8-9501] generate block is allowed only inside loop and conditional generate in SystemVerilog mode [C:/Xilinx/Vivado/2022.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:4023]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1281.938 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'TimeCard_TC_PpsSlave_0_0' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_PpsSlave_0_0/synth/TimeCard_TC_PpsSlave_0_0.vhd:105]
+	Parameter ClockPeriod_Gen bound to: 20 - type: integer 
+	Parameter CableDelay_Gen bound to: 0 - type: bool 
+	Parameter InputDelay_Gen bound to: 0 - type: integer 
+	Parameter InputPolarity_Gen bound to: 1 - type: bool 
+	Parameter HighResFreqMultiply_Gen bound to: 4 - type: integer 
+	Parameter DriftMulP_Gen bound to: 3 - type: integer 
+	Parameter DriftDivP_Gen bound to: 4 - type: integer 
+	Parameter DriftMulI_Gen bound to: 3 - type: integer 
+	Parameter DriftDivI_Gen bound to: 16 - type: integer 
+	Parameter OffsetMulP_Gen bound to: 3 - type: integer 
+	Parameter OffsetDivP_Gen bound to: 4 - type: integer 
+	Parameter OffsetMulI_Gen bound to: 3 - type: integer 
+	Parameter OffsetDivI_Gen bound to: 16 - type: integer 
+	Parameter Sim_Gen bound to: 0 - type: bool 
+INFO: [Synth 8-3491] module 'PpsSlave' declared at 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:29' bound to instance 'U0' of component 'PpsSlave' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_PpsSlave_0_0/synth/TimeCard_TC_PpsSlave_0_0.vhd:222]
+INFO: [Synth 8-638] synthesizing module 'PpsSlave' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:113]
+INFO: [Synth 8-226] default block is never used [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:563]
+INFO: [Synth 8-226] default block is never used [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:1149]
+INFO: [Synth 8-226] default block is never used [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:1311]
+INFO: [Synth 8-256] done synthesizing module 'PpsSlave' (0#1) [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:113]
+INFO: [Synth 8-256] done synthesizing module 'TimeCard_TC_PpsSlave_0_0' (0#1) [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_PpsSlave_0_0/synth/TimeCard_TC_PpsSlave_0_0.vhd:105]
+WARNING: [Synth 8-6014] Unused sequential element PI_OffsetAdjustRetain_Interval_DatReg_reg was removed.  [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:723]
+WARNING: [Synth 8-6014] Unused sequential element PI_OffsetAdjustRetain_ValReg_reg was removed.  [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/PpsSlave.vhd:724]
+WARNING: [Synth 8-7129] Port ClockTime_TimeJump_DatIn in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[2] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[1] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[0] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[31] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[30] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[29] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[28] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[27] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[26] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[25] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[24] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[23] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[22] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[21] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[20] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[19] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[18] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[17] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[16] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[3] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[2] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[1] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[0] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[2] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[1] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[0] in module PpsSlave is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1281.938 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1281.938 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1281.938 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.120 . Memory (MB): peak = 1281.938 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1357.871 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.091 . Memory (MB): peak = 1358.465 ; gain = 0.594
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:24 . Memory (MB): peak = 1358.465 ; gain = 76.527
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tfgg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:24 . Memory (MB): peak = 1358.465 ; gain = 76.527
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:24 . Memory (MB): peak = 1358.465 ; gain = 76.527
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'DriftCalcState_StaReg_reg' in module 'PpsSlave'
+INFO: [Synth 8-802] inferred FSM for state register 'PI_OffsetState_StaReg_reg' in module 'PpsSlave'
+INFO: [Synth 8-802] inferred FSM for state register 'PI_DriftState_StaReg_reg' in module 'PpsSlave'
+INFO: [Synth 8-802] inferred FSM for state register 'Axi_AccessState_StaReg_reg' in module 'PpsSlave'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 idle_st |                               00 |                               00
+                write_st |                               01 |                               10
+                 read_st |                               10 |                               01
+                 resp_st |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'Axi_AccessState_StaReg_reg' using encoding 'sequential' in module 'PpsSlave'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+        waittimestamp_st |                              000 |                              000
+         suboffsetold_st |                              001 |                              001
+                 diff_st |                              010 |                              010
+      normalize_step1_st |                              011 |                              011
+      normalize_step2_st |                              100 |                              100
+      normalize_step3_st |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'DriftCalcState_StaReg_reg' using encoding 'sequential' in module 'PpsSlave'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 idle_st |                               00 |                               00
+                    p_st |                               01 |                               01
+                    i_st |                               10 |                               10
+                check_st |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'PI_DriftState_StaReg_reg' using encoding 'sequential' in module 'PpsSlave'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 idle_st |                               00 |                               00
+                    p_st |                               01 |                               01
+                    i_st |                               10 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'PI_OffsetState_StaReg_reg' using encoding 'sequential' in module 'PpsSlave'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:26 . Memory (MB): peak = 1358.465 ; gain = 76.527
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input  128 Bit       Adders := 1     
+	   2 Input   64 Bit       Adders := 1     
+	   2 Input   44 Bit       Adders := 2     
+	   3 Input   44 Bit       Adders := 4     
+	   2 Input   32 Bit       Adders := 10    
+	   3 Input   32 Bit       Adders := 19    
+	   3 Input   31 Bit       Adders := 1     
+	   2 Input   31 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 1     
+	   2 Input   11 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 1     
++---Registers : 
+	              128 Bit    Registers := 2     
+	               88 Bit    Registers := 2     
+	               64 Bit    Registers := 3     
+	               44 Bit    Registers := 6     
+	               32 Bit    Registers := 27    
+	               16 Bit    Registers := 1     
+	               11 Bit    Registers := 2     
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                2 Bit    Registers := 3     
+	                1 Bit    Registers := 38    
++---Multipliers : 
+	              44x44  Multipliers := 2     
+	              32x44  Multipliers := 2     
++---Muxes : 
+	   2 Input  128 Bit        Muxes := 1     
+	   6 Input  128 Bit        Muxes := 2     
+	   4 Input   88 Bit        Muxes := 1     
+	   3 Input   88 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 1     
+	   6 Input   64 Bit        Muxes := 4     
+	   2 Input   44 Bit        Muxes := 12    
+	   4 Input   44 Bit        Muxes := 2     
+	   2 Input   32 Bit        Muxes := 57    
+	   4 Input   32 Bit        Muxes := 4     
+	   6 Input   32 Bit        Muxes := 5     
+	   3 Input   32 Bit        Muxes := 1     
+	   2 Input   30 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 3     
+	   2 Input   11 Bit        Muxes := 7     
+	   2 Input   10 Bit        Muxes := 4     
+	   8 Input    6 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   6 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 1     
+	   6 Input    3 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 3     
+	   3 Input    2 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 3     
+	   2 Input    2 Bit        Muxes := 8     
+	   5 Input    2 Bit        Muxes := 1     
+	   7 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 104   
+	   7 Input    1 Bit        Muxes := 1     
+	   4 Input    1 Bit        Muxes := 23    
+	   8 Input    1 Bit        Muxes := 1     
+	   6 Input    1 Bit        Muxes := 24    
+	   5 Input    1 Bit        Muxes := 2     
+	   3 Input    1 Bit        Muxes := 10    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_DriftMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: operator PI_DriftMul_DatReg0 is absorbed into DSP PI_DriftMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: PCIN+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: Generating DSP PI_OffsetMul_DatReg0, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+DSP Report: operator PI_OffsetMul_DatReg0 is absorbed into DSP PI_OffsetMul_DatReg0.
+WARNING: [Synth 8-7129] Port ClockTime_TimeJump_DatIn in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[2] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[1] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[0] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[31] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[30] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[29] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[28] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[27] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[26] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[25] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[24] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[23] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[22] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[21] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[20] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[19] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[18] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[17] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[16] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[3] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[2] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[1] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[0] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[2] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[1] in module PpsSlave is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[0] in module PpsSlave is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:43 . Memory (MB): peak = 1358.465 ; gain = 76.527
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|PpsSlave    | A*B            | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 11     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 16     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 11     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B       | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 16     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 18     | 11     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | (PCIN>>17)+A*B | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:58 . Memory (MB): peak = 1358.465 ; gain = 76.527
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:58 . Memory (MB): peak = 1358.465 ; gain = 76.527
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:38 ; elapsed = 00:01:01 . Memory (MB): peak = 1362.062 ; gain = 80.125
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:42 ; elapsed = 00:01:09 . Memory (MB): peak = 1376.582 ; gain = 94.645
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:42 ; elapsed = 00:01:09 . Memory (MB): peak = 1376.582 ; gain = 94.645
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:43 ; elapsed = 00:01:10 . Memory (MB): peak = 1376.582 ; gain = 94.645
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:43 ; elapsed = 00:01:10 . Memory (MB): peak = 1376.582 ; gain = 94.645
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:44 ; elapsed = 00:01:10 . Memory (MB): peak = 1376.582 ; gain = 94.645
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:44 ; elapsed = 00:01:11 . Memory (MB): peak = 1376.582 ; gain = 94.645
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++-------------------------+-----------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name              | RTL Name                                | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-------------------------+-----------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|TimeCard_TC_PpsSlave_0_0 | U0/TimestampSysClkNx_EvtShiftReg_reg[1] | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
++-------------------------+-----------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|PpsSlave    | A*B          | 17     | 0      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B     | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B     | 17     | 10     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN>>17+A*B | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B     | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN>>17+A*B | 17     | 0      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN>>17+A*B | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 17     | 0      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B     | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B     | 17     | 10     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN>>17+A*B | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN+A*B     | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN>>17+A*B | 17     | 0      | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|PpsSlave    | PCIN>>17+A*B | 17     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |CARRY4  |   457|
+|2     |DSP48E1 |    22|
+|3     |LUT1    |   371|
+|4     |LUT2    |  1294|
+|5     |LUT3    |   215|
+|6     |LUT4    |   752|
+|7     |LUT5    |   380|
+|8     |LUT6    |   805|
+|9     |MUXF7   |     4|
+|10    |SRL16E  |     1|
+|11    |FDCE    |  1201|
+|12    |FDPE    |    19|
+|13    |FDRE    |    20|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:44 ; elapsed = 00:01:11 . Memory (MB): peak = 1376.582 ; gain = 94.645
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 28 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:01:07 . Memory (MB): peak = 1376.582 ; gain = 18.117
+Synthesis Optimization Complete : Time (s): cpu = 00:00:44 ; elapsed = 00:01:11 . Memory (MB): peak = 1376.582 ; gain = 94.645
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.207 . Memory (MB): peak = 1388.652 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 483 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'TimeCard_TC_PpsSlave_0_0' is not ideal for floorplanning, since the cellview 'PpsSlave' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1394.301 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: e7cffb56
+INFO: [Common 17-83] Releasing license: Synthesis
+34 Infos, 61 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:48 ; elapsed = 00:01:19 . Memory (MB): peak = 1394.301 ; gain = 112.363
+INFO: [Common 17-1381] The checkpoint 'C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_PpsSlave_0_0_synth_1/TimeCard_TC_PpsSlave_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP TimeCard_TC_PpsSlave_0_0, cache-ID = df518634f97cc3d6
+INFO: [Common 17-1381] The checkpoint 'C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_PpsSlave_0_0_synth_1/TimeCard_TC_PpsSlave_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file TimeCard_TC_PpsSlave_0_0_utilization_synth.rpt -pb TimeCard_TC_PpsSlave_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 27 19:53:50 2025...

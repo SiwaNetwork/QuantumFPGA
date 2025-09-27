@@ -1,0 +1,262 @@
+
+*** Running vivado
+    with args -log TimeCard_TC_MsiIrq_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source TimeCard_TC_MsiIrq_0_0.tcl
+
+
+
+****** Vivado v2022.1 (64-bit)
+  **** SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+  **** IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source TimeCard_TC_MsiIrq_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1281.121 ; gain = 9.492
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_MsiIrq_0_0_synth_1'.)
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.1/data/ip'.
+WARNING: [IP_Flow 19-4995] The host OS only allows 260 characters in a normal path. The IP cache path is more than 80 characters. If you experience issues with IP caching, please consider changing the IP cache to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. 
+Current IP cache path is c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.cache/ip 
+Command: synth_design -top TimeCard_TC_MsiIrq_0_0 -part xc7a100tfgg484-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tfgg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 20284
+WARNING: [Synth 8-9501] generate block is allowed only inside loop and conditional generate in SystemVerilog mode [C:/Xilinx/Vivado/2022.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:4023]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1281.121 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'TimeCard_TC_MsiIrq_0_0' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_MsiIrq_0_0/synth/TimeCard_TC_MsiIrq_0_0.vhd:91]
+	Parameter NumberOfInterrupts_Gen bound to: 20 - type: integer 
+	Parameter LevelInterrupt_Gen bound to: 32'b00000000000011100000010110111000 
+INFO: [Synth 8-3491] module 'MsiIrq' declared at 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/MsiIrq.vhd:31' bound to instance 'U0' of component 'MsiIrq' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_MsiIrq_0_0/synth/TimeCard_TC_MsiIrq_0_0.vhd:194]
+INFO: [Synth 8-638] synthesizing module 'MsiIrq' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/MsiIrq.vhd:90]
+INFO: [Synth 8-256] done synthesizing module 'MsiIrq' (0#1) [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/MsiIrq.vhd:90]
+INFO: [Synth 8-256] done synthesizing module 'TimeCard_TC_MsiIrq_0_0' (0#1) [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_MsiIrq_0_0/synth/TimeCard_TC_MsiIrq_0_0.vhd:91]
+WARNING: [Synth 8-7129] Port IrqIn20_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn21_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn22_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn23_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn24_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn25_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn26_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn27_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn28_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn29_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn30_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port IrqIn31_DatIn in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port MsiVectorWidth_DatIn[2] in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port MsiVectorWidth_DatIn[1] in module MsiIrq is either unconnected or has no load
+WARNING: [Synth 8-7129] Port MsiVectorWidth_DatIn[0] in module MsiIrq is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1281.121 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1281.121 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1281.121 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1281.121 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1320.121 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1320.461 ; gain = 0.340
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tfgg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'Msi_State_StReg_reg' in module 'MsiIrq'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 idle_st |                              000 |                              000
+            selectirq_st |                              001 |                              001
+              sendirq_st |                              010 |                              010
+            waitgrant_st |                              011 |                              011
+                  end_st |                              100 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'Msi_State_StReg_reg' using encoding 'sequential' in module 'MsiIrq'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:23 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    5 Bit       Adders := 1     
++---Registers : 
+	               20 Bit    Registers := 3     
+	                5 Bit    Registers := 2     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input   20 Bit        Muxes := 4     
+	   5 Input   20 Bit        Muxes := 1     
+	   5 Input    5 Bit        Muxes := 1     
+	   7 Input    3 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 41    
+	   5 Input    1 Bit        Muxes := 5     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-7129] Port MsiVectorWidth_DatIn[2] in module TimeCard_TC_MsiIrq_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port MsiVectorWidth_DatIn[1] in module TimeCard_TC_MsiIrq_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port MsiVectorWidth_DatIn[0] in module TimeCard_TC_MsiIrq_0_0 is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:35 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:35 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:35 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |LUT1  |     1|
+|2     |LUT2  |    22|
+|3     |LUT3  |     9|
+|4     |LUT4  |     5|
+|5     |LUT5  |     5|
+|6     |LUT6  |    35|
+|7     |MUXF7 |     1|
+|8     |FDCE  |    74|
++------+------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:39 . Memory (MB): peak = 1320.461 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:27 ; elapsed = 00:00:42 . Memory (MB): peak = 1320.461 ; gain = 39.340
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1320.461 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1320.461 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: b9a2d558
+INFO: [Common 17-83] Releasing license: Synthesis
+25 Infos, 22 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:48 . Memory (MB): peak = 1320.461 ; gain = 39.340
+INFO: [Common 17-1381] The checkpoint 'C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_MsiIrq_0_0_synth_1/TimeCard_TC_MsiIrq_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP TimeCard_TC_MsiIrq_0_0, cache-ID = 5bd85ee976387147
+INFO: [Common 17-1381] The checkpoint 'C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_MsiIrq_0_0_synth_1/TimeCard_TC_MsiIrq_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file TimeCard_TC_MsiIrq_0_0_utilization_synth.rpt -pb TimeCard_TC_MsiIrq_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 27 19:53:00 2025...

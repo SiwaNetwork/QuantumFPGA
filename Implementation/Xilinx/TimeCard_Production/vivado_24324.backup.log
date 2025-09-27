@@ -1,0 +1,266 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Sat Sep 27 19:42:18 2025
+# Process ID: 24324
+# Current directory: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production
+# Command line: vivado.exe -mode batch -notrace -source C:\Users\SHIWA\AppData\Local\Temp\tmpB6F8.tmp
+# Log file: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/vivado.log
+# Journal file: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production\vivado.jou
+# Running On: HOME-PC, OS: Windows, CPU Frequency: 3593 MHz, CPU Physical cores: 12, Host memory: 34281 MB
+#-----------------------------------------------------------
+source {C:\Users\SHIWA\AppData\Local\Temp\tmpB6F8.tmp} -notrace
+create_project: Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 1281.887 ; gain = 9.633
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard'.)
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.1/data/ip'.
+Run is defaulting to srcset: sources_1
+Run is defaulting to parent run srcset: sources_1
+INFO: Project created:TimeCard
+
+WARNING: [BD_TCL-1002] This script was generated using Vivado <2019.1> without IP versions in the create_bd_cell commands, but is now being run in <2022.1> of Vivado. There may have been major IP version changes between Vivado <2019.1> and <2022.1>, which could impact the parameter settings of the IPs.
+INFO: [BD_TCL-3] Currently there is no design <TimeCard> in project, so creating one...
+Wrote  : <C:\Users\SHIWA\Documents\GitHub\QuantumFPGA\Implementation\Xilinx\TimeCard_Production\TimeCard\TimeCard.srcs\sources_1\bd\TimeCard\TimeCard.bd> 
+INFO: [BD_TCL-4] Making design <TimeCard> as current_bd_design.
+INFO: [BD_TCL-5] Currently the variable <design_name> is equal to "TimeCard".
+INFO: [BD_TCL-6] Checking if the following IPs exist in the project's IP catalog:  
+nettimelogic.com:TimeCardLib:TC_AdjustableClock:* nettimelogic.com:TimeCardLib:TC_ClockDetector:* nettimelogic.com:TimeCardLib:TC_ConfMaster:* nettimelogic.com:TimeCardLib:TC_CoreList:* nettimelogic.com:TimeCardLib:TC_DummyAxiSlave:* nettimelogic.com:TimeCardLib:TC_FpgaVersion:* nettimelogic.com:TimeCardLib:TC_FrequencyCounter:* nettimelogic.com:TimeCardLib:TC_MsiIrq:* nettimelogic.com:TimeCardLib:TC_PpsGenerator:* nettimelogic.com:TimeCardLib:TC_PpsSlave:* nettimelogic.com:TimeCardLib:TC_PpsSourceSelector:* nettimelogic.com:TimeCardLib:TC_SignalGenerator:* nettimelogic.com:TimeCardLib:TC_SmaSelector:* nettimelogic.com:TimeCardLib:TC_SignalTimestamper:* nettimelogic.com:TimeCardLib:TC_TodSlave:* xilinx.com:ip:axi_gpio:* xilinx.com:ip:axi_hwicap:* xilinx.com:ip:axi_iic:* xilinx.com:ip:axi_pcie:* xilinx.com:ip:axi_quad_spi:* xilinx.com:ip:axi_uart16550:* xilinx.com:ip:clk_wiz:* xilinx.com:ip:proc_sys_reset:* xilinx.com:ip:util_ds_buf:* xilinx.com:ip:xlconstant:*  .
+INFO: [BD_TCL-6] Checking if the following modules exist in the project's sources:  
+BufgMux_IPI BufgMux_IPI BufgMux_IPI  .
+WARNING: [BD 5-670] It is required to provide a frequency value for a user created input clock port. Please use the <-freq_hz $freq_val> argument of the create_bd_port command. ie create_bd_port -dir I -type clk -freq_hz 100000000 clkin
+WARNING: [BD 5-670] It is required to provide a frequency value for a user created input clock port. Please use the <-freq_hz $freq_val> argument of the create_bd_port command. ie create_bd_port -dir I -type clk -freq_hz 100000000 clkin
+WARNING: [BD 5-670] It is required to provide a frequency value for a user created input clock port. Please use the <-freq_hz $freq_val> argument of the create_bd_port command. ie create_bd_port -dir I -type clk -freq_hz 100000000 clkin
+WARNING: [BD 5-670] It is required to provide a frequency value for a user created input clock port. Please use the <-freq_hz $freq_val> argument of the create_bd_port command. ie create_bd_port -dir I -type clk -freq_hz 100000000 clkin
+WARNING: [BD 5-670] It is required to provide a frequency value for a user created input clock port. Please use the <-freq_hz $freq_val> argument of the create_bd_port command. ie create_bd_port -dir I -type clk -freq_hz 100000000 clkin
+WARNING: [BD 5-670] It is required to provide a frequency value for a user created input clock port. Please use the <-freq_hz $freq_val> argument of the create_bd_port command. ie create_bd_port -dir I -type clk -freq_hz 100000000 clkin
+INFO: [IP_Flow 19-5107] Inferred bus interface 'ClkIn0_ClkIn' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'ClkIn1_ClkIn' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+WARNING: [IP_Flow 19-5661] Bus Interface 'ClkIn0_ClkIn' does not have any bus interfaces associated with it.
+WARNING: [IP_Flow 19-5661] Bus Interface 'ClkIn1_ClkIn' does not have any bus interfaces associated with it.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard'.)
+WARNING: [IP_Flow 19-4052] Unable to find the parameter 'PROJECT_PARAM.ARCHTECTURE' for the proc 'update_PARAM_VALUE.C_S_AXI4_ID_WIDTH'.The proc 'update_PARAM_VALUE.C_S_AXI4_ID_WIDTH' will never be called.Please check and correct the proc
+WARNING: [BD 41-1306] The connection to interface pin </util_ds_buf_1/IBUF_DS_N> is being overridden by the user with net <PcieRefClockN_1>. This pin will not be connected as a part of interface connection <CLK_IN_D>.
+WARNING: [BD 41-1306] The connection to interface pin </util_ds_buf_1/IBUF_DS_P> is being overridden by the user with net <PcieRefClockP_1>. This pin will not be connected as a part of interface connection <CLK_IN_D>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_ext/sin> is being overridden by the user with net <TC_SmaSelector_0_SmaUartExtSource_DatOut>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_gnss1/sin> is being overridden by the user with net <UartGnss1Rx_DatIn_1>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_gnss2/sin> is being overridden by the user with net <UartGnss2Rx_DatIn_1>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_mac/sin> is being overridden by the user with net <UartMacRx_DatIn_1>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_quad_spi_flash/cfgclk> is being overridden by the user with net <axi_quad_spi_flash_cfgclk>. This pin will not be connected as a part of interface connection <STARTUP_IO>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_quad_spi_flash/cfgmclk> is being overridden by the user with net <axi_quad_spi_flash_cfgmclk>. This pin will not be connected as a part of interface connection <STARTUP_IO>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_quad_spi_flash/eos> is being overridden by the user with net <axi_quad_spi_flash_eos>. This pin will not be connected as a part of interface connection <STARTUP_IO>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_quad_spi_flash/preq> is being overridden by the user with net <axi_quad_spi_flash_preq>. This pin will not be connected as a part of interface connection <STARTUP_IO>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_ext/sout> is being overridden by the user with net <axi_uart16550_ext_sout>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_gnss1/sout> is being overridden by the user with net <axi_uart16550_gnss1_sout>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_gnss2/sout> is being overridden by the user with net <axi_uart16550_gnss2_sout>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_mac/sout> is being overridden by the user with net <axi_uart16550_mac_sout>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-1306] The connection to interface pin </axi_uart16550_reserved/sin> is being overridden by the user with net <xlconstant_4_dout>. This pin will not be connected as a part of interface connection <UART>.
+WARNING: [BD 41-702] Propagation TCL tries to overwrite USER strength parameter S_AXI_SUPPORTS_NARROW_BURST(false) on '/axi_pcie_0' with propagated value(true). Command ignored
+clk_domain: , clk_domain_1: TimeCard_clk_wiz_1_0_clk_out1, clkDomainValSrc_1: DEFAULT, clk_domain_ctrl: 0
+clk_domain: TimeCard_clk_wiz_0_0_clk_out1, clk_domain_1: TimeCard_clk_wiz_2_0_clk_out1, clkDomainValSrc_1: DEFAULT, clk_domain_ctrl: 0
+clk_domain: TimeCard_clk_wiz_0_0_clk_out1, clk_domain_1: TimeCard_clk_wiz_0_0_clk_out1, clkDomainValSrc_1: PROPAGATED, clk_domain_ctrl: 0
+clk_domain: TimeCard_clk_wiz_0_0_clk_out1, clk_domain_1: TimeCard_clk_wiz_0_0_clk_out1, clkDomainValSrc_1: PROPAGATED, clk_domain_ctrl: 0
+WARNING: [BD 5-699] No address segments matched 'get_bd_addr_segs -of_objects /axi_pcie_0/S_AXI/BAR0'
+INFO: [xilinx.com:ip:axi_hwicap:3.0-1] /axi_hwicap_0 
+                    ##########################################################################################
+                    Clocks connected to AXI HWICAP are same. Configuring AXI HWICAP in SYNC mode ..........
+                    ##########################################################################################
+INFO: [xilinx.com:ip:axi_pcie:2.9-1] /axi_pcie_0 axi_aclk, axi_ctl_aclk are connected internally
+INFO: [xilinx.com:ip:axi_quad_spi:3.2-1] /axi_quad_spi_flash 
+                   #######################################################################################
+                   INFO: AXI Quad SPI core's AXI Lite Clock and EXT SPI CLK are synchronous to each other.
+                   ########################################################################################
+INFO: [xilinx.com:ip:clk_wiz:6.0-1] /clk_wiz_1 clk_wiz propagate
+INFO: [xilinx.com:ip:clk_wiz:6.0-1] /clk_wiz_0 clk_wiz propagate
+INFO: [xilinx.com:ip:clk_wiz:6.0-1] /clk_wiz_2 clk_wiz propagate
+WARNING: [BD 41-927] Following properties on pin /TC_AdjustableClock_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_AdjustableClock_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_AdjustableClock_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_ClockDetector_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_ClockDetector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_ClockDetector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_ClockDetector_0/Mhz10ClkSma_ClkIn have been updated from connected ip, but BD cell '/TC_ClockDetector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 10000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_ClockDetector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_ClockDetector_0/Mhz10ClkMac_ClkIn have been updated from connected ip, but BD cell '/TC_ClockDetector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 10000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_ClockDetector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_ClockDetector_0/Mhz10ClkDcxo1_ClkIn have been updated from connected ip, but BD cell '/TC_ClockDetector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 10000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_ClockDetector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_ClockDetector_0/Mhz10ClkDcxo2_ClkIn have been updated from connected ip, but BD cell '/TC_ClockDetector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 10000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_ClockDetector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_ConfMaster_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_ConfMaster_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_ConfMaster_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_CoreList_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_CoreList_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_CoreList_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_DummyAxiSlave_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_DummyAxiSlave_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_DummyAxiSlave_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_DummyAxiSlave_1/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_DummyAxiSlave_1' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_DummyAxiSlave_1> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_DummyAxiSlave_2/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_DummyAxiSlave_2' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_DummyAxiSlave_2> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_DummyAxiSlave_3/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_DummyAxiSlave_3' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_DummyAxiSlave_3> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_DummyAxiSlave_4/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_DummyAxiSlave_4' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_DummyAxiSlave_4> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_FpgaVersion_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_FpgaVersion_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_FpgaVersion_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_FrequencyCounter_1/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_FrequencyCounter_1' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_FrequencyCounter_1> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_FrequencyCounter_2/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_FrequencyCounter_2' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_FrequencyCounter_2> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_FrequencyCounter_3/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_FrequencyCounter_3' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_FrequencyCounter_3> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_FrequencyCounter_4/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_FrequencyCounter_4' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_FrequencyCounter_4> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 62500000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn0_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn1_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn2_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn6_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn9_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn11_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn12_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn13_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn14_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn15_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_MsiIrq_0/IrqIn16_DatIn have been updated from connected ip, but BD cell '/TC_MsiIrq_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	SENSITIVITY = EDGE_RISING 
+Please resolve any mismatches by directly setting properties on BD cell </TC_MsiIrq_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_PpsGenerator_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_PpsGenerator_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_PpsGenerator_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_PpsGenerator_0/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_PpsGenerator_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_PpsGenerator_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_PpsSlave_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_PpsSlave_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_PpsSlave_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_PpsSlave_0/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_PpsSlave_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_PpsSlave_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_PpsSourceSelector_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_PpsSourceSelector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_PpsSourceSelector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_PpsSourceSelector_1/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_PpsSourceSelector_1' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_PpsSourceSelector_1> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_1/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_1' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_1> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_1/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_1' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_1> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_2/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_2' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_2> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_2/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_2' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_2> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_3/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_3' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_3> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_3/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_3' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_3> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_4/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_4' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_4> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SignalGenerator_4/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_SignalGenerator_4' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SignalGenerator_4> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SmaSelector_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_SmaSelector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SmaSelector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_SmaSelector_0/Sma10MHzSource_ClkIn have been updated from connected ip, but BD cell '/TC_SmaSelector_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 10000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_SmaSelector_0> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_1/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_1' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_1> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_1/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_1' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_1> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_2/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_2' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_2> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_2/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_2' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_2> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_3/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_3' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_3> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_3/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_3' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_3> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_4/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_4' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_4> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_4/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_4' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_4> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_FpgaPps/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_FpgaPps' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_FpgaPps> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_FpgaPps/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_FpgaPps' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_FpgaPps> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_Gnss1Pps/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_Gnss1Pps' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_Gnss1Pps> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_Timestamper_Gnss1Pps/SysClkNx_ClkIn have been updated from connected ip, but BD cell '/TC_Timestamper_Gnss1Pps' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 200000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_Timestamper_Gnss1Pps> to completely resolve these warnings.
+WARNING: [BD 41-927] Following properties on pin /TC_TodSlave_0/SysClk_ClkIn have been updated from connected ip, but BD cell '/TC_TodSlave_0' does not accept parameter changes, so they may not be synchronized with cell properties:
+	FREQ_HZ = 50000000 
+Please resolve any mismatches by directly setting properties on BD cell </TC_TodSlave_0> to completely resolve these warnings.
+validate_bd_design: Time (s): cpu = 00:00:19 ; elapsed = 00:00:24 . Memory (MB): peak = 1281.887 ; gain = 0.000
+Wrote  : <C:\Users\SHIWA\Documents\GitHub\QuantumFPGA\Implementation\Xilinx\TimeCard_Production\TimeCard\TimeCard.srcs\sources_1\bd\TimeCard\TimeCard.bd> 
+INFO: [BD 41-1662] The design 'TimeCard.bd' is already validated. Therefore parameter propagation will not be re-run.
+VHDL Output written to : C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/synth/TimeCard.vhd
+VHDL Output written to : C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/sim/TimeCard.vhd
+VHDL Output written to : C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/hdl/TimeCard_wrapper.vhd
+make_wrapper: Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1281.887 ; gain = 0.000
+INFO: [Project 1-1716] Could not find the wrapper file C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.srcs/sources_1/bd/TimeCard/hdl/TimeCard_wrapper.vhd, checking in project .gen location instead.
+INFO: [Vivado 12-12390] Found file C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/hdl/TimeCard_wrapper.vhd, adding it to Project
+ERROR: [Common 17-163] Missing value for option 'file', please type 'open_project -help' for usage info.
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 27 19:43:17 2025...

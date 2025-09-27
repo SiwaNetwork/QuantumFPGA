@@ -1,0 +1,21 @@
+
+*** Running vivado
+    with args -log TimeCard_auto_cc_2.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source TimeCard_auto_cc_2.tcl
+
+
+
+****** Vivado v2022.1 (64-bit)
+  **** SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+  **** IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source TimeCard_auto_cc_2.tcl -notrace
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1282.035 ; gain = 10.434
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_auto_cc_2_synth_1'.)
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.1/data/ip'.
+WARNING: [IP_Flow 19-4995] The host OS only allows 260 characters in a normal path. The IP cache path is more than 80 characters. If you experience issues with IP caching, please consider changing the IP cache to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. 
+Current IP cache path is c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.cache/ip 
+INFO: [IP_Flow 19-4838] Using cached IP synthesis design for IP TimeCard_auto_cc_2, cache-ID = 17376e14e96ce806.
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 27 19:56:23 2025...

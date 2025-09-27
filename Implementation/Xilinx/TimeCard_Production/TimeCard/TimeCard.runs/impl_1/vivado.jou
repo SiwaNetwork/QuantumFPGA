@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Sat Sep 27 20:04:37 2025
+# Process ID: 12660
+# Current directory: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/impl_1
+# Command line: vivado.exe -log TimeCardTop.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source TimeCardTop.tcl -notrace
+# Log file: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/impl_1/TimeCardTop.vdi
+# Journal file: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/impl_1\vivado.jou
+# Running On: HOME-PC, OS: Windows, CPU Frequency: 3593 MHz, CPU Physical cores: 12, Host memory: 34281 MB
+#-----------------------------------------------------------
+source TimeCardTop.tcl -notrace

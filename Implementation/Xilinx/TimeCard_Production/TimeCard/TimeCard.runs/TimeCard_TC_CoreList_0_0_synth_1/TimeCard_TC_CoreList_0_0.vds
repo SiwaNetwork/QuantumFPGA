@@ -1,0 +1,352 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Sat Sep 27 19:57:57 2025
+# Process ID: 4608
+# Current directory: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_CoreList_0_0_synth_1
+# Command line: vivado.exe -log TimeCard_TC_CoreList_0_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source TimeCard_TC_CoreList_0_0.tcl
+# Log file: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_CoreList_0_0_synth_1/TimeCard_TC_CoreList_0_0.vds
+# Journal file: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_CoreList_0_0_synth_1\vivado.jou
+# Running On: HOME-PC, OS: Windows, CPU Frequency: 3593 MHz, CPU Physical cores: 12, Host memory: 34281 MB
+#-----------------------------------------------------------
+source TimeCard_TC_CoreList_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1283.758 ; gain = 10.895
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA'.
+WARNING: [IP_Flow 19-3656] If you move the project, the path for repository 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA' may become invalid. A better location for the repository would be in a path adjacent to the project. (Current project location is 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_CoreList_0_0_synth_1'.)
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2022.1/data/ip'.
+WARNING: [IP_Flow 19-4995] The host OS only allows 260 characters in a normal path. The IP cache path is more than 80 characters. If you experience issues with IP caching, please consider changing the IP cache to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. 
+Current IP cache path is c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.cache/ip 
+Command: synth_design -top TimeCard_TC_CoreList_0_0 -part xc7a100tfgg484-1 -incremental_mode off -mode out_of_context
+Starting synth_design
+WARNING: [Vivado_Tcl 4-393] The 'Synthesis' target of the following IPs are stale, please generate the output products using the generate_target or synth_ip command before running synth_design.
+c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.srcs/sources_1/bd/TimeCard/ip/TimeCard_TC_CoreList_0_0/TimeCard_TC_CoreList_0_0.xci
+
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tfgg484-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 5420
+WARNING: [Synth 8-9501] generate block is allowed only inside loop and conditional generate in SystemVerilog mode [C:/Xilinx/Vivado/2022.1/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv:4023]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:08 . Memory (MB): peak = 1283.758 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'TimeCard_TC_CoreList_0_0' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_CoreList_0_0/synth/TimeCard_TC_CoreList_0_0.vhd:86]
+	Parameter CoreListFile_Gen bound to: C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/CoreListFile.txt - type: string 
+	Parameter ClockPeriod_Gen bound to: 20 - type: integer 
+INFO: [Synth 8-3491] module 'CoreList' declared at 'c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/CoreList.vhd:34' bound to instance 'U0' of component 'CoreList' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_CoreList_0_0/synth/TimeCard_TC_CoreList_0_0.vhd:153]
+INFO: [Synth 8-638] synthesizing module 'CoreList' [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/CoreList.vhd:77]
+INFO: [Synth 8-226] default block is never used [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/CoreList.vhd:468]
+INFO: [Synth 8-226] default block is never used [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/CoreList.vhd:493]
+INFO: [Synth 8-256] done synthesizing module 'CoreList' (0#1) [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ipshared/CoreList.vhd:77]
+INFO: [Synth 8-256] done synthesizing module 'TimeCard_TC_CoreList_0_0' (0#1) [c:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/sources_1/bd/TimeCard/ip/TimeCard_TC_CoreList_0_0/synth/TimeCard_TC_CoreList_0_0.vhd:86]
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[15] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[14] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[13] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[12] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[11] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[10] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[9] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[8] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[7] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[6] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[5] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[4] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[3] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[2] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[1] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[0] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[2] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[1] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[0] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[31] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[30] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[29] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[28] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[27] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[26] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[25] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[24] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[23] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[22] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[21] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[20] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[19] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[18] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[17] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[16] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[15] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[14] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[13] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[12] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[11] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[10] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[9] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[8] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[7] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[6] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[5] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[4] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[3] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[2] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[1] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[0] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[3] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[2] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[1] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataStrobe_DatIn[0] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[2] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[1] in module CoreList is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiReadAddrProt_DatIn[0] in module CoreList is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:23 . Memory (MB): peak = 1405.430 ; gain = 121.672
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:23 . Memory (MB): peak = 1405.430 ; gain = 121.672
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:23 . Memory (MB): peak = 1405.430 ; gain = 121.672
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1405.430 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1411.012 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1411.277 ; gain = 0.266
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:34 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tfgg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:34 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:34 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'Axi_AccessState_StaReg_reg' in module 'CoreList'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 idle_st |                               00 |                               00
+                write_st |                               01 |                               10
+                 read_st |                               10 |                               01
+                 resp_st |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'Axi_AccessState_StaReg_reg' using encoding 'sequential' in module 'CoreList'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:35 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	               31 Bit    Registers := 1     
+	               10 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 8     
++---ROMs : 
+	                    ROMs := 1     
++---Muxes : 
+	   2 Input   32 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 4     
+	   2 Input    1 Bit        Muxes := 13    
+	   4 Input    1 Bit        Muxes := 17    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[15] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[14] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[13] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[12] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[11] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[10] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[9] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[8] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[7] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[6] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[5] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[4] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[3] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[2] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[1] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrAddress_AdrIn[0] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[2] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[1] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteAddrProt_DatIn[0] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[31] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[30] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[29] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[28] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[27] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[26] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[25] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[24] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[23] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[22] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[21] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[20] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[19] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[18] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[17] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[16] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[15] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[14] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[13] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[12] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[11] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[10] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port AxiWriteDataData_DatIn[9] in module TimeCard_TC_CoreList_0_0 is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:38 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:27 ; elapsed = 00:00:47 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:47 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance U0/RomRead_DatReg_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:27 ; elapsed = 00:00:47 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:31 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:31 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:31 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:31 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:32 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |LUT1     |     1|
+|2     |LUT2     |     7|
+|3     |LUT3     |    35|
+|4     |LUT4     |     6|
+|5     |LUT5     |     8|
+|6     |LUT6     |    12|
+|7     |RAMB36E1 |     1|
+|8     |FDCE     |    52|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:32 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 59 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:52 . Memory (MB): peak = 1411.277 ; gain = 121.672
+Synthesis Optimization Complete : Time (s): cpu = 00:00:32 ; elapsed = 00:00:54 . Memory (MB): peak = 1411.277 ; gain = 127.520
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1411.277 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1411.277 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 1311b82a
+INFO: [Common 17-83] Releasing license: Synthesis
+29 Infos, 105 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:36 ; elapsed = 00:01:01 . Memory (MB): peak = 1411.277 ; gain = 127.520
+INFO: [Common 17-1381] The checkpoint 'C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_CoreList_0_0_synth_1/TimeCard_TC_CoreList_0_0.dcp' has been generated.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP TimeCard_TC_CoreList_0_0, cache-ID = b40748eed68739da
+INFO: [Common 17-1381] The checkpoint 'C:/Users/SHIWA/Documents/GitHub/QuantumFPGA/Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/TimeCard_TC_CoreList_0_0_synth_1/TimeCard_TC_CoreList_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file TimeCard_TC_CoreList_0_0_utilization_synth.rpt -pb TimeCard_TC_CoreList_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 27 19:59:09 2025...

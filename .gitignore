@@ -1,0 +1,33 @@
+# Vivado generated artifacts (build, logs, temp)
+**/.Xil/**
+**/*.jou
+**/*.log
+**/*.str
+**/*.rpx
+**/*.pb
+**/*.dcp
+**/*.rpt
+**/*.csv
+**/*.wdb
+
+# TimeCard_Production project-generated directories
+Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.cache/**
+Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.gen/**
+Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.hw/**
+Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.ip_user_files/**
+Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.runs/**
+
+# Vivado session logs/backups in TimeCard_Production
+Implementation/Xilinx/TimeCard_Production/vivado*.log
+Implementation/Xilinx/TimeCard_Production/vivado*.jou
+Implementation/Xilinx/TimeCard_Production/vivado_*.backup.*
+
+# Timestamped binaries folders (keep top-level deliverables)
+Implementation/Xilinx/TimeCard_Production/Binaries/*/*
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.swo

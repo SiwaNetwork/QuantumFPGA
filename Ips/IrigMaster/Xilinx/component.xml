@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1.4" xmlns:xilinx="http://www.xilinx.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1.4 http://www.spiritconsortium.org/XMLSchema/SPIRIT/1.4/index.xsd">
+  <spirit:vendor>nettimelogic.com</spirit:vendor>
+  <spirit:library>TimeCardLib</spirit:library>
+  <spirit:name>TC_IrigMaster</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:displayName>TC IRIG Master</spirit:displayName>
+  <spirit:description>IRIG Master - IRIG-B DCLS Signal Generator</spirit:description>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>ClockPeriod_Gen</spirit:name>
+      <spirit:displayName>Clock Period (ns)</spirit:displayName>
+      <spirit:description>System clock period in nanoseconds</spirit:description>
+      <spirit:value spirit:resolve="generated" spirit:id="PARAM_VALUE.ClockPeriod_Gen">20</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>HighResFreqMultiply_Gen</spirit:name>
+      <spirit:displayName>High Resolution Frequency Multiplier</spirit:displayName>
+      <spirit:description>High resolution clock frequency multiplier (4-10)</spirit:description>
+      <spirit:value spirit:resolve="generated" spirit:id="PARAM_VALUE.HighResFreqMultiply_Gen">5</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>xilinx_vivadoanalysisandelaboration</spirit:name>
+        <spirit:displayName>Vivado Analysis and Elaboration</spirit:displayName>
+        <spirit:envIdentifier>:vivado</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>verilog_srcs</spirit:localName>
+        </spirit:fileSetRef>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_vivadosynthesis</spirit:name>
+        <spirit:displayName>Vivado Synthesis</spirit:displayName>
+        <spirit:envIdentifier>:vivado</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>verilog_srcs</spirit:localName>
+        </spirit:fileSetRef>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_vivadoimplementation</spirit:name>
+        <spirit:displayName>Vivado Implementation</spirit:displayName>
+        <spirit:envIdentifier>:vivado</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>verilog_srcs</spirit:localName>
+        </spirit:fileSetRef>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_vivadosimulation</spirit:name>
+        <spirit:displayName>Vivado Simulation</spirit:displayName>
+        <spirit:envIdentifier>:vivado</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>verilog_srcs</spirit:localName>
+        </spirit:fileSetRef>
+      </spirit:view>
+    </spirit:views>
+    <spirit:ports>
+      <spirit:port>
+        <spirit:name>SysClk_ClkIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+        <spirit:clockDriver spirit:clock="clk"/>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>SysClkNx_ClkIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>SysRstN_RstIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+        <spirit:resetDriver spirit:reset="rst" spirit:clock="clk"/>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ClockTime_Second_DatIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ClockTime_Nanosecond_DatIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">31</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ClockTime_TimeJump_DatIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>ClockTime_ValIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>Pps_EvtIn</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>IrigMaster_EvtOut</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>Irq_EvtOut</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>axi4l_slave</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+        </spirit:wire>
+        <spirit:interface spirit:interfaceType="xilinx.com:interface:aximm_rtl:1.0" spirit:interfaceMode="slave"/>
+      </spirit:port>
+    </spirit:ports>
+    <spirit:fileSets>
+      <spirit:fileSet>
+        <spirit:name>verilog_srcs</spirit:name>
+        <spirit:file>
+          <spirit:name>IrigMaster.vhd</spirit:name>
+          <spirit:fileType>vhdlSource</spirit:fileType>
+        </spirit:file>
+      </spirit:fileSet>
+    </spirit:fileSets>
+  </spirit:model>
+</spirit:component>

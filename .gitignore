@@ -31,3 +31,5 @@ Thumbs.db
 *.tmp
 *.swp
 *.swo
+
+Implementation/Xilinx/TimeCard_Production/TimeCard/TimeCard.srcs/**
